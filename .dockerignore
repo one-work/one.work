@@ -9,6 +9,8 @@ work.design
 /.env*
 !/.env*.erb
 
+public/svgs
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
