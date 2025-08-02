@@ -4,6 +4,7 @@
 /.bundle
 /.git
 work.design
+node_modules
 
 # Ignore all environment files (except templates).
 /.env*
