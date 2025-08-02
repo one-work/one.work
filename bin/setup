@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+require "fileutils"
+
+APP_ROOT = File.expand_path('..', __dir__)
+
+def system!(*args)
+  system(*args, exception: true)
+end
+
+FileUtils.chdir APP_ROOT do
+  puts "== 初始化子模块 =="
+  system! 'git submodule update --init'
+
+  puts "\n== 将子模块切换至 main 分支 =="
+  system! 'git submodule foreach git checkout main'
+
+  puts "\n== 安装 Gems =="
+  system("bundle check") || system!("bundle install")
+
+  puts "\n== 安装 JS =="
+  system! 'npm install'
+
+  puts "\n== Removing old logs and tempfiles =="
+  system! 'bin/rails log:clear tmp:clear'
+end

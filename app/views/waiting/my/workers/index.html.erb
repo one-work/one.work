@@ -1,0 +1,51 @@
+<div class="ui top attached menu borderless">
+  <div class="item"><strong>我的职位</strong></div>
+  <div class="right menu">
+    <div class="item">
+      <%= link_to '设置职位', new_my_worker_path, class: 'ui blue button' %>
+    </div>
+  </div>
+</div>
+
+<table class="table is-hoverable is-fullwidth">
+  <tbody>
+  <% @workers.each do |worker| %>
+    <tr>
+      <td><%= worker.duty.name %></td>
+      <td><%= worker.provider&.name %></td>
+      <td>🍅 <%= worker.pomodoro %>分钟</td>
+      <td>
+        <%= form_tag present_my_worker_path(worker.id), method: :patch do %>
+          <span class="<%= worker.present ? 'ui toggle disabled checkbox' : 'ui toggle checkbox' %>">
+            <label></label>
+            <%= check_box_tag :present, nil, worker.present %>
+          </span>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to my_worker_path(worker), aria: { label: 'show' }, class: 'ui blue mini icon button' do %>
+          <i class="location arrow icon"></i>
+        <% end %>
+        <%= link_to edit_my_worker_path(worker), aria: { label: t('.edit') }, class: 'ui red mini icon button' do %>
+          <i class="pencil icon"></i>
+        <% end %>
+        <%= link_to my_worker_path(worker), method: :delete, aria: { label: t('.destroy') }, data: { confrim: t('.confirm') }, class: 'ui red mini icon button' do %>
+          <i class="times icon"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<script>
+  $('.ui.checkbox').checkbox({
+    onChange: function(){
+      $(this).parent().parent().submit();
+    }
+  });
+</script>
+
+
+

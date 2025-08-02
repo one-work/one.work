@@ -1,0 +1,11 @@
+<%= render layout: 'layouts/phone_head' do %>
+  <body>
+    <div class="weui-tab">
+      <div class="weui-tab__panel">
+        <%= render 'nav_bar' %>
+        <%= yield %>
+        <%= render 'footer' %>
+      </div>
+    </div>
+  </body>
+<% end %>

@@ -1,0 +1,1 @@
+SolidQueue.on_start { Com::SshKey.init_project }

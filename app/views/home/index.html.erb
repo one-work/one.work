@@ -1,0 +1,16 @@
+<section class="hero is-cover" style="background-image: url(<%= image_path('banner.png') %>)">
+  <div class="hero-body is-middle text-centered">
+    <h1 class="title text-white">企业一站式管理专家</h1>
+    <h2 class="title text-white">所有功能，登录就有，全部免费</h2>
+    <p class="text-grey-lighter">当数据量达到 5 万条或交易额达到 10 万元，才开始收取 390 元/年</p>
+  </div>
+  <div class="buttons are-large is-centered mb-4">
+    <%= render 'links' %>
+  </div>
+</section>
+
+<% @posts.each do |post| %>
+  <div class="work_layout">
+    <%= render partial: "md_layout/#{post.layout}", collection: post.raw_block_texts, as: :item %>
+  </div>
+<% end %>

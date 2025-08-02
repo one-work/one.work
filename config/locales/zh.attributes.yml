@@ -1,0 +1,10 @@
+zh:
+  activerecord:
+    attributes:
+      bench/facilitating:
+        extra/name: 标注名称
+        extra/address: 标注地址
+        extra/contact: 法人姓名
+        extra/time_start: 开始营业时间
+        extra/time_finish: 结束营业时间
+        extra/mobile: 联系电话

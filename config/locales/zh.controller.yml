@@ -1,0 +1,16 @@
+zh:
+  home:
+    index:
+      title: 首页
+  my:
+    home:
+      index:
+        title: 我的
+  admin:
+    home:
+      index:
+        title: 后台管理
+  panel:
+    home:
+      index:
+        title: 平台管理

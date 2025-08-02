@@ -1,0 +1,8 @@
+<% @order.items.each do |item| %>
+  <% item.good.extra.each do |key, value| %>
+  <div>
+    <dt><%= Bench::Facilitating.human_attribute_name("extra/#{key}") %></dt>
+    <dd><%= value %></dd>
+  </div>
+  <% end %>
+<% end %>

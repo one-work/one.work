@@ -1,0 +1,83 @@
+<section class="hero is-cover" style="background-image: url(<%= image_path('banner.png') %>)">
+  <div class="hero-body is-middle text-centered">
+    <h1 class="title text-white">Work Design 工作设计</h1>
+    <h2 class="title text-white">聚焦产业互联网基建</h2>
+    <h2 class="title text-white">让一部分商家先做大</h2>
+  </div>
+</section>
+<section class="hero is-medium">
+  <div class="hero-body container">
+    <h2 class="title text-centered">
+      <a href="/why">渐进式数字化解决方案</a>
+    </h2>
+    <div class="content text-centered">
+      <p>
+        <span>SaaS 轻松用：20大通用功能，</span><%= link_to '登陆', { controller: '/auth/sign', action: 'sign' } %><span>即可使用，数据随时下载</span>
+      </p>
+      <p>定制开发，满足个性化需求</p>
+      <p>研发团队托管，共享研发能力与生态</p>
+      <p>自主研发，开源代码助力</p>
+    </div>
+  </div>
+</section>
+<section class="hero is-medium is-light">
+  <div class="hero-body container">
+    <h2 class="title text-centered">高效能软件开发</h2>
+    <div class="content">
+      <p>基于硅谷创业公司首选技术体系进化而来</p>
+      <p>数据天然互通，再无数据孤岛</p>
+      <p>代码无保留开源，免除后顾之忧</p>
+      <p>引领软件能力普及，实现技术普惠</p>
+      <p>中小企业也能自主研发</p>
+    </div>
+    <a href="https://github.com/work-design/home" target="_blank" class="text-link">了解更多>></a>
+    <p class="buttons">
+      <a href="https://github.com/work-design" target="_blank" class="button is-medium is-info">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>Github</span>
+      </a>
+      <a href="https://gitee.com/work-design" target="_blank" class="button is-medium is-warning">
+        <span class="icon"><i class="fab fa-git-alt"></i></span>
+        <span>码云</span>
+      </a>
+    </p>
+  </div>
+</section>
+<section class="hero is-medium">
+  <div class="hero-body container">
+    <h2 class="title text-centered text-weight-bold">超越软件开发</h2>
+    <div class="content">
+      <p>软件即运营：降低运营成本、增加获客渠道、提升转化率，数据决策等</p>
+      <p>软件即管理：通过对工作内容、工作方法、员工职能、软硬件的分析，进而调整优化，达到最佳协作效率，释放生产力</p>
+      <p>整体精心设计，一切环环相扣</p>
+    </div>
+    <div class="level container is-hidden-mobile" style="margin-top: 20px;">
+      <div class="level-item text-centered">
+        <%= image_tag '工作内容.png' %>
+      </div>
+      <div class="level-item text-centered">
+        <%= image_tag '方法.png' %>
+      </div>
+      <div class="level-item text-centered">
+        <%= image_tag '人员.png' %>
+      </div>
+      <div class="level-item text-centered">
+        <%= image_tag '软硬件.png' %>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero is-medium is-light">
+  <div class="container tile is-parent">
+    <div class="tile is-vertical is-7" style="padding: 3rem">
+      <h2 class="title text-weight-bold">Work Design 生态服务</h2>
+      <div class="content">
+        <p>项目生命周期管理：人员配置，股权激励，财务管理，任务管理</p>
+        <p>按需雇佣：灵活雇佣，将低用人成本，提升人力价值</p>
+      </div>
+    </div>
+    <div class="tile is-5 is-hidden-mobile">
+      <%= image_tag 'digit.png', class: 'image' %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,8 @@
+<%= f.fields :extra, model: OpenStruct.new(f.object.extra) do |ef| %>
+  <%= ef.text_field :name, label: '标注名称', placeholder: '请输入标注名称' %>
+  <%= ef.text_field :address, label: '商铺地址', placeholder: '请输入商铺地址，非必填' %>
+  <%= ef.text_field :contact, label: '法人姓名', placeholder: '请输入姓名' %>
+  <%= ef.text_field :mobile, label: '联系电话', placeholder: '请输入联系电话' %>
+  <%= ef.time_select :time_start, start_hour: 0, end_hour: 23, default: { hour: 0, min: 0 }, time_separator: '<span class="select-divider">:</span>'.html_safe, wrap: { select: 'field-body > field is-narrow > control > select' }, label: '开始营业时间', placeholder: '请输入开始营业时间' %>
+  <%= ef.time_select :time_finish, start_hour: 0, end_hour: 23, default: { hour: 23, min: 59 }, time_separator: '<span class="select-divider">:</span>'.html_safe, wrap: { select: 'field-body > field is-narrow > control > select' }, label: '结束营业时间', placeholder: '请输入结束营业时间' %>
+<% end %>

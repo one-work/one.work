@@ -1,0 +1,49 @@
+<%= link_to({ controller: 'profiled/my/profiles', action: 'show' }, class: 'weui-cell weui-cell_access') do %>
+  <div class="weui-cell__bd">
+    <i class="fas fa-book-medical fa-fw"></i>
+    <span>档案</span>
+  </div>
+  <div class="weui-cell__ft"></div>
+<% end %>
+<%= link_to({ controller: 'trade/my/orders' }, class: 'weui-cell weui-cell_access') do %>
+  <div class="weui-cell__bd">
+    <i class="fas fa-store fa-fw"></i>
+    <span>订单</span>
+  </div>
+  <div class="weui-cell__ft"></div>
+<% end %>
+<%= link_to({ controller: 'trade/my/cards' }, class: 'weui-cell weui-cell_access') do %>
+  <div class="weui-cell__bd">
+    <i class="fas fa-credit-card fa-fw"></i>
+    <span>会员</span>
+  </div>
+  <div class="weui-cell__ft"></div>
+<% end %>
+<%= link_to({ controller: 'ship/driver/favorites' }, class: 'weui-cell weui-cell_access') do %>
+  <div class="weui-cell__bd">
+    <i class="fas fa-users fa-fw"></i>
+    <span><%= t('ship.driver.favorites.index.title') %></span>
+  </div>
+  <div class="weui-cell__ft"></div>
+<% end if current_user.driver %>
+<%= link_to({ controller: 'ship/my/lines', action: 'requirement' }, class: 'weui-cell weui-cell_access') do %>
+  <div class="weui-cell__bd">
+    <i class="fas fa-paper-plane fa-fw"></i>
+    <span><%= t('ship.my.lines.requirement.title') %></span>
+  </div>
+  <div class="weui-cell__ft"></div>
+<% end %>
+<%= link_to({ controller: 'ship/my/cars' }, class: 'weui-cell weui-cell_access') do %>
+  <div class="weui-cell__bd">
+    <i class="fas fa-car fa-fw"></i>
+    <span><%= t('ship.my.cars.index.title') %></span>
+  </div>
+  <div class="weui-cell__ft"></div>
+<% end %>
+<%= link_to({ controller: 'ship/my/drivers', action: 'show' }, class: 'weui-cell weui-cell_access') do %>
+  <div class="weui-cell__bd">
+    <i class="fas fa-id-card fa-fw"></i>
+    <span><%= t('ship.my.drivers.show.title') %></span>
+  </div>
+  <div class="weui-cell__ft"></div>
+<% end %>

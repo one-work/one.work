@@ -1,0 +1,30 @@
+zh:
+  activerecord:
+    enum:
+      oauth_user:
+        provider:
+          github: Github
+          facebook: Factbook
+          developer: Developer
+          wechat: Wechat
+        type:
+          GithubUser: Github User
+          FacebookUser: Facebook User
+      trade/order:
+        payment_type:
+          alipay: Alipay
+      poster:
+        type:
+          WebPoster: Web端
+          MobilePoster: 手机端
+          AppPoster: App端
+      trade/promote_good:
+        good_type:
+          Bench::Facilitate: 服务
+          Trade::Advance: 充值
+          Factory::Production: 商品
+      trade/trade_item:
+        good_type:
+          Bench::Facilitate: 标准化服务
+          Trade::Advance: 充值
+          Factory::Production: 商品

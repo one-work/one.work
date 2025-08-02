@@ -1,0 +1,19 @@
+local:
+  service: Disk
+  root: <%= Rails.root.join('storage') %>
+
+acme:
+  service: Disc
+  root: <%= Rails.root.join('acme') %>
+
+test:
+  service: Disk
+  root: <%= Rails.root.join('tmp/storage') %>
+
+upyun:
+  service: Upyun
+  bucket: one-work
+  operator: yougexiangfa
+  password: <%= Rails.application.credentials.dig(:upyun, :password) %>
+  host: https://images.work.design
+  folder: images

@@ -1,0 +1,18 @@
+<%= form_with theme: 'weui', model: [:my, @requirement] do |f| %>
+  <%= render 'error_messages', target: @requirement %>
+  <%= f.text_field :name, required: true %>
+  <%= f.collection_select :from_area_id, Area.leaves, :id, :full_name %>
+  <%= f.text_field :from, required: true %>
+  <%= f.collection_select :to_area_id, Area.leaves, :id, :full_name %>
+  <%= f.text_field :to, required: true %>
+  <%= f.date_select :pick_on, required: true %>
+  <%= f.time_select :pick_at, {}, class: nil %>
+  <%= f.text_area :note, class: 'weui-textarea' %>
+  <%= f.file_field :credential, required: true %>
+  <%= f.submit %>
+<% end %>
+
+<div style="color: red;">
+  因最近疫情形势严峻，防护措施完全的志愿者有限，目的地或出发地非医院的信息将全部关闭！未上传证件的信息将会标记为无效信息。
+  请务必上传真实有效证件，如有虚假，伪造证件，我平台将依法报告公安机关追责到底！
+</div>

@@ -1,0 +1,5 @@
+<% unless params[:produce_on].present? || params[:scene_id].present? %>
+  <div class="tabs as-bottom">
+    <%= render 'tab_bar_item' %>
+  </div>
+<% end %>

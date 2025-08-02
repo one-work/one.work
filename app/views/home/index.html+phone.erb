@@ -1,0 +1,13 @@
+<section class="hero is-cover" style="background-image: url(<%= image_path('banner.png') %>)">
+  <div class="hero-body is-middle text-centered">
+    <h1 class="title text-white">Work Design 工作设计</h1>
+    <h2 class="title text-white">聚焦产业互联网基建</h2>
+    <h2 class="title text-white">让一部分商家先做大</h2>
+  </div>
+</section>
+
+<% @posts.each do |post| %>
+  <div class="work_layout">
+    <%= render partial: "md_layout/#{post.layout}", collection: post.raw_block_texts, as: :item %>
+  </div>
+<% end %>

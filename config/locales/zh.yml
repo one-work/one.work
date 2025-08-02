@@ -1,0 +1,6 @@
+zh:
+  site_name: Work Design 工作设计
+  helpers:
+    submit:
+      bench/facilitating:
+        create: 创建订单

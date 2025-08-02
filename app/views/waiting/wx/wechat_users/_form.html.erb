@@ -1,0 +1,4 @@
+<%= form_with model: @wechat_user, local: true do |f| %>
+  <%= render 'error_messages', target: f.object %>
+  <%= f.submit %>
+<% end %>

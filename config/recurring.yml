@@ -1,0 +1,4 @@
+detector:
+  class: Com::DetectorJob
+  queue: background
+  schedule: every minute

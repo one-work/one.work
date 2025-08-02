@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+require 'solid_queue/cli'
+
+SolidQueue.on_start do
+  puts 'Started'
+end
+
+SolidQueue::Cli.start(ARGV)

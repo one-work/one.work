@@ -1,0 +1,15 @@
+<div data-controller="weui-actionsheet" id="actionsheet">
+  <div data-weui-actionsheet-target="mask" data-action="click->weui-actionsheet#close" class="weui-mask" style="opacity: 0; display: none"></div>
+  <div class="weui-actionsheet" data-weui-actionsheet-target="sheet">
+    <div class="weui-actionsheet__menu">
+      <div class="weui-actionsheet__cell weui-actionsheet__cell_warn">
+        <%= link_to({ controller: '/auth/sign', action: 'logout' }, class: 'text-danger') do %>
+          <i class="fas fa-sign-out-alt"></i><span>退出登录</span>
+        <% end %>
+      </div>
+    </div>
+    <div class="weui-actionsheet__action">
+      <div class="weui-actionsheet__cell" data-action="click->weui-actionsheet#close">取消</div>
+    </div>
+  </div>
+</div>

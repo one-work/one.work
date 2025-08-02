@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+rm -rf app/assets/builds
+rm -rf public/assets
+npm exec run-pty run-pty.json

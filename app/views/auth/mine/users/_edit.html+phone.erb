@@ -1,0 +1,5 @@
+<%= form_with theme: 'weui', model: @user, url: my_user_path do |f| %>
+  <%= hidden_field_tag :return_to, params[:return_to] %>
+  <%= f.text_field :name, required: true %>
+  <%= f.submit %>
+<% end %>

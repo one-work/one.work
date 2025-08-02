@@ -1,0 +1,49 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  host: work_design-postgres
+  username: postgres
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+development:
+  primary:
+    <<: *default
+    host: localhost
+    database: work_development
+    gssencmode: disable
+  queue:
+    <<: *default
+    host: localhost
+    database: work_queue_development
+    migrations_paths: db/queue_migrate
+    gssencmode: disable
+  cache:
+    <<: *default
+    host: localhost
+    database: work_cache_development
+    migrations_paths: db/cache_migrate
+test:
+  primary:
+    <<: *default
+    host: localhost
+    database: work_test
+  queue:
+    <<: *default
+    host: localhost
+    database: work_test
+  cache:
+    <<: *default
+    host: localhost
+    database: work_test
+production:
+  primary:
+    <<: *default
+    database: work_production
+  queue:
+    <<: *default
+    database: work_queue_production
+    migrations_paths: db/queue_migrate
+  cache:
+    <<: *default
+    database: work_cache_production
+    migrations_paths: db/cache_migrate

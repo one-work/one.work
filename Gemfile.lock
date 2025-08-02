@@ -1,0 +1,764 @@
+GIT
+  remote: https://gitee.com/qinmingyuan/default_where.git
+  revision: fbe4b6ffd4205c4d1a3a58907c4c4521c1dfc219
+  specs:
+    default_where (2.3.0)
+      activerecord
+
+GIT
+  remote: https://gitee.com/qinmingyuan/upyun_rails.git
+  revision: 639e115c1586421bf46b4438e418bf52e13455b9
+  specs:
+    upyun_rails (0.1.1)
+      activestorage
+      httpx
+
+GIT
+  remote: https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git
+  revision: b86d672b8ef54b155038bac87940b04e900fa7eb
+  specs:
+    tencentcloud-sdk-common (3.0.1114)
+
+PATH
+  remote: engine/rails_alipay
+  specs:
+    rails_alipay (0.0.1)
+      rails_com
+
+PATH
+  remote: engine/rails_attend
+  specs:
+    rails_attend (0.0.1)
+      rails_com (~> 1.2)
+
+PATH
+  remote: engine/rails_audit
+  specs:
+    rails_audit (1.0.4)
+      rails_com (~> 1.2)
+
+PATH
+  remote: engine/rails_auth
+  specs:
+    rails_auth (1.2.0)
+      bcrypt (~> 3.1)
+      rails_com (~> 1.2)
+      rotp
+
+PATH
+  remote: engine/rails_bench
+  specs:
+    rails_bench (0.0.2)
+      rails_com (~> 1.2)
+
+PATH
+  remote: engine/rails_bluetooth
+  specs:
+    rails_bluetooth (0.0.1)
+      rails (>= 7.2.1)
+
+PATH
+  remote: engine/rails_cms
+  specs:
+    rails_cms (0.0.1)
+      rails_com
+
+PATH
+  remote: engine/rails_com
+  specs:
+    rails_com (1.3.0)
+      acme-client
+      closure_tree (>= 7.3)
+      csv
+      default_where (~> 2.2)
+      http-form_data (~> 2.3)
+      httpx
+      kaminari
+      money-rails (~> 1.15)
+      mutex_m
+      net-http
+      net-pop
+      net-scp
+      ostruct
+      positioning
+      rails
+      reline
+      solid_cache
+      solid_queue
+      sshkey
+      turbo-rails
+
+PATH
+  remote: engine/rails_crm
+  specs:
+    rails_crm (0.0.2)
+      rails_trade
+
+PATH
+  remote: engine/rails_data
+  specs:
+    rails_data (1.0.2)
+      csv
+      matrix
+      nkf
+      prawn
+      prawn-table
+      roo
+      roo-xls
+      write_xlsx
+
+PATH
+  remote: engine/rails_deploy
+  specs:
+    rails_deploy (1.0.0)
+      activesupport (>= 7.0)
+
+PATH
+  remote: engine/rails_design
+  specs:
+    rails_design (0.0.1)
+      rails
+
+PATH
+  remote: engine/rails_detail
+  specs:
+    rails_detail (0.0.1)
+      rails_com
+
+PATH
+  remote: engine/rails_doc
+  specs:
+    rails_doc (0.0.2)
+      rails_com (>= 1.2)
+
+PATH
+  remote: engine/rails_douyin
+  specs:
+    rails_douyin (0.0.1)
+      rails
+
+PATH
+  remote: engine/rails_email
+  specs:
+    rails_email (0.0.2)
+      rails_auth
+      rails_com (~> 1.2)
+
+PATH
+  remote: engine/rails_event
+  specs:
+    rails_event (0.0.1)
+      rails_com (~> 1.2)
+
+PATH
+  remote: engine/rails_factory
+  specs:
+    rails_factory (0.0.1)
+      rails_com (~> 1.2)
+      rails_org
+      rails_space
+      rails_trade
+
+PATH
+  remote: engine/rails_finance
+  specs:
+    rails_finance (0.0.1)
+      prawn
+      rails_com
+
+PATH
+  remote: engine/rails_growth
+  specs:
+    rails_growth (0.0.1)
+      rails_com (~> 1.2)
+
+PATH
+  remote: engine/rails_interact
+  specs:
+    rails_interact (0.0.1)
+      rails_com (~> 1.2)
+      rails_notice (>= 0.1)
+
+PATH
+  remote: engine/rails_markdown
+  specs:
+    rails_markdown (0.0.1)
+      kramdown
+      kramdown-parser-gfm
+      nokogiri
+      rails_com
+      rouge
+
+PATH
+  remote: engine/rails_notice
+  specs:
+    rails_notice (1.0.3)
+      rails_com
+
+PATH
+  remote: engine/rails_one_ai
+  specs:
+    rails_one_ai (0.0.1)
+      rails (>= 8.0.1)
+
+PATH
+  remote: engine/rails_org
+  specs:
+    rails_org (0.0.1)
+      rails_com
+
+PATH
+  remote: engine/rails_print
+  specs:
+    rails_print (0.0.1)
+      rails (>= 7.2.1)
+
+PATH
+  remote: engine/rails_ship
+  specs:
+    rails_ship (0.0.1)
+      rails_com
+      rails_space
+      rails_trade
+
+PATH
+  remote: engine/rails_space
+  specs:
+    rails_space (0.0.1)
+      rails_com
+
+PATH
+  remote: engine/rails_sync
+  specs:
+    rails_sync (0.1)
+      rails_com
+
+PATH
+  remote: engine/rails_trade
+  specs:
+    rails_trade (0.0.3)
+      rails_com
+      rails_notice
+
+PATH
+  remote: engine/rails_wechat
+  specs:
+    rails_wechat (0.1.2)
+      rails_com
+      rqrcode
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    acme-client (2.0.23)
+      base64 (~> 0.2)
+      faraday (>= 1.0, < 3.0.0)
+      faraday-retry (>= 1.0, < 3.0.0)
+    actioncable (8.0.2)
+      actionpack (= 8.0.2)
+      activesupport (= 8.0.2)
+      nio4r (~> 2.0)
+      websocket-driver (>= 0.6.1)
+      zeitwerk (~> 2.6)
+    actionmailbox (8.0.2)
+      actionpack (= 8.0.2)
+      activejob (= 8.0.2)
+      activerecord (= 8.0.2)
+      activestorage (= 8.0.2)
+      activesupport (= 8.0.2)
+      mail (>= 2.8.0)
+    actionmailer (8.0.2)
+      actionpack (= 8.0.2)
+      actionview (= 8.0.2)
+      activejob (= 8.0.2)
+      activesupport (= 8.0.2)
+      mail (>= 2.8.0)
+      rails-dom-testing (~> 2.2)
+    actionpack (8.0.2)
+      actionview (= 8.0.2)
+      activesupport (= 8.0.2)
+      nokogiri (>= 1.8.5)
+      rack (>= 2.2.4)
+      rack-session (>= 1.0.1)
+      rack-test (>= 0.6.3)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+      useragent (~> 0.16)
+    actiontext (8.0.2)
+      actionpack (= 8.0.2)
+      activerecord (= 8.0.2)
+      activestorage (= 8.0.2)
+      activesupport (= 8.0.2)
+      globalid (>= 0.6.0)
+      nokogiri (>= 1.8.5)
+    actionview (8.0.2)
+      activesupport (= 8.0.2)
+      builder (~> 3.1)
+      erubi (~> 1.11)
+      rails-dom-testing (~> 2.2)
+      rails-html-sanitizer (~> 1.6)
+    activejob (8.0.2)
+      activesupport (= 8.0.2)
+      globalid (>= 0.3.6)
+    activemodel (8.0.2)
+      activesupport (= 8.0.2)
+    activerecord (8.0.2)
+      activemodel (= 8.0.2)
+      activesupport (= 8.0.2)
+      timeout (>= 0.4.0)
+    activestorage (8.0.2)
+      actionpack (= 8.0.2)
+      activejob (= 8.0.2)
+      activerecord (= 8.0.2)
+      activesupport (= 8.0.2)
+      marcel (~> 1.0)
+    activesupport (8.0.2)
+      base64
+      benchmark (>= 0.3)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.3.1)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      logger (>= 1.4.2)
+      minitest (>= 5.1)
+      securerandom (>= 0.3)
+      tzinfo (~> 2.0, >= 2.0.5)
+      uri (>= 0.13.1)
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
+    aliyunsdkcore (0.0.17)
+      activesupport (>= 3.0.0)
+      faraday (>= 0.15.4)
+    base64 (0.3.0)
+    bcrypt (3.1.20)
+    bcrypt_pbkdf (1.1.1)
+    benchmark (0.4.1)
+    bigdecimal (3.2.2)
+    bindex (0.8.1)
+    brakeman (7.1.0)
+      racc
+    builder (3.3.0)
+    capybara (3.40.0)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.11)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
+    chunky_png (1.4.0)
+    closure_tree (9.1.1)
+      activerecord (>= 7.2.0)
+      with_advisory_lock (>= 7.0.0)
+      zeitwerk (~> 2.7)
+    concurrent-ruby (1.3.5)
+    connection_pool (2.5.3)
+    crass (1.0.6)
+    csv (3.3.5)
+    date (3.4.1)
+    debug (1.11.0)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
+    dotenv (3.1.8)
+    drb (2.2.3)
+    ed25519 (1.4.0)
+    erb (5.0.2)
+    erubi (1.13.1)
+    et-orbi (1.2.11)
+      tzinfo
+    faraday (2.13.4)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-net_http (3.4.1)
+      net-http (>= 0.5.0)
+    faraday-retry (2.3.2)
+      faraday (~> 2.0)
+    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux-musl)
+    fugit (1.11.1)
+      et-orbi (~> 1, >= 1.2.11)
+      raabro (~> 1.4)
+    globalid (1.2.1)
+      activesupport (>= 6.1)
+    hashie (5.0.0)
+    http-2 (1.1.1)
+    http-form_data (2.3.0)
+    httpx (1.5.1)
+      http-2 (>= 1.0.0)
+    i18n (1.14.7)
+      concurrent-ruby (~> 1.0)
+    image_processing (1.14.0)
+      mini_magick (>= 4.9.5, < 6)
+      ruby-vips (>= 2.0.17, < 3)
+    io-console (0.8.1)
+    irb (1.15.2)
+      pp (>= 0.6.0)
+      rdoc (>= 4.0.0)
+      reline (>= 0.4.2)
+    jbuilder (2.13.0)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
+    json (2.13.2)
+    jwt (3.1.2)
+      base64
+    kamal (2.7.0)
+      activesupport (>= 7.0)
+      base64 (~> 0.2)
+      bcrypt_pbkdf (~> 1.0)
+      concurrent-ruby (~> 1.2)
+      dotenv (~> 3.1)
+      ed25519 (~> 1.4)
+      net-ssh (~> 7.3)
+      sshkit (>= 1.23.0, < 2.0)
+      thor (~> 1.3)
+      zeitwerk (>= 2.6.18, < 3.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
+    kramdown (2.5.1)
+      rexml (>= 3.3.9)
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
+    listen (3.9.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    logger (1.7.0)
+    loofah (2.24.1)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.12.0)
+    mail (2.8.1)
+      mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
+    marcel (1.0.4)
+    matrix (0.4.3)
+    mini_magick (5.3.0)
+      logger
+    mini_mime (1.1.5)
+    minitest (5.25.5)
+    monetize (1.13.0)
+      money (~> 6.12)
+    money (6.19.0)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.15.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9)
+      money (~> 6.13)
+      railties (>= 3.0)
+    multi_xml (0.7.2)
+      bigdecimal (~> 3.1)
+    mutex_m (0.3.0)
+    net-http (0.6.0)
+      uri
+    net-imap (0.5.9)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.2)
+      timeout
+    net-scp (4.1.0)
+      net-ssh (>= 2.6.5, < 8.0.0)
+    net-sftp (4.0.0)
+      net-ssh (>= 5.0.0, < 8.0.0)
+    net-smtp (0.5.1)
+      net-protocol
+    net-ssh (7.3.0)
+    nio4r (2.7.4)
+    nkf (0.2.0)
+    nokogiri (1.18.9-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-musl)
+      racc (~> 1.4)
+    oauth2 (2.0.12)
+      faraday (>= 0.17.3, < 4.0)
+      jwt (>= 1.0, < 4.0)
+      logger (~> 1.2)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 4)
+      snaky_hash (~> 2.0, >= 2.0.3)
+      version_gem (>= 1.1.8, < 3)
+    octokit (10.0.0)
+      faraday (>= 1, < 3)
+      sawyer (~> 0.9)
+    omniauth (2.1.3)
+      hashie (>= 3.4.6)
+      rack (>= 2.2.3)
+      rack-protection
+    omniauth-github (2.0.1)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.8)
+    omniauth-oauth2 (1.8.0)
+      oauth2 (>= 1.4, < 3)
+      omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (1.0.2)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
+    ostruct (0.6.3)
+    pdf-core (0.10.0)
+    pg (1.6.0)
+    pg (1.6.0-aarch64-linux)
+    pg (1.6.0-arm64-darwin)
+    pg (1.6.0-x86_64-linux)
+    positioning (0.4.6)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
+    pp (0.6.2)
+      prettyprint
+    prawn (2.5.0)
+      matrix (~> 0.4)
+      pdf-core (~> 0.10.0)
+      ttfunk (~> 1.8)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
+    prettyprint (0.2.0)
+    propshaft (1.2.1)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+    psych (5.2.6)
+      date
+      stringio
+    public_suffix (6.0.2)
+    puma (6.6.0)
+      nio4r (~> 2.0)
+    raabro (1.4.0)
+    racc (1.8.1)
+    rack (3.2.0)
+    rack-protection (4.1.1)
+      base64 (>= 0.1.0)
+      logger (>= 1.6.0)
+      rack (>= 3.0.0, < 4)
+    rack-session (2.1.1)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0)
+    rack-test (2.2.0)
+      rack (>= 1.3)
+    rackup (2.2.1)
+      rack (>= 3)
+    rails (8.0.2)
+      actioncable (= 8.0.2)
+      actionmailbox (= 8.0.2)
+      actionmailer (= 8.0.2)
+      actionpack (= 8.0.2)
+      actiontext (= 8.0.2)
+      actionview (= 8.0.2)
+      activejob (= 8.0.2)
+      activemodel (= 8.0.2)
+      activerecord (= 8.0.2)
+      activestorage (= 8.0.2)
+      activesupport (= 8.0.2)
+      bundler (>= 1.15.0)
+      railties (= 8.0.2)
+    rails-dom-testing (2.3.0)
+      activesupport (>= 5.0.0)
+      minitest
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.6.2)
+      loofah (~> 2.21)
+      nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
+    railties (8.0.2)
+      actionpack (= 8.0.2)
+      activesupport (= 8.0.2)
+      irb (~> 1.13)
+      rackup (>= 1.0.0)
+      rake (>= 12.2)
+      thor (~> 1.0, >= 1.2.2)
+      zeitwerk (~> 2.6)
+    rake (13.3.0)
+    rb-fsevent (0.11.2)
+    rb-inotify (0.11.1)
+      ffi (~> 1.0)
+    rdoc (6.14.2)
+      erb
+      psych (>= 4.0.0)
+    regexp_parser (2.10.0)
+    reline (0.6.2)
+      io-console (~> 0.5)
+    rexml (3.4.1)
+    roo (2.10.1)
+      nokogiri (~> 1)
+      rubyzip (>= 1.3.0, < 3.0.0)
+    roo-xls (1.2.0)
+      nokogiri
+      roo (>= 2.0.0, < 3)
+      spreadsheet (> 0.9.0)
+    rotp (6.3.0)
+    rouge (4.6.0)
+    rqrcode (3.1.0)
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 2.0)
+    rqrcode_core (2.0.0)
+    ruby-ole (1.2.13.1)
+    ruby-vips (2.2.4)
+      ffi (~> 1.12)
+      logger
+    rubyzip (2.4.1)
+    sawyer (0.9.2)
+      addressable (>= 2.3.5)
+      faraday (>= 0.17.3, < 3)
+    sd_notify (0.1.1)
+    securerandom (0.4.1)
+    selenium-webdriver (4.34.0)
+      base64 (~> 0.2)
+      logger (~> 1.4)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
+    snaky_hash (2.0.3)
+      hashie (>= 0.1.0, < 6)
+      version_gem (>= 1.1.8, < 3)
+    solid_cache (1.0.7)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
+    solid_queue (1.2.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      concurrent-ruby (>= 1.3.1)
+      fugit (~> 1.11.0)
+      railties (>= 7.1)
+      thor (>= 1.3.1)
+    spreadsheet (1.3.4)
+      bigdecimal
+      logger
+      ruby-ole
+    sshkey (3.0.0)
+    sshkit (1.24.0)
+      base64
+      logger
+      net-scp (>= 1.1.2)
+      net-sftp (>= 2.1.2)
+      net-ssh (>= 2.8.0)
+      ostruct
+    stringio (3.1.7)
+    thor (1.4.0)
+    timeout (0.4.3)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
+    turbo-rails (2.0.16)
+      actionpack (>= 7.1.0)
+      railties (>= 7.1.0)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    uri (1.0.3)
+    useragent (0.16.11)
+    version_gem (1.1.8)
+    web-console (4.2.1)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
+      bindex (>= 0.4.0)
+      railties (>= 6.0.0)
+    websocket (1.2.11)
+    websocket-driver (0.8.0)
+      base64
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
+    with_advisory_lock (7.0.1)
+      activerecord (>= 7.2)
+      zeitwerk (>= 2.7)
+    write_xlsx (1.12.1)
+      nkf
+      rubyzip (>= 1.0.0)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
+    zeitwerk (2.7.3)
+
+PLATFORMS
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin-24
+  x86_64-linux-gnu
+  x86_64-linux-musl
+
+DEPENDENCIES
+  aliyunsdkcore
+  bcrypt
+  brakeman
+  capybara
+  debug
+  default_where!
+  image_processing
+  jbuilder
+  kamal (= 2.7.0)
+  listen
+  mini_magick
+  nokogiri
+  octokit
+  omniauth-github
+  omniauth-rails_csrf_protection
+  pg
+  propshaft
+  puma
+  rails (= 8.0.2)
+  rails_alipay!
+  rails_attend!
+  rails_audit!
+  rails_auth!
+  rails_bench!
+  rails_bluetooth!
+  rails_cms!
+  rails_com!
+  rails_crm!
+  rails_data!
+  rails_deploy!
+  rails_design!
+  rails_detail!
+  rails_doc!
+  rails_douyin!
+  rails_email!
+  rails_event!
+  rails_factory!
+  rails_finance!
+  rails_growth!
+  rails_interact!
+  rails_markdown!
+  rails_notice!
+  rails_one_ai!
+  rails_org!
+  rails_print!
+  rails_ship!
+  rails_space!
+  rails_sync!
+  rails_trade!
+  rails_wechat!
+  rexml
+  rqrcode
+  sd_notify
+  selenium-webdriver
+  tencentcloud-sdk-common!
+  upyun_rails!
+  web-console
+
+BUNDLED WITH
+   2.6.2
