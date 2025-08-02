@@ -3,6 +3,7 @@
 # Ignore bundler config.
 /.bundle
 /.git
+work.design
 
 # Ignore all environment files (except templates).
 /.env*
