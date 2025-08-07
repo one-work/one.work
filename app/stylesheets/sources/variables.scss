@@ -1,3 +1,9 @@
 $body-size: 15px;
 $table-head-cell-border-width: 0 0 1px;
 $grey-darker: #2d3a4b;
+
+.menu {
+  --bulma-menu-item-h: 212;
+  --bulma-menu-item-s: 52%;
+  --bulma-menu-item-background-l: 95%;
+}
