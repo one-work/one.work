@@ -11,6 +11,12 @@ body {
   --bulma-body-family: Alibaba, 'Microsoft YaHei', 'PingFang SC';
 }
 
+.menu {
+  --bulma-menu-item-h: 212;
+  --bulma-menu-item-s: 52%;
+  --bulma-menu-item-background-l: 95%;
+}
+
 .slide + .weui-panel {
   margin-top: 0;
 }
