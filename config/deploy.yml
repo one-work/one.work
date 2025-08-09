@@ -56,12 +56,15 @@ accessories:
     image: ccr.ccs.tencentyun.com/kamal/emqx:6.0
     host: work.design
     options:
-      publish: 
+      publish:
         - 1883:1883
         - 8083:8083
         - 8084:8084
         - 8883:8883
         - 18083:18083
+    proxy:
+      host: emqx.work.design
+      ssl: true
 
 proxy:
   hosts:
