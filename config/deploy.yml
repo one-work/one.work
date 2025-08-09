@@ -52,6 +52,15 @@ accessories:
       - ~/app/db_dump:/root/pg_dump
     files:
       - deploy/postgresql.conf:/var/lib/postgresql/custom.conf
+  emqx:
+    image: ccr.ccs.tencentyun.com/kamal/emqx:6.0
+    host: work.design
+    port:
+      - 1883
+      - 8083
+      - 8084
+      - 8883
+      - 18083
 
 proxy:
   hosts:
