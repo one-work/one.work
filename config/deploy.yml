@@ -65,6 +65,7 @@ accessories:
     proxy:
       host: emqx.work.design
       app_port: 18083
+      ssl: true
       healthcheck:
         path: /
 
