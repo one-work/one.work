@@ -6,6 +6,15 @@
       #FAF7FF 100%
     );
   }
+
+  .column {
+    &.as-body {
+      padding-top: 16px;
+      padding-left: 0;
+      padding-right: 24px;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .box {
