@@ -2,4 +2,12 @@
   --bulma-menu-item-h: 212;
   --bulma-menu-item-s: 52%;
   --bulma-menu-item-background-l: 95%;
+
+  &.as-wrap {
+    background-color: transparent;
+
+    .menu-list a {
+      background-color: transparent;
+    }
+  }
 }
