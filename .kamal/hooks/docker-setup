@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Docker set up on $KAMAL_HOSTS..."
+bin/kamal proxy boot_config set --registry ccr.ccs.tencentyun.com --repository kamal --image_version v0.9.1
