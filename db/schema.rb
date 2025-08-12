@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_09_162252) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_12_034314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3498,15 +3498,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_09_162252) do
     t.index ["printer_type", "printer_id"], name: "index_print_devices_on_printer"
   end
 
-  create_table "print_ip_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.uuid "organ_id"
-    t.string "ip"
-    t.string "port"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["organ_id"], name: "index_print_ip_printers_on_organ_id"
-  end
-
   create_table "print_jia_bo_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "name"
     t.string "member_code"
@@ -3537,6 +3528,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_09_162252) do
     t.string "base_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "print_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "uid"
+    t.index ["organ_id"], name: "index_print_printers_on_organ_id"
   end
 
   create_table "roled_cache_roles", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
