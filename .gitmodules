@@ -1,93 +1,93 @@
 [submodule "engine/rails_com"]
   path = engine/rails_com
-  url = git@github.com:work-design/rails_com.git
+  url = ./engine/rails_com
 [submodule "engine/rails_crm"]
   path = engine/rails_crm
-  url = git@github.com:work-design/rails_crm.git
+  url = ./engine/rails_crm
 [submodule "engine/rails_cms"]
   path = engine/rails_cms
-  url = git@github.com:work-design/rails_cms.git
+  url = ./engine/rails_cms
 [submodule "engine/rails_doc"]
   path = engine/rails_doc
-  url = git@github.com:work-design/rails_doc.git
+  url = ./engine/rails_doc
 [submodule "engine/rails_org"]
   path = engine/rails_org
-  url = git@github.com:work-design/rails_org.git
+  url = ./engine/rails_org
 [submodule "engine/rails_auth"]
   path = engine/rails_auth
-  url = git@github.com:work-design/rails_auth.git
+  url = ./engine/rails_auth
 [submodule "engine/rails_data"]
   path = engine/rails_data
-  url = git@github.com:work-design/rails_data.git
+  url = ./engine/rails_data
 [submodule "engine/rails_ship"]
   path = engine/rails_ship
-  url = git@github.com:work-design/rails_ship.git
+  url = ./engine/rails_ship
 [submodule "engine/rails_sync"]
   path = engine/rails_sync
-  url = git@github.com:work-design/rails_sync.git
+  url = ./engine/rails_sync
 [submodule "engine/rails_audit"]
   path = engine/rails_audit
-  url = git@github.com:work-design/rails_audit.git
+  url = ./engine/rails_audit
 [submodule "engine/rails_bench"]
   path = engine/rails_bench
-  url = git@github.com:work-design/rails_bench.git
+  url = ./engine/rails_bench
 [submodule "engine/rails_email"]
   path = engine/rails_email
-  url = git@github.com:work-design/rails_email.git
+  url = ./engine/rails_email
 [submodule "engine/rails_event"]
   path = engine/rails_event
-  url = git@github.com:work-design/rails_event.git
+  url = ./engine/rails_event
 [submodule "engine/rails_trade"]
   path = engine/rails_trade
-  url = git@github.com:work-design/rails_trade.git
+  url = ./engine/rails_trade
 [submodule "engine/rails_attend"]
   path = engine/rails_attend
-  url = git@github.com:work-design/rails_attend.git
+  url = ./engine/rails_attend
 [submodule "engine/rails_design"]
   path = engine/rails_design
-  url = git@github.com:work-design/rails_design.git
+  url = ./engine/rails_design
 [submodule "engine/rails_detail"]
   path = engine/rails_detail
-  url = git@github.com:work-design/rails_detail.git
+  url = ./engine/rails_detail
 [submodule "engine/rails_douyin"]
   path = engine/rails_douyin
-  url = git@github.com:work-design/rails_douyin.git
+  url = ./engine/rails_douyin
 [submodule "engine/rails_growth"]
   path = engine/rails_growth
-  url = git@github.com:work-design/rails_growth.git
+  url = ./engine/rails_growth
 [submodule "engine/rails_notice"]
   path = engine/rails_notice
-  url = git@github.com:work-design/rails_notice.git
+  url = ./engine/rails_notice
 [submodule "engine/rails_wechat"]
   path = engine/rails_wechat
-  url = git@github.com:work-design/rails_wechat.git
+  url = ./engine/rails_wechat
 [submodule "engine/rails_factory"]
   path = engine/rails_factory
-  url = git@github.com:work-design/rails_factory.git
+  url = ./engine/rails_factory
 [submodule "engine/rails_finance"]
   path = engine/rails_finance
-  url = git@github.com:work-design/rails_finance.git
+  url = ./engine/rails_finance
 [submodule "engine/rails_space"]
   path = engine/rails_space
-  url = git@github.com:work-design/rails_space.git
+  url = ./engine/rails_space
 [submodule "engine/rails_interact"]
   path = engine/rails_interact
-  url = git@github.com:work-design/rails_interact.git
+  url = ./engine/rails_interact
 [submodule "engine/rails_markdown"]
   path = engine/rails_markdown
-  url = git@github.com:work-design/rails_markdown.git
+  url = ./engine/rails_markdown
 [submodule "engine/rails_bluetooth"]
   path = engine/rails_bluetooth
-  url = git@github.com:work-design/rails_bluetooth.git
+  url = ./engine/rails_bluetooth
 [submodule "engine/rails_alipay"]
   path = engine/rails_alipay
-  url = git@github.com:work-design/rails_alipay.git
-[submodule "engine/rails_deploy"]
-  path = engine/rails_deploy
-  url = git@github.com:work-design/rails_deploy.git
-[submodule "engine/rails_one_ai"]
-  path = engine/rails_one_ai
-  url = git@github.com:work-design/rails_one_ai.git
+  url = ./engine/rails_alipay
 [submodule "engine/rails_print"]
-  path = engine/rails_print
-  url = git@github.com:work-design/rails_print.git
+	path = engine/rails_print
+	url = ./engine/rails_print
+[submodule "engine/rails_one_ai"]
+	path = engine/rails_one_ai
+	url = ./engine/rails_one_ai
+[submodule "engine/rails_deploy"]
+	path = engine/rails_deploy
+	url = ./engine/rails_deploy
