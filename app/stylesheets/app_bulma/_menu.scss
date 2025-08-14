@@ -6,13 +6,20 @@
   &.as-wrap {
     --bulma-menu-item-selected-h: 300;
     --bulma-menu-item-selected-s: 90%;
-    --bulma-menu-item-selected-color-l: 40%;
 
     background-color: transparent;
 
-    .menu-item,
-    .menu-list a {
+    .menu-item:not(.is-active),
+    .menu-list a:not(.is-active) {
       background-color: transparent;
+    }
+
+    .cell:not(.is-active) {
+      color: hsl(
+        var(--bulma-menu-item-h),
+        var(--bulma-menu-item-s),
+        var(--bulma-text-l)
+      );
     }
   }
 }
