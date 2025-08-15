@@ -73,6 +73,7 @@ proxy:
   hosts:
     - work.design
     - '*.work.design'
+    - '*.admin.work.design'
   ssl:
     certificate_path: /certs/work.design.pem
     private_key_path: /certs/work.design.key
