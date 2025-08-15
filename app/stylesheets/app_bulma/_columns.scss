@@ -22,10 +22,5 @@
     flex-grow: 1;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-
-    &:has(.columns) {
-      max-height: calc(100vh - 16px);
-      padding: 0;
-    }
   }
 }
