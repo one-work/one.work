@@ -1,1 +1,3 @@
-SolidQueue.on_start { Com::SshKey.init_project }
+SolidQueue.on_start do
+  Com::SshKey.init_project unless Rails.env.local?
+end
