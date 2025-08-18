@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_18_162902) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_18_165001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -4950,6 +4950,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_162902) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "taxon_id"
+    t.uuid "part_id"
     t.index ["agent_id"], name: "index_trade_promote_goods_on_agent_id"
     t.index ["card_id"], name: "index_trade_promote_goods_on_card_id"
     t.index ["card_template_id"], name: "index_trade_promote_goods_on_card_template_id"
@@ -4959,6 +4960,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_162902) do
     t.index ["member_id"], name: "index_trade_promote_goods_on_member_id"
     t.index ["member_organ_id"], name: "index_trade_promote_goods_on_member_organ_id"
     t.index ["organ_id"], name: "index_trade_promote_goods_on_organ_id"
+    t.index ["part_id"], name: "index_trade_promote_goods_on_part_id"
     t.index ["promote_id"], name: "index_trade_promote_goods_on_promote_id"
     t.index ["taxon_id"], name: "index_trade_promote_goods_on_taxon_id"
     t.index ["user_id"], name: "index_trade_promote_goods_on_user_id"
