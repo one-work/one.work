@@ -1,1 +1,1 @@
-import 'rails_design/weixin_script'
+import 'rails_design/weixin_script.js'
