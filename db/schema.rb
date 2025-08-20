@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_18_165001) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_074622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -2572,7 +2572,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_165001) do
     t.jsonb "parent_ancestors"
     t.string "name"
     t.integer "position"
-    t.boolean "take_stock", comment: "可盘点"
     t.boolean "enabled"
     t.boolean "nav", comment: "单独分类"
     t.integer "products_count"
@@ -2580,6 +2579,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_165001) do
     t.integer "taxon_components_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "countable", comment: "可盘点"
+    t.boolean "customizable", comment: "可定制"
     t.index ["factory_taxon_id"], name: "index_factory_taxons_on_factory_taxon_id"
     t.index ["organ_id"], name: "index_factory_taxons_on_organ_id"
     t.index ["parent_id"], name: "index_factory_taxons_on_parent_id"
