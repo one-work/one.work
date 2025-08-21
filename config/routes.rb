@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     end
   end
   constraints ->(req) { req.subdomain.start_with?('admin') } do
-    root to: 'me/home#index', as: 'admin'
     namespace :wechat, defaults: { business: 'wechat' } do
       controller :wechat do
         get 'user_login' => :admin_login
