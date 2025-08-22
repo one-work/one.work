@@ -1,17 +1,17 @@
 servers:
   web:
     hosts:
-      - map.work.design
+      - one.work
   job:
     hosts:
-      - map.work.design
+      - one.work
 env:
   clear:
-    ASSET_HOST: map.work.design
+    ASSET_HOST: assets.work.design
 accessories:
   postgres:
-    host: map.work.design
+    host: one.work
 proxy:
   hosts:
-    - map.work.design
+    - one.work
   ssl: true
