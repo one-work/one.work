@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_20_074622) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_26_044623) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3492,7 +3492,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_074622) do
     t.string "printer_type"
     t.uuid "printer_id"
     t.string "aim"
-    t.boolean "online"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_print_devices_on_organ_id"
