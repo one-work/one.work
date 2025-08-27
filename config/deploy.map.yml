@@ -14,4 +14,8 @@ accessories:
 proxy:
   hosts:
     - one.work
-  ssl: true
+    - '*.one.work'
+    - '*.admin.one.work'
+  ssl:
+    certificate_path: /certs/one.work.pem
+    private_key_path: /certs/one.work.key
