@@ -4,10 +4,10 @@ deploy_timeout: 100
 servers:
   web:
     hosts:
-      - work.design
+      - one.work
   job:
     hosts:
-      - work.design
+      - one.work
     cmd: bin/jobs
 
 registry:
@@ -26,8 +26,8 @@ env:
   clear:
     RAILS_ENV: production
     RAILS_MAX_THREADS: 6
-    HOST: work.design
-    ASSET_HOST: assets.work.design
+    HOST: one.work
+    ASSET_HOST: assets.one.work
   secret:
     - POSTGRES_PASSWORD
     - RAILS_MASTER_KEY
@@ -35,12 +35,12 @@ env:
 builder:
   dockerfile: deploy/Dockerfile
   arch: x86_64
-  remote: ssh://root@map.work.design
+  remote: ssh://root@one.work
 
 accessories:
   postgres:
     image: ccr.ccs.tencentyun.com/kamal/postgres:18.2
-    host: work.design
+    host: one.work
     port: 5432
     env:
       clear:
@@ -54,7 +54,7 @@ accessories:
       - deploy/postgresql.conf:/var/lib/postgresql/custom.conf
   emqx:
     image: ccr.ccs.tencentyun.com/kamal/emqx:6.0
-    host: work.design
+    host: one.work
     options:
       publish:
         - 1883:1883
@@ -63,7 +63,7 @@ accessories:
         - 8883:8883
         - 18083:18083
     proxy:
-      host: emqx.work.design
+      host: emqx.one.work
       app_port: 18083
       ssl: true
       healthcheck:
@@ -71,12 +71,12 @@ accessories:
 
 proxy:
   hosts:
-    - work.design
-    - '*.work.design'
-    - '*.admin.work.design'
+    - one.work
+    - '*.one.work'
+    - '*.admin.one.work'
   ssl:
-    certificate_path: /certs/work.design.pem
-    private_key_path: /certs/work.design.key
+    certificate_path: /certs/one.work.pem
+    private_key_path: /certs/one.work.key
   app_port: 3000
   response_timeout: 100
   forward_headers: true
