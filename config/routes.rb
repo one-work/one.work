@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :schedules
 
-  constraints ->(req) { req.subdomain.start_with?('panel') } do
+  constraints ->(req) { req.subdomain.end_with?('panel') } do
     root to: 'panel/home#index', as: 'panel'
     namespace :wechat, defaults: { business: 'wechat' } do
       controller :wechat do
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  constraints ->(req) { req.subdomain.start_with?('admin') } do
+  constraints ->(req) { req.subdomain.end_with?('admin') } do
     root to: 'admin/home#index', as: 'admin'
     namespace :wechat, defaults: { business: 'wechat' } do
       controller :wechat do
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  constraints ->(req) { req.subdomain.start_with?('agent') } do
+  constraints ->(req) { req.subdomain.end_with?('agent') } do
     root to: 'agent/home#index', as: 'agent'
   end
 
