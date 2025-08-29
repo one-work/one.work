@@ -27,7 +27,7 @@ env:
     RAILS_ENV: production
     RAILS_MAX_THREADS: 6
     HOST: one.work
-    ASSET_HOST: assets.work.design
+    ASSET_HOST: assets.one.work
   secret:
     - POSTGRES_PASSWORD
     - RAILS_MASTER_KEY
