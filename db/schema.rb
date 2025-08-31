@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_28_055822) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_31_022231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -5232,7 +5232,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_055822) do
     t.integer "auditid"
     t.jsonb "version_info"
     t.jsonb "webview_domain_registered"
-    t.string "audit_status"
+    t.integer "audit_status"
     t.string "confirm_name"
     t.string "confirm_content"
     t.string "ticket"
