@@ -34,6 +34,8 @@ Rails.application.configure do
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
 
+  config.action_view.annotate_rendered_view_with_filenames = true
+
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailbox.ingress = :postmark
