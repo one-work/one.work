@@ -68,3 +68,6 @@ end
 ActiveRecord.verbose_query_logs = true
 
 #ActionCable.server.config.logger = Logger.new(nil)
+Rails.application.routes.default_url_options = {
+  host: 'lvh.me'
+}
