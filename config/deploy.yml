@@ -74,6 +74,7 @@ proxy:
     - one.work
     - '*.one.work'
     - '*.admin.one.work'
+    - '*.org.one.work'
   ssl:
     certificate_path: /certs/one.work.pem
     private_key_path: /certs/one.work.key
