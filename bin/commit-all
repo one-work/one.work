@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
 
 # 一次性命令，复制整段即可跑
-git submodule foreach --quiet '
-if [ -n "$(git status --porcelain 2>/dev/null)" ]; then
-  printf "[DIRTY]  %s  ->  %s\n" "$name" "$path"
-fi
-'
+git submodule foreach --quiet 'if [ -n "$(git status --porcelain 2>/dev/null)" ]; then git commit -m "auto commit"; fi'
