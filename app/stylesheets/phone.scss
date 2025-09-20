@@ -1,3 +1,3 @@
-@use 'rails_design/app/stylesheets/rails_design/phone';
-@use 'app_bulma';
-@use 'sources/font';
+@forward 'rails_design/app/stylesheets/rails_design/phone';
+@forward '../assets/stylesheets/app_bulma';
+@forward '../assets/stylesheets/sources/font';
