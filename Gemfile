@@ -84,4 +84,5 @@ group :development do
   gem 'listen'
   gem 'brakeman'
   gem 'sass-embedded'
+  gem 'tidewave'
 end
