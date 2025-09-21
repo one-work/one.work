@@ -3375,7 +3375,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_21_162545) do
     t.uuid "cache_id"
     t.string "code"
     t.uuid "corp_user_id"
-    t.jsonb "counters"
+    t.jsonb "counters", default: {}
     t.datetime "created_at", null: false
     t.uuid "creator_id"
     t.string "dispatch"
