@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_09_16_155023) do
+ActiveRecord::Schema[8.1].define(version: 2025_09_21_162545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3375,6 +3375,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_16_155023) do
     t.uuid "cache_id"
     t.string "code"
     t.uuid "corp_user_id"
+    t.jsonb "counters"
     t.datetime "created_at", null: false
     t.uuid "creator_id"
     t.string "dispatch"
@@ -5727,6 +5728,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_16_155023) do
 
   create_table "wechat_registers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "appid"
+    t.string "bank_number"
     t.datetime "created_at", null: false
     t.string "email_code"
     t.string "id_name"
