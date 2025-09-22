@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_09_22_051102) do
+ActiveRecord::Schema[8.1].define(version: 2025_09_22_082024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -403,6 +403,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_22_051102) do
     t.uuid "cache_id"
     t.jsonb "counters"
     t.datetime "created_at", null: false
+    t.integer "created_organs_count"
     t.boolean "disabled"
     t.string "invited_code"
     t.datetime "last_login_at"
