@@ -60,6 +60,7 @@ Rails.application.configure do
   config.hosts += [
     '.lvh.me',
     '.admin.lvh.me',
+    '.org.lvh.me',
     '.frp.work.design'
   ]
 
