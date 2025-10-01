@@ -39,7 +39,7 @@ builder:
 
 accessories:
   postgres:
-    image: ccr.ccs.tencentyun.com/kamal/postgres:18.2
+    image: ccr.ccs.tencentyun.com/kamal/postgres:18-alpine
     host: one.work
     port: 5432
     env:
