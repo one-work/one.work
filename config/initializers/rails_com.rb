@@ -10,8 +10,8 @@ RailsCom.configure do |config|
   config.debug_i18n = false
   config.quiet_logs += [
     '/assets',
-    '/images',
-    '/rails/active_storage'
+    '/images'
+  #'/rails/active_storage'
   ]
   config.ignore_models += []
   config.override_prefixes = [
