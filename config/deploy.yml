@@ -19,6 +19,7 @@ registry:
 
 volumes:
   - ~/app/acme:/rails/acme
+  - ~/app/storage:/rails/storage
   - ~/app/tmp/storage:/rails/tmp/storage
   - ~/.ssh:/root/.ssh
 
