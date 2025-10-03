@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_03_124910) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_03_133407) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -405,7 +405,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_03_124910) do
     t.uuid "cache_id"
     t.jsonb "counters"
     t.datetime "created_at", null: false
-    t.integer "created_organs_count"
     t.boolean "disabled"
     t.string "invited_code"
     t.datetime "last_login_at"
@@ -3320,7 +3319,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_03_124910) do
     t.string "number"
     t.uuid "organ_id"
     t.integer "organ_root_id"
-    t.boolean "own"
+    t.boolean "owned"
     t.integer "pomodoro"
     t.integer "promote_goods_count"
     t.integer "showtime"
@@ -3380,7 +3379,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_03_124910) do
     t.uuid "corp_user_id"
     t.jsonb "counters", default: {}
     t.datetime "created_at", null: false
-    t.uuid "creator_id"
     t.boolean "debug_enabled"
     t.string "dispatch"
     t.boolean "joinable", comment: "是否可搜索并加入"
@@ -3401,7 +3399,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_03_124910) do
     t.index ["area_id"], name: "index_org_organs_on_area_id"
     t.index ["cache_id"], name: "index_org_organs_on_cache_id"
     t.index ["corp_user_id"], name: "index_org_organs_on_corp_user_id"
-    t.index ["creator_id"], name: "index_org_organs_on_creator_id"
     t.index ["parent_id"], name: "index_org_organs_on_parent_id"
     t.index ["provider_id"], name: "index_org_organs_on_provider_id"
   end
