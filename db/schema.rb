@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_03_133407) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_03_142454) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -346,7 +346,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_03_133407) do
     t.uuid "user_id"
     t.index ["identity"], name: "index_auth_oauth_users_on_identity"
     t.index ["organ_id"], name: "index_auth_oauth_users_on_organ_id"
-    t.index ["uid", "type"], name: "index_auth_oauth_users_on_uid_and_type", unique: true
     t.index ["unionid"], name: "index_auth_oauth_users_on_unionid"
     t.index ["user_id"], name: "index_auth_oauth_users_on_user_id"
   end
