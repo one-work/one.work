@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_04_072830) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_04_124539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -2143,7 +2143,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_04_072830) do
     t.string "gtin"
     t.string "made_in"
     t.string "name"
-    t.decimal "prince"
+    t.decimal "price"
     t.string "spec"
     t.string "supplier"
     t.uuid "unit_id"
