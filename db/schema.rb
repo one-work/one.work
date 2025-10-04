@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_03_142454) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_04_072830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -2134,6 +2134,23 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_03_142454) do
     t.uuid "organ_id"
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_eventual_time_lists_on_organ_id"
+  end
+
+  create_table "factory_barcodes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "brand_id"
+    t.string "brand_name"
+    t.datetime "created_at", null: false
+    t.string "gtin"
+    t.string "made_in"
+    t.string "name"
+    t.decimal "prince"
+    t.string "spec"
+    t.string "supplier"
+    t.uuid "unit_id"
+    t.string "unit_name"
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_factory_barcodes_on_brand_id"
+    t.index ["unit_id"], name: "index_factory_barcodes_on_unit_id"
   end
 
   create_table "factory_brands", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
