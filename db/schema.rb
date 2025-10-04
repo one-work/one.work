@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_04_124539) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_04_130554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -2150,6 +2150,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_04_124539) do
     t.string "unit_name"
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_factory_barcodes_on_brand_id"
+    t.index ["gtin"], name: "index_factory_barcodes_on_gtin", unique: true
     t.index ["unit_id"], name: "index_factory_barcodes_on_unit_id"
   end
 
