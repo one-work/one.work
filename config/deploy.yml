@@ -35,6 +35,12 @@ builder:
   remote: ssh://root@one.work
 
 accessories:
+  registry:
+    image: ccr.ccs.tencentyun.com/kamal/registry:3
+    host: one.work
+    port: 5555
+    volumes:
+      - ~/registry_data:/var/lib/registry
   postgres:
     image: ccr.ccs.tencentyun.com/kamal/postgres:18-alpine
     host: one.work
