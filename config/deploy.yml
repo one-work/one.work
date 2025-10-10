@@ -36,7 +36,7 @@ builder:
 
 accessories:
   registry:
-    image: ccr.ccs.tencentyun.com/kamal/registry:3
+    image: ccr.ccs.tencentyun.com/kamal/registry:2
     host: one.work
     port: 5555:5000
     volumes:
