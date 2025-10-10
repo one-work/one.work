@@ -11,11 +11,7 @@ servers:
     cmd: bin/jobs
 
 registry:
-  server: ccr.ccs.tencentyun.com
-  username:
-    - KAMAL_REGISTRY_USERNAME
-  password:
-    - KAMAL_REGISTRY_PASSWORD
+  server: localhost:5555
 
 volumes:
   - ~/app/acme:/rails/acme
