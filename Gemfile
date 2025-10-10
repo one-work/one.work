@@ -6,7 +6,7 @@ gem 'rails', '8.1.0.beta1'
 gem 'pg'
 gem 'puma'
 gem 'jbuilder'
-gem 'kamal', '2.7.0', require: false
+gem 'kamal', github: 'basecamp/kamal'
 gem 'rails_deploy', path: 'engine/rails_deploy', require: false
 
 # Utils

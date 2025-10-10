@@ -19,6 +19,22 @@ GIT
   specs:
     tencentcloud-sdk-common (3.0.1139)
 
+GIT
+  remote: https://github.com/basecamp/kamal.git
+  revision: 785d89a7b988945eb80cdfa9f1bac09f04cb310a
+  specs:
+    kamal (2.7.0)
+      activesupport (>= 7.0)
+      base64 (~> 0.2)
+      bcrypt_pbkdf (~> 1.0)
+      concurrent-ruby (~> 1.2)
+      dotenv (~> 3.1)
+      ed25519 (~> 1.4)
+      net-ssh (~> 7.3)
+      sshkit (>= 1.23.0, < 2.0)
+      thor (~> 1.3)
+      zeitwerk (>= 2.6.18, < 3.0)
+
 PATH
   remote: engine/rails_alipay
   specs:
@@ -466,17 +482,6 @@ GEM
     json (2.13.2)
     jwt (3.1.2)
       base64
-    kamal (2.7.0)
-      activesupport (>= 7.0)
-      base64 (~> 0.2)
-      bcrypt_pbkdf (~> 1.0)
-      concurrent-ruby (~> 1.2)
-      dotenv (~> 3.1)
-      ed25519 (~> 1.4)
-      net-ssh (~> 7.3)
-      sshkit (>= 1.23.0, < 2.0)
-      thor (~> 1.3)
-      zeitwerk (>= 2.6.18, < 3.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -793,7 +798,7 @@ DEPENDENCIES
   default_where!
   image_processing
   jbuilder
-  kamal (= 2.7.0)
+  kamal!
   listen
   mini_magick
   nokogiri
