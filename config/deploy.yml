@@ -38,7 +38,7 @@ accessories:
   registry:
     image: ccr.ccs.tencentyun.com/kamal/registry:3
     host: one.work
-    port: 5555
+    port: 5555:5000
     volumes:
       - ~/registry_data:/var/lib/registry
   postgres:
