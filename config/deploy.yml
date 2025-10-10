@@ -32,7 +32,6 @@ env:
 builder:
   dockerfile: deploy/Dockerfile
   arch: x86_64
-  remote: ssh://root@one.work
 
 accessories:
   registry:
