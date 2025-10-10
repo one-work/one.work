@@ -11,7 +11,7 @@ servers:
     cmd: bin/jobs
 
 registry:
-  server: '127.0.0.1:5555'
+  server: 'localhost:5555'
 
 volumes:
   - ~/app/acme:/rails/acme
