@@ -11,7 +11,7 @@ servers:
     cmd: bin/jobs
 
 registry:
-  server: localhost:5000
+  server: localhost:5555
 
 volumes:
   - ~/app/acme:/rails/acme
