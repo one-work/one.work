@@ -11,7 +11,7 @@ servers:
     cmd: bin/jobs
 
 registry:
-  server: 'localhost:5555'
+  server: localhost:5000
 
 volumes:
   - ~/app/acme:/rails/acme
@@ -38,7 +38,7 @@ accessories:
   registry:
     image: ccr.ccs.tencentyun.com/kamal/registry:2
     host: one.work
-    port: 5555:5000
+    port: 5000
     volumes:
       - ~/registry_data:/var/lib/registry
   postgres:
