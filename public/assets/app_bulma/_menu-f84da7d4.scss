@@ -1,0 +1,25 @@
+.menu {
+  --bulma-menu-item-h: 212;
+  --bulma-menu-item-s: 52%;
+  --bulma-menu-item-background-l: 95%;
+
+  &.as-wrap {
+    --bulma-menu-item-selected-h: 300;
+    --bulma-menu-item-selected-s: 90%;
+
+    background-color: transparent;
+
+    .menu-item:not(.is-active),
+    .menu-list a:not(.is-active) {
+      background-color: transparent;
+    }
+
+    .cell:not(.is-active) {
+      color: hsl(
+        var(--bulma-menu-item-h),
+        var(--bulma-menu-item-s),
+        var(--bulma-text-l)
+      );
+    }
+  }
+}
