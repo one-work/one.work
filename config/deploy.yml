@@ -32,6 +32,7 @@ env:
 builder:
   dockerfile: deploy/Dockerfile
   arch: x86_64
+  context: .
 
 accessories:
   registry:
