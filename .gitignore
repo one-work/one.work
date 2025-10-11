@@ -12,6 +12,7 @@ tmp/**/*
 .idea
 .irb_history
 public/fonts
+public/assets
 public/svgs
 public/challenge
 storage
