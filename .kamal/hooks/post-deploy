@@ -1,12 +1,7 @@
 #!/bin/sh
 
-#if [ "$(git log -1 --pretty=format:%s)" = "update assets" ]; then
-#  git stash
-#  git reset --hard HEAD~1
-#  git stash pop
-#fi
+#git stash pop
 
-cp .gitmodules.github .gitmodules
 echo "部署完成时间: $(date +'%Y-%m-%d %H:%M:%S')"
 echo "最后一次提交：$(git log -1 --pretty='%s %ci')"
 exit 0

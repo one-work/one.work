@@ -1,12 +1,7 @@
 #!/bin/sh
 
 rake assets:precompile
-cp .gitmodules.deploy .gitmodules
-
-#if [ -n "$(git status public/assets --porcelain)" ]; then
-  #git add public/assets
-  #git add .gitmodules
-  #git commit -m 'update assets'
-#fi
+#cp .gitmodules.deploy .gitmodules
+#git stash
 
 exit 0
