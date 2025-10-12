@@ -3,16 +3,19 @@
   --bulma-menu-item-s: 52%;
   --bulma-menu-item-background-l: 95%;
 
-  &.as-wrap {
-    --bulma-menu-item-selected-h: 300;
-    --bulma-menu-item-selected-s: 90%;
-
+  &.as-wrap,
+  &.as-side {
     background-color: transparent;
 
     .menu-item:not(.is-active),
     .menu-list a:not(.is-active) {
       background-color: transparent;
     }
+  }
+
+  &.as-wrap {
+    --bulma-menu-item-selected-h: 300;
+    --bulma-menu-item-selected-s: 90%;
 
     .cell:not(.is-active) {
       color: hsl(
@@ -27,6 +30,10 @@
     --bulma-menu-item-selected-h: 0;
     --bulma-menu-item-selected-s: 0%;
     --bulma-menu-item-selected-color-l: 20%;
+
+    .menu-item {
+      text-align: center;
+    }
 
     .menu-item.is-active {
       --bulma-menu-item-selected-background-l: 98%;
