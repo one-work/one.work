@@ -2,7 +2,7 @@ FROM ccr.ccs.tencentyun.com/kamal/ruby:3.4.1 AS base
 
 # Rails App 所在位置
 WORKDIR /rails
-ENV RAILS_ENV='production' BUNDLE_PATH='/usr/local/bundle' BUNDLE_DEPLOYMENT='1' BUNDLE_WITHOUT='development'
+ENV RAILS_ENV='production' BUNDLE_PATH='/usr/local/bundle' BUNDLE_WITHOUT='development'
 
 FROM base AS build
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.ustc.edu.cn/alpine#g' /etc/apk/repositories
