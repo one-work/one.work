@@ -22,4 +22,8 @@
       );
     }
   }
+
+  &.as-side {
+    --bulma-menu-item-selected-h: 100;
+  }
 }
