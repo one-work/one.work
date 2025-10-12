@@ -29,7 +29,8 @@
     --bulma-menu-item-selected-color-l: 20%;
 
     .menu-item.is-active {
-      --bulma-menu-item-selected-background-l: 93%;
+      --bulma-menu-item-selected-background-l: 98%;
+      --bulma-menu-item-background-l-delta: -5%;
     }
   }
 }
