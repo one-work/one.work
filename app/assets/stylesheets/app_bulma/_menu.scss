@@ -26,7 +26,10 @@
   &.as-side {
     --bulma-menu-item-selected-h: 0;
     --bulma-menu-item-selected-s: 0%;
-    --bulma-menu-item-selected-background-l: 93%;
     --bulma-menu-item-selected-color-l: 20%;
+
+    .menu-item.is-active {
+      --bulma-menu-item-selected-background-l: 93%;
+    }
   }
 }
