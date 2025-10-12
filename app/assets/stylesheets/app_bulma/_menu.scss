@@ -3,8 +3,7 @@
   --bulma-menu-item-s: 52%;
   --bulma-menu-item-background-l: 95%;
 
-  &.as-wrap,
-  &.as-side {
+  &.as-wrap {
     background-color: transparent;
 
     .menu-item:not(.is-active),
@@ -30,6 +29,16 @@
     --bulma-menu-item-selected-h: 0;
     --bulma-menu-item-selected-s: 0%;
     --bulma-menu-item-selected-color-l: 20%;
+    background-color: transparent;
+
+    .menu-list {
+      height: 100%;
+    }
+
+    .menu-item:not(.is-active),
+    .menu-list a:not(.is-active) {
+      background-color: white;
+    }
 
     .menu-item {
       text-align: center;
@@ -38,6 +47,15 @@
     .menu-item.is-active {
       --bulma-menu-item-selected-background-l: 98%;
       --bulma-menu-item-background-l-delta: -5%;
+    }
+
+    .menu-item:has(+ .is-active) {
+      border-bottom-right-radius: 16px;
+    }
+
+    .is-active + .menu-item:not(.is-active),
+    .is-active + .flex-grow-1 {
+      border-top-right-radius: 16px;
     }
   }
 }
