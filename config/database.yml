@@ -1,7 +1,9 @@
 default: &default
   adapter: postgresql
-  pool: 5
+  pool: 10
   timeout: 5000
+  checkout_timeout: 5  # 添加连接检出超时
+  reaping_frequency: 10  # 添加连接回收频率（秒)
   host: work_design-postgres
   username: postgres
   password: <%= ENV['POSTGRES_PASSWORD'] %>
