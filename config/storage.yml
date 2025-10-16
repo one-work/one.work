@@ -15,5 +15,5 @@ upyun:
   bucket: one-work
   operator: yougexiangfa
   password: <%= Rails.application.credentials.dig(:upyun, :password) %>
-  host: https://images.work.design
+  host: https://images.one.work
   folder: images
