@@ -1,7 +1,7 @@
 <%= image_tag 'dibiao/header.png', class: 'image' %>
 
 <div class="box mt-3">
-<%= form_with theme: 'weui', model: @facilitating, url: { controller: 'bench/my/facilitatings', action: 'create' } do |f| %>
+<%= form_with theme: 'default_phone', model: @facilitating, url: { controller: 'bench/my/facilitatings', action: 'create' } do |f| %>
   <%= f.hidden_field :facilitate_id %>
   <%= render partial: 'bench/my/facilitatings/form', locals: { f: f } %>
   <%= f.submit %>
