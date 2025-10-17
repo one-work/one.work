@@ -59,6 +59,8 @@ accessories:
         - 8084:8084
         - 8883:8883
         - 18083:18083
+    volumes:
+      - ~/emqx_data:/opt/emqx/data
     proxy:
       host: emqx.one.work
       app_port: 18083
