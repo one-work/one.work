@@ -61,6 +61,9 @@ accessories:
         - 18083:18083
     volumes:
       - ~/emqx_data:/opt/emqx/data
+    env:
+      clear:
+        EMQX_HOST: work_design-emqx
     proxy:
       host: emqx.one.work
       app_port: 18083
