@@ -17,6 +17,7 @@ gem 'rqrcode'
 gem 'rexml'
 gem 'nokogiri'
 gem 'sd_notify'
+gem 'mqtt', github: 'njh/ruby-mqtt'
 
 # Third party
 gem 'octokit'

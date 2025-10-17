@@ -15,13 +15,13 @@ GIT
 
 GIT
   remote: https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git
-  revision: 4024a6f125fbfff0b8b3f45694e9fb55c4b4f87d
+  revision: 409c8aab027f576499d068f69adbf5986752cf70
   specs:
-    tencentcloud-sdk-common (3.0.1152)
+    tencentcloud-sdk-common (3.0.1155)
 
 GIT
   remote: https://github.com/basecamp/kamal.git
-  revision: 785d89a7b988945eb80cdfa9f1bac09f04cb310a
+  revision: a293409fcb64cdaec145b795ad01cba4403edbd7
   specs:
     kamal (2.7.0)
       activesupport (>= 7.0)
@@ -34,6 +34,13 @@ GIT
       sshkit (>= 1.23.0, < 2.0)
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
+
+GIT
+  remote: https://github.com/njh/ruby-mqtt.git
+  revision: 4af412fc84cdf92c819bcc099053548f329d0cca
+  specs:
+    mqtt (0.7.0)
+      logger
 
 PATH
   remote: engine/rails_alipay
@@ -367,7 +374,7 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     chunky_png (1.4.0)
-    closure_tree (9.1.1)
+    closure_tree (9.2.0)
       activerecord (>= 7.2.0)
       with_advisory_lock (>= 7.0.0)
       zeitwerk (~> 2.7)
@@ -442,22 +449,22 @@ GEM
       raabro (~> 1.4)
     globalid (1.3.0)
       activesupport (>= 6.1)
-    google-protobuf (4.32.1)
+    google-protobuf (4.33.0)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.32.1-aarch64-linux-gnu)
+    google-protobuf (4.33.0-aarch64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.32.1-aarch64-linux-musl)
+    google-protobuf (4.33.0-aarch64-linux-musl)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.32.1-arm64-darwin)
+    google-protobuf (4.33.0-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.32.1-x86_64-linux-gnu)
+    google-protobuf (4.33.0-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.32.1-x86_64-linux-musl)
+    google-protobuf (4.33.0-x86_64-linux-musl)
       bigdecimal
       rake (>= 13)
     hashie (5.0.0)
@@ -617,7 +624,7 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (7.0.4)
+    puma (7.1.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
@@ -806,6 +813,7 @@ DEPENDENCIES
   kamal!
   listen
   mini_magick
+  mqtt!
   nokogiri
   octokit
   omniauth-github
