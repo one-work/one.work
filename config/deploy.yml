@@ -50,7 +50,7 @@ accessories:
     files:
       - deploy/postgresql.conf:/var/lib/postgresql/custom.conf
   emqx:
-    image: ccr.ccs.tencentyun.com/kamal/emqx:6.0
+    image: ccr.ccs.tencentyun.com/kamal/emqx:6.0.0
     host: one.work
     options:
       publish:
