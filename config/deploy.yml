@@ -64,6 +64,7 @@ accessories:
     env:
       clear:
         EMQX_HOST: work_design-emqx
+        EMQX_TELEMETRY__ENABLE: false
     proxy:
       host: emqx.one.work
       app_port: 18083
