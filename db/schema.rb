@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_18_052147) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_18_091923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3059,6 +3059,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_18_052147) do
     t.datetime "updated_at", null: false
     t.index ["git_id"], name: "index_markdown_posts_on_git_id"
     t.index ["organ_id"], name: "index_markdown_posts_on_organ_id"
+  end
+
+  create_table "mqtt_acl", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "action"
+    t.datetime "created_at", null: false
+    t.string "permission"
+    t.string "topic"
+    t.datetime "updated_at", null: false
+    t.string "username"
   end
 
   create_table "mqtt_user", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
