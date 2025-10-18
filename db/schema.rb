@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_18_104748) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_18_122407) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3565,6 +3565,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_18_104748) do
     t.datetime "created_at", null: false
     t.string "key"
     t.string "secret"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "print_mqtt_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "dev_desc"
+    t.string "dev_imei"
+    t.string "dev_network"
+    t.string "dev_spec"
+    t.string "dev_type"
+    t.string "dev_vendor"
+    t.boolean "online"
     t.datetime "updated_at", null: false
   end
 
