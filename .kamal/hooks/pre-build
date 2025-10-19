@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -rf app/assets/builds
+rm -rf public/assets
 rake assets:precompile
 #git stash
 

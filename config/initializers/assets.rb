@@ -3,7 +3,6 @@ Rails.configuration.assets.paths += [
 ]
 
 Rails.configuration.assets.excluded_paths += [
-  Rails.root.join('app/assets/builds'),
   ActionView::Railtie.root.join('app/assets/javascripts'),
   ActionText::Engine.root.join('app/assets/javascripts'),
   ActionCable::Engine.root.join('app/assets/javascripts'),
