@@ -10,5 +10,6 @@ module Org
     include Notice::Ext::Setting
     include Attend::Ext::Member
     include Wechat::Ext::Member
+    include Ship::Ext::Member
   end
 end
