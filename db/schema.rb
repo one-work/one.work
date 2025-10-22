@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_18_122407) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_22_085725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1227,6 +1227,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_18_122407) do
     t.string "request_method"
     t.jsonb "session"
     t.string "session_id"
+    t.boolean "skip_back"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.index ["organ_id"], name: "index_com_states_on_organ_id"
@@ -1364,6 +1365,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_18_122407) do
     t.string "type"
     t.datetime "updated_at", null: false
     t.uuid "upstream_id"
+    t.boolean "vendor"
     t.index ["agency_id"], name: "index_crm_maintains_on_agency_id"
     t.index ["agent_type", "agent_id"], name: "index_crm_maintains_on_agent"
     t.index ["client_id"], name: "index_crm_maintains_on_client_id"
