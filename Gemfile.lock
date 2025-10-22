@@ -225,8 +225,6 @@ PATH
   specs:
     rails_ship (0.0.1)
       rails_com
-      rails_space
-      rails_trade
 
 PATH
   remote: engine/rails_space
