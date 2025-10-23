@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#git stash pop
-
 echo "部署完成时间: $(date +'%Y-%m-%d %H:%M:%S')"
 echo "最后一次提交：$(git log -1 --pretty='%s %ci')"
 exit 0
