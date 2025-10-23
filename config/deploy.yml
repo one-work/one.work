@@ -25,6 +25,7 @@ env:
     RAILS_MAX_THREADS: 6
     HOST: one.work
     ASSET_HOST: assets.one.work
+    TZ: Asia/Shanghai
   secret:
     - POSTGRES_PASSWORD
     - RAILS_MASTER_KEY
