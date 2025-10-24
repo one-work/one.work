@@ -1,8 +1,8 @@
 # One Work 一站式办公
 
-[One Work 一站式办公](https://one.work) 源码，基于[业务组件](https://github.com/work-design/engine)快速开发。
+[One Work 一站式办公](https://one.work) 源码，基于[业务组件](https://github.com/one-work/engine)快速开发。
 
-[Work Design 官网](https://work.design) 是服务于 One Work 生态的应用，也是业务组件化开发的示例项目。
+One.work 是服务于 One Work 生态的应用，也是业务组件化开发的示例项目。
 
 ## 特性
 * 所有功能作为 SaaS 服务开放，注册即可使用；
