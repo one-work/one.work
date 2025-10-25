@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_22_085725) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_25_111122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -292,18 +292,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_22_085725) do
     t.index ["job_title_id"], name: "index_auditor_verifiers_on_job_title_id"
     t.index ["member_id"], name: "index_auditor_verifiers_on_member_id"
     t.index ["verifiable_type", "verifiable_id"], name: "index_auditor_verifiers_on_verifiable"
-  end
-
-  create_table "auth_accounts", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.boolean "confirmed"
-    t.datetime "created_at", null: false
-    t.string "identity"
-    t.string "source"
-    t.datetime "updated_at", null: false
-    t.uuid "user_id"
-    t.index ["identity", "confirmed"], name: "index_auth_accounts_on_identity_and_confirmed"
-    t.index ["identity"], name: "index_auth_accounts_on_identity"
-    t.index ["user_id"], name: "index_auth_accounts_on_user_id"
   end
 
   create_table "auth_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -5266,15 +5254,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_22_085725) do
     t.index ["organ_id"], name: "index_trade_wallets_on_organ_id"
     t.index ["user_id"], name: "index_trade_wallets_on_user_id"
     t.index ["wallet_template_id"], name: "index_trade_wallets_on_wallet_template_id"
-  end
-
-  create_table "wechat_app_configs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "appid"
-    t.datetime "created_at", null: false
-    t.string "key"
-    t.datetime "updated_at", null: false
-    t.string "value"
-    t.index ["appid"], name: "index_wechat_app_configs_on_appid"
   end
 
   create_table "wechat_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
