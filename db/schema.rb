@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_25_111122) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_25_114444) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3400,6 +3400,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_25_111122) do
     t.jsonb "area_ancestors"
     t.uuid "area_id"
     t.uuid "cache_id"
+    t.integer "children_count"
     t.string "code"
     t.uuid "corp_user_id"
     t.jsonb "counters", default: {}
