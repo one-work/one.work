@@ -29,7 +29,6 @@ module OneWork
       g.jbuilder true
     end
     config.server_timing = true
-    config.middleware.delete ActionDispatch::RequestId # 记录X-Request-Id（方便查看请求在群集中的哪台执行）
     config.i18n.default_locale = :zh
 
     config.active_job.queue_adapter = :solid_queue
