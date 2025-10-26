@@ -15,8 +15,6 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
   subscriber = EventJsonSubscriber.new
-  subscriber.task.execute
-
   Rails.event.subscribe(subscriber) do |event|
     event[:name].start_with?('controller.')
   end
