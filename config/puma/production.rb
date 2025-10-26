@@ -11,6 +11,10 @@ pidfile "#{File.expand_path('tmp/pids/puma.pid', dir)}"
 state_path "#{File.expand_path('tmp/sockets/puma.state', dir)}"
 activate_control_app 'tcp://0.0.0.0:9293', { no_token: true }
 
+before_fork do
+  ActiveRecord::Base.connection_pool.disconnect!
+end
+
 before_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
@@ -18,10 +22,6 @@ before_worker_boot do
   Rails.event.subscribe(subscriber) do |event|
     event[:name].start_with?('controller.')
   end
-end
-
-before_fork do
-  ActiveRecord::Base.connection_pool.disconnect!
 end
 
 before_restart do
