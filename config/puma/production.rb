@@ -1,7 +1,7 @@
 dir = ENV['PWD']
 
 port 3000
-workers 1
+workers 2
 threads 2, 10
 environment 'production'
 directory dir
@@ -13,6 +13,13 @@ activate_control_app 'tcp://0.0.0.0:9293', { no_token: true }
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+
+  subscriber = EventJsonSubscriber.new
+  subscriber.task.execute
+
+  Rails.event.subscribe(subscriber) do |event|
+    event[:name].start_with?('controller.')
+  end
 end
 
 before_fork do
