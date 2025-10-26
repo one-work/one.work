@@ -21,6 +21,7 @@ module OneWork
     config.time_zone = 'Beijing'
     config.ssl_options = { hsts: { subdomains: true } }
     config.logger = ActiveSupport::Logger.new(config.default_log_file, 'daily')
+    #config.logger = JsonRailsLogger::Logger.new(STDOUT)
     config.generators do |g|
       g.stylesheets false
       g.javasricpts false
