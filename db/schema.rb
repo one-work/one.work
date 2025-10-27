@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_26_131339) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_27_081934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1083,6 +1083,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_26_131339) do
 
   create_table "com_logs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "action_name"
+    t.string "commit_uuid"
     t.string "controller_name"
     t.jsonb "cookie"
     t.datetime "created_at", null: false
@@ -1093,6 +1094,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_26_131339) do
     t.string "path"
     t.jsonb "session"
     t.string "user_agent"
+    t.string "uuid"
   end
 
   create_table "com_meta_actions", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
