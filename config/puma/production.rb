@@ -18,14 +18,14 @@ end
 before_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
-  Rails.event.debug_mode = true
-  Rails.event.subscribe(EventRequestSubscriber.new) do |event|
-    event[:name].start_with?('controller.')
-  end
-
-  Rails.event.subscribe(EventSqlSubscriber.new) do |event|
-    ['active_record.sql'].include?(event[:name])
-  end
+  # Rails.event.debug_mode = true
+  # Rails.event.subscribe(EventRequestSubscriber.new) do |event|
+  #   event[:name].start_with?('controller.')
+  # end
+  #
+  # Rails.event.subscribe(EventSqlSubscriber.new) do |event|
+  #   ['active_record.sql'].include?(event[:name])
+  # end
 end
 
 before_restart do
