@@ -5,6 +5,9 @@ servers:
   web:
     hosts:
       - one.work
+    options:
+      publish:
+        - 3000:3000
   job:
     hosts:
       - one.work
