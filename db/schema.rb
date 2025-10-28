@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_27_092901) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_28_140505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1087,15 +1087,21 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_092901) do
     t.string "controller_name"
     t.jsonb "cookie"
     t.datetime "created_at", null: false
+    t.float "db_duration"
+    t.integer "duration"
     t.string "format"
     t.jsonb "headers"
     t.string "ip"
     t.jsonb "params"
     t.string "path"
+    t.integer "query_cached_count"
+    t.integer "query_count"
     t.jsonb "session"
     t.string "session_id"
+    t.integer "status"
     t.virtual "user_agent", type: :string, as: "(headers #>> '{USER_AGENT}'::text[])", stored: true
     t.string "uuid"
+    t.float "view_duration"
   end
 
   create_table "com_meta_actions", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
