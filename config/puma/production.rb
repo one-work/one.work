@@ -19,7 +19,7 @@ before_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
   Rails.event.debug_mode = true
-  Rails.event.subscribe(EventJsonSubscriber.new) do |event|
+  Rails.event.subscribe(EventRequestSubscriber.new) do |event|
     event[:name].start_with?('controller.')
   end
 
