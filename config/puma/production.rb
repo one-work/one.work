@@ -18,9 +18,13 @@ end
 before_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
-  subscriber = EventJsonSubscriber.new
-  Rails.event.subscribe(subscriber) do |event|
+  Rails.event.debug_mode = true
+  Rails.event.subscribe(EventJsonSubscriber.new) do |event|
     event[:name].start_with?('controller.')
+  end
+
+  Rails.event.subscribe(EventSqlSubscriber.new) do |event|
+    ['active_record.sql'].include?(event[:name])
   end
 end
 
