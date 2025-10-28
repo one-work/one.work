@@ -18,10 +18,10 @@ end
 before_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
-  # subscriber = EventJsonSubscriber.new
-  # Rails.event.subscribe(subscriber) do |event|
-  #   event[:name].start_with?('controller.')
-  # end
+  subscriber = EventJsonSubscriber.new
+  Rails.event.subscribe(subscriber) do |event|
+    event[:name].start_with?('controller.')
+  end
 end
 
 before_restart do
