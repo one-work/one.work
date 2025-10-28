@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:gitee) { |repo| "https://gitee.com/#{repo}.git" }
 
 # 核心依赖
-gem 'rails', '8.1.0'
+gem 'rails', github: 'rails/rails'
 gem 'pg'
 gem 'puma'
 gem 'jbuilder'
