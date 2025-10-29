@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_10_28_160224) do
+ActiveRecord::Schema[8.2].define(version: 2025_10_29_142607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1092,6 +1092,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_10_28_160224) do
   end
 
   create_table "com_logs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.virtual "accept", type: :string, as: "(headers #>> '{ACCEPT}'::text[])", stored: true
     t.string "action_name"
     t.string "commit_uuid"
     t.string "controller_name"
@@ -1106,6 +1107,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_10_28_160224) do
     t.string "path"
     t.integer "query_cached_count"
     t.integer "query_count"
+    t.virtual "referer", type: :string, as: "(headers #>> '{REFERER}'::text[])", stored: true
     t.jsonb "session"
     t.string "session_id"
     t.integer "status"
