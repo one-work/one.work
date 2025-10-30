@@ -12,10 +12,7 @@ state_path "#{File.expand_path('tmp/sockets/puma.state', dir)}"
 activate_control_app 'tcp://127.0.0.1:9293', { auth_token: '123456' }
 
 before_worker_boot do
-  Rails.event.subscribe(EventRequestSubscriber.new) do |event|
-    event[:name].start_with?('controller.')
-  end
-
+  #Rails.event.subscribe(EventRequestSubscriber.new) { |event| event[:name].start_with?('controller.') }
   #Rails.event.subscribe(EventSqlSubscriber.new) { |event| ['active_record.sql'].include?(event[:name]) }
 end
 
