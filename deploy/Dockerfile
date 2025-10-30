@@ -7,7 +7,7 @@ ENV RAILS_ENV='production' BUNDLE_PATH='/usr/local/bundle' BUNDLE_WITHOUT='devel
 FROM base AS build
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.ustc.edu.cn/alpine#g' /etc/apk/repositories
 RUN apk update
-RUN apk add --update --no-cache build-base libpq-dev gcompat git
+RUN apk add --update --no-cache build-base libpq-dev gcompat git yaml-dev
 
 # 安装 Ruby 依赖
 COPY Gemfile Gemfile.lock ./
