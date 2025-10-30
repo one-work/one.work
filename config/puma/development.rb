@@ -16,9 +16,7 @@ before_worker_boot do
     event[:name].start_with?('controller.')
   end
 
-  Rails.event.subscribe(EventSqlSubscriber.new) do |event|
-    ['active_record.sql'].include?(event[:name])
-  end
+  #Rails.event.subscribe(EventSqlSubscriber.new) { |event| ['active_record.sql'].include?(event[:name]) }
 end
 
 before_restart do
