@@ -23,10 +23,10 @@ gem 'mqtt', github: 'njh/ruby-mqtt'
 gem 'octokit'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
-git 'https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git' do
-  gem 'tencentcloud-sdk-common'
+#git 'https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git' do
+  #gem 'tencentcloud-sdk-common'
   #gem 'tencentcloud-sdk-ocr'
-end
+#end
 gem 'aliyunsdkcore'
 
 # Payment method
@@ -34,10 +34,10 @@ gem 'aliyunsdkcore'
 #gem 'paypal-sdk-rest'
 
 # Files
-gem 'upyun_rails', gitee: 'qinmingyuan/upyun_rails'
+gem 'upyun_rails', github: 'qinmingyuan/upyun_rails'
 
 # Rails Helpers
-gem 'default_where', gitee: 'qinmingyuan/default_where'
+gem 'default_where', github: 'qinmingyuan/default_where'
 
 # Engines
 gem 'rails_com', path: 'engine/rails_com'

@@ -1,30 +1,24 @@
 GIT
-  remote: https://gitee.com/qinmingyuan/default_where.git
+  remote: https://github.com/njh/ruby-mqtt.git
+  revision: 6c60e2efd2aa1e39ad79751b4e3fee03d4e85d93
+  specs:
+    mqtt (0.7.0)
+      logger
+
+GIT
+  remote: https://github.com/qinmingyuan/default_where.git
   revision: fbe4b6ffd4205c4d1a3a58907c4c4521c1dfc219
   specs:
     default_where (2.3.0)
       activerecord
 
 GIT
-  remote: https://gitee.com/qinmingyuan/upyun_rails.git
+  remote: https://github.com/qinmingyuan/upyun_rails.git
   revision: 54d1485eaec977c56b256aae90061f2f792acbb4
   specs:
     upyun_rails (0.1.1)
       activestorage
       httpx
-
-GIT
-  remote: https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git
-  revision: bdc2e5daf959824c133fb7548870b7018bad2d92
-  specs:
-    tencentcloud-sdk-common (3.0.1159)
-
-GIT
-  remote: https://github.com/njh/ruby-mqtt.git
-  revision: 6c60e2efd2aa1e39ad79751b4e3fee03d4e85d93
-  specs:
-    mqtt (0.7.0)
-      logger
 
 GIT
   remote: https://github.com/rails/rails.git
@@ -854,7 +848,6 @@ DEPENDENCIES
   sass-embedded
   sd_notify
   selenium-webdriver
-  tencentcloud-sdk-common!
   tidewave
   upyun_rails!
   web-console
