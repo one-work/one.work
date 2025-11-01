@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_10_29_142607) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_01_113309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -4124,6 +4124,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_10_29_142607) do
 
   create_table "space_desks", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "code"
+    t.jsonb "counters", default: {}
     t.datetime "created_at", null: false
     t.integer "height"
     t.integer "length"
