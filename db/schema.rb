@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_01_113309) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_01_165653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -514,6 +514,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_01_113309) do
     t.uuid "item_id"
     t.uuid "member_id"
     t.string "name"
+    t.uuid "organ_id"
     t.decimal "price"
     t.decimal "quantity"
     t.string "sku"
@@ -529,6 +530,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_01_113309) do
     t.index ["facilitator_id"], name: "index_bench_facilitatings_on_facilitator_id"
     t.index ["item_id"], name: "index_bench_facilitatings_on_item_id"
     t.index ["member_id"], name: "index_bench_facilitatings_on_member_id"
+    t.index ["organ_id"], name: "index_bench_facilitatings_on_organ_id"
     t.index ["user_id"], name: "index_bench_facilitatings_on_user_id"
     t.index ["wallet_payment_id"], name: "index_bench_facilitatings_on_wallet_payment_id"
   end
