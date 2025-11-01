@@ -27,7 +27,7 @@ Rails.application.configure do
     return_response: true
   }
 
-  config.log_level = :warn
+  config.log_level = :debug
   config.log_tags = [ :request_id ]
   config.log_formatter = ::Logger::Formatter.new
 
