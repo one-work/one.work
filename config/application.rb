@@ -28,7 +28,7 @@ module OneWork
       g.helper false
       g.jbuilder true
     end
-    config.server_timing = true
+    #config.server_timing = true
     config.i18n.default_locale = :zh
 
     config.active_job.queue_adapter = :solid_queue
@@ -40,7 +40,6 @@ module OneWork
     config.action_controller.forgery_protection_origin_check = true
     config.action_controller.per_form_csrf_tokens = true
 
-    config.action_view.form_with_generates_remote_forms = true
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       html_tag
     end
