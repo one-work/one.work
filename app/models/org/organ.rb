@@ -7,6 +7,7 @@ module Org
     include Factory::Ext::Organ
     include Wechat::Ext::Organ
     include Print::Ext::Organ
+    include Bluetooth::Ext::Organ
 
     #after_create_commit :init_provider_later
 
