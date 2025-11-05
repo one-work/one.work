@@ -1,10 +1,6 @@
 .columns {
   &.as-main {
-    background: linear-gradient(
-      180deg,
-      #F5EBFF 0%,
-      #FAF7FF 100%
-    );
+    background-color: hsl(212, 52%, 95%)
   }
 
   .column {

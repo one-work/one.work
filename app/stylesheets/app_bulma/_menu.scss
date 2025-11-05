@@ -5,23 +5,16 @@
 
   &.as-wrap {
     background-color: transparent;
+    --bulma-menu-item-selected-h: 300;
+    --bulma-menu-item-selected-s: 90%;
 
     .menu-item:not(.is-active),
     .menu-list a:not(.is-active) {
       // background-color: transparent;
     }
-  }
-
-  &.as-wrap {
-    --bulma-menu-item-selected-h: 300;
-    --bulma-menu-item-selected-s: 90%;
 
     .cell:not(.is-active) {
-      color: hsl(
-        var(--bulma-menu-item-h),
-        var(--bulma-menu-item-s),
-        var(--bulma-text-l)
-      );
+      color: hsl(var(--bulma-menu-item-h), var(--bulma-menu-item-s), var(--bulma-text-l));
     }
   }
 
