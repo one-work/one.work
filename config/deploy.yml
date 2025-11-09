@@ -5,6 +5,8 @@ servers:
   web:
     hosts:
       - one.work
+    options:
+      network-alias: one-work
   job:
     hosts:
       - one.work
