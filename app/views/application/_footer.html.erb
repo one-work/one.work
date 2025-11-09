@@ -1,7 +1,16 @@
 <footer class="footer">
   <div class="container">
-    <div class="divided row">
-
+    <div class="columns">
+      <div class="column">
+        <p class="size-7 text-grey mb-2">开源</p>
+        <a href="https://github.com/one-work" target="_blank" ref="nofollow" class="text-grey display-block">
+          <%= svg_tag 'github', kind: 'brands' %>
+          <span class="ml-1">Github</span>
+        </a>
+      </div>
+      <div class="column">
+        <p class="size-7 text-grey mb-2">关于我们</p>
+      </div>
     </div>
     <div class="content text-centered">
       <div class="">©<%= Date.today.year %> <%= (defined?(current_organ) && current_organ&.name) || t('site_name') %> All Rights Reserved.</div>
