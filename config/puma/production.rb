@@ -21,6 +21,7 @@ before_worker_boot do
   Rails.event.debug_mode = true
   Rails.event.subscribe(EventRequestSubscriber.new) { |event| event[:name].start_with?('controller.') }
 
+  $mqtt_user = MqttUser.where(is_superuser: true).take
   # Rails.event.subscribe(EventSqlSubscriber.new) { |event| ['active_record.sql'].include?(event[:name]) }
 end
 
