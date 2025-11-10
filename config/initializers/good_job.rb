@@ -14,3 +14,4 @@
 #     }
 #   }
 # end
+$mqtt_user = MqttUser.where(is_superuser: true).take
