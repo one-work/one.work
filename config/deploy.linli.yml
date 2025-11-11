@@ -1,0 +1,19 @@
+servers:
+  web:
+    hosts:
+      - linlishenghuo.com
+  job:
+    hosts:
+      - linlishenghuo.com
+
+accessories:
+  postgres:
+    host: linlishenghuo.com
+  emqx:
+    host: linlishenghuo.com
+    proxy:
+      host: emqx.linlishenghuo.com
+
+proxy:
+  host: linlishenghuo.com
+  ssl: true
