@@ -2,6 +2,6 @@
 
 echo "Docker set up on $KAMAL_HOSTS..."
 bin/kamal proxy boot_config set --registry ccr.ccs.tencentyun.com --repository kamal --image_version v0.9.1 -d $KAMAL_DESTINATION
-ssh root@$KAMAL_HOSTS mkdir emqx_data && chmod o+w ~/emqx_data
+bin/kamal server exec 'mkdir emqx_data && chmod o+w ~/emqx_data'
 
 exit 0
