@@ -15,5 +15,6 @@ accessories:
       host: emqx.linlishenghuo.com
 
 proxy:
-  host: linlishenghuo.com
+  hosts:
+    - linlishenghuo.com
   ssl: true
