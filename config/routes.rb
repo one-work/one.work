@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   controller :oauth do
     match '/auth/alipay', action: 'alipay', via: [:get, :post]
+    match '/auth/github' => :github, via: [:git, :post]
   end
 
   namespace :admin do

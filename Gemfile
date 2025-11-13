@@ -21,7 +21,6 @@ gem 'mqtt', github: 'njh/ruby-mqtt'
 
 # Third party
 gem 'octokit'
-gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 #git 'https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git' do
   #gem 'tencentcloud-sdk-common'

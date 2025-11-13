@@ -17,4 +17,8 @@ class OauthController < ApplicationController
     # app_refresh_token
   end
 
+  def github
+
+  end
+
 end
