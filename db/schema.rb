@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_13_144659) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_13_155419) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3054,6 +3054,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_13_144659) do
     t.string "client_id"
     t.string "client_secret"
     t.datetime "created_at", null: false
+    t.string "state"
     t.datetime "updated_at", null: false
   end
 
