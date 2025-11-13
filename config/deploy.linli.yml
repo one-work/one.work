@@ -17,4 +17,6 @@ accessories:
 proxy:
   hosts:
     - linlishenghuo.com
-  ssl: true
+  ssl:
+    certificate_path: /certs/one.work.pem
+    private_key_path: /certs/one.work.key
