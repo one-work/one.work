@@ -15,5 +15,5 @@
 #   }
 # end
 Rails.application.config.after_initialize do
-  #$mqtt_user = MqttUser.where(is_superuser: true).take
+  $mqtt_user = MqttUser.where(is_superuser: true).take
 end
