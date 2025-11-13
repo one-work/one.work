@@ -18,6 +18,7 @@ gem 'rexml'
 gem 'nokogiri'
 gem 'sd_notify'
 gem 'mqtt', github: 'njh/ruby-mqtt'
+gem 'net-ssh-gateway'
 
 # Third party
 gem 'octokit'
