@@ -18,5 +18,5 @@ proxy:
   hosts:
     - linlishenghuo.com
   ssl:
-    certificate_path: /certs/one.work.pem
-    private_key_path: /certs/one.work.key
+    certificate_path: /certs/linlishenghuo.com.pem
+    private_key_path: /certs/linlishenghuo.com.key
