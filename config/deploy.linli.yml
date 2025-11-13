@@ -6,6 +6,10 @@ servers:
     hosts:
       - linlishenghuo.com
 
+env:
+  clear:
+    HOST: linlishenghuo.com
+
 accessories:
   postgres:
     host: linlishenghuo.com
