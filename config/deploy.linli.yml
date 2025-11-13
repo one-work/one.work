@@ -17,6 +17,10 @@ accessories:
 proxy:
   hosts:
     - linlishenghuo.com
+    - '*.linlishenghuo.com'
+    - '*.admin.linlishenghuo.com'
+    - '*.mp.linlishenghuo.com'
+    - '*.org.linlishenghuo.com'
   ssl:
     certificate_path: /certs/linlishenghuo.com.pem
     private_key_path: /certs/linlishenghuo.com.key
