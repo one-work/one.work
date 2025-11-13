@@ -8,6 +8,7 @@
     "@fullcalendar/resource-daygrid": "^5.8.0",
     "@fullcalendar/resource-timegrid": "^5.8.0",
     "@fullcalendar/timegrid": "^5.8.0",
+    "@octokit/oauth-authorization-url": "^8.0.0",
     "rails_design": "file:engine/rails_design"
   },
   "devDependencies": {
