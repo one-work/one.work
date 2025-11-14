@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_13_155419) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_14_141158) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3061,7 +3061,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_13_155419) do
   create_table "markdown_gits", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "base_name"
     t.datetime "created_at", null: false
-    t.string "identity"
+    t.uuid "github_user_id"
     t.datetime "last_commit_at"
     t.string "last_commit_message"
     t.uuid "organ_id"
@@ -3070,6 +3070,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_13_155419) do
     t.string "type"
     t.datetime "updated_at", null: false
     t.string "working_directory"
+    t.index ["github_user_id"], name: "index_markdown_gits_on_github_user_id"
     t.index ["organ_id"], name: "index_markdown_gits_on_organ_id"
   end
 
