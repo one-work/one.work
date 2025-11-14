@@ -20,6 +20,8 @@ class OauthController < ApplicationController
   def github
     @github_app = GithubApp.find_by(state: params[:state])
     @github_app.generate_github_user(params[:code])
+
+    head :ok
   end
 
 end
