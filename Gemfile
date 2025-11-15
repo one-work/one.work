@@ -19,6 +19,7 @@ gem 'nokogiri'
 gem 'sd_notify'
 gem 'mqtt', github: 'njh/ruby-mqtt'
 gem 'net-ssh-gateway'
+gem 'commonmarker'
 
 # Third party
 gem 'octokit'
