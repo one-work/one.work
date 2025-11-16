@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_16_064444) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3089,6 +3089,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_064444) do
     t.string "oid"
     t.uuid "organ_id"
     t.string "path"
+    t.integer "position"
     t.boolean "ppt"
     t.boolean "published"
     t.boolean "shared"
