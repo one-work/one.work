@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_15_231733) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_16_064444) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3045,6 +3045,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_15_231733) do
     t.string "parent_path"
     t.string "path"
     t.integer "position"
+    t.boolean "published"
     t.datetime "updated_at", null: false
     t.index ["git_id"], name: "index_markdown_catalogs_on_git_id"
     t.index ["organ_id"], name: "index_markdown_catalogs_on_organ_id"
