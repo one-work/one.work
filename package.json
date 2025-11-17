@@ -1,5 +1,5 @@
 {
-  "nameme": "work_design",
+  "nameme": "one.work",
   "private": true,
   "dependencies": {
     "@fullcalendar/core": "^5.8.0",
@@ -11,7 +11,7 @@
     "rails_design": "file:engine/rails_design"
   },
   "devDependencies": {
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.27.0",
     "run-pty": "^5.0.0"
   },
   "scripts": {
