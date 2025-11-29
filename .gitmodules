@@ -76,9 +76,6 @@
 [submodule "engine/rails_markdown"]
   path = engine/rails_markdown
   url = git@github.com:one-work/rails_markdown.git
-[submodule "engine/rails_bluetooth"]
-  path = engine/rails_bluetooth
-  url = git@github.com:one-work/rails_bluetooth.git
 [submodule "engine/rails_alipay"]
   path = engine/rails_alipay
   url = git@github.com:one-work/rails_alipay.git
