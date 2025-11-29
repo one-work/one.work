@@ -6,7 +6,7 @@ gem 'rails', github: 'rails/rails'
 gem 'pg'
 gem 'puma'
 gem 'jbuilder'
-gem 'kamal', '2.8.1', require: false
+gem 'kamal', '2.9.0', require: false
 gem 'rails_deploy', path: 'engine/rails_deploy', require: false
 
 # Utils
@@ -68,7 +68,6 @@ gem 'rails_finance', path: 'engine/rails_finance'
 gem 'rails_space', path: 'engine/rails_space'
 gem 'rails_interact', path: 'engine/rails_interact'
 gem 'rails_markdown', path: 'engine/rails_markdown'
-gem 'rails_bluetooth', path: 'engine/rails_bluetooth'
 gem 'rails_print', path: 'engine/rails_print'
 gem 'rails_one_ai', path: 'engine/rails_one_ai'
 
