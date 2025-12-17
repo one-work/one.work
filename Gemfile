@@ -6,7 +6,7 @@ gem 'rails', github: 'rails/rails'
 gem 'pg'
 gem 'puma'
 gem 'jbuilder'
-gem 'kamal', '2.9.0', require: false
+gem 'kamal', '2.10.1', require: false
 gem 'rails_deploy', path: 'engine/rails_deploy', require: false
 
 # Utils
@@ -17,7 +17,6 @@ gem 'rqrcode'
 gem 'rexml'
 gem 'nokogiri'
 gem 'sd_notify'
-gem 'mqtt', github: 'njh/ruby-mqtt'
 gem 'net-ssh-gateway'
 
 # Third party

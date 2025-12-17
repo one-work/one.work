@@ -11,6 +11,8 @@ servers:
     hosts:
       - one.work
     cmd: bin/jobs
+boot:
+  parallel_roles: true
 
 registry:
   server: localhost:5555
