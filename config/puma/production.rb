@@ -2,7 +2,7 @@ dir = ENV['PWD']
 
 port 3000
 workers 3
-threads 2, 20
+threads 2, 6
 environment 'production'
 directory dir
 
