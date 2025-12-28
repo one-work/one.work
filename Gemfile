@@ -36,7 +36,7 @@ gem 'aliyunsdkcore'
 gem 'upyun_rails', github: 'qinmingyuan/upyun_rails'
 
 # Rails Helpers
-gem 'default_where', github: 'qinmingyuan/default_where'
+gem 'default_where', github: 'one-work/default_where'
 
 # Engines
 gem 'rails_com', path: 'engine/rails_com'
@@ -55,7 +55,7 @@ gem 'rails_event', path: 'engine/rails_event'
 gem 'rails_trade', path: 'engine/rails_trade'
 gem 'rails_alipay', path: 'engine/rails_alipay'
 gem 'rails_attend', path: 'engine/rails_attend'
-gem 'rails_design', path: 'engine/rails_design'
+gem 'rails_ui', path: 'engine/rails_ui'
 gem 'rails_detail', path: 'engine/rails_detail'
 gem 'rails_douyin', path: 'engine/rails_douyin'
 gem 'rails_growth', path: 'engine/rails_growth'

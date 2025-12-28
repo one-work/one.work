@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/qinmingyuan/default_where.git
+  remote: https://github.com/one-work/default_where.git
   revision: fbe4b6ffd4205c4d1a3a58907c4c4521c1dfc219
   specs:
     default_where (2.3.0)
@@ -202,12 +202,6 @@ PATH
       activesupport (>= 7.0)
 
 PATH
-  remote: engine/rails_design
-  specs:
-    rails_design (0.0.1)
-      rails
-
-PATH
   remote: engine/rails_detail
   specs:
     rails_detail (0.0.1)
@@ -327,6 +321,12 @@ PATH
       rails_notice
 
 PATH
+  remote: engine/rails_ui
+  specs:
+    rails_ui (0.0.1)
+      rails
+
+PATH
   remote: engine/rails_wechat
   specs:
     rails_wechat (0.1.2)
@@ -419,7 +419,7 @@ GEM
       logger
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
-    faraday-retry (2.3.2)
+    faraday-retry (2.4.0)
       faraday (~> 2.0)
     fast-mcp (1.6.0)
       addressable (~> 2.8)
@@ -778,7 +778,6 @@ DEPENDENCIES
   rails_crm!
   rails_data!
   rails_deploy!
-  rails_design!
   rails_detail!
   rails_doc!
   rails_douyin!
@@ -797,6 +796,7 @@ DEPENDENCIES
   rails_space!
   rails_sync!
   rails_trade!
+  rails_ui!
   rails_wechat!
   rexml
   rqrcode
@@ -808,4 +808,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.7.2
+  4.0.3

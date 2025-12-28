@@ -1,5 +1,5 @@
-service: work_design
-image: work-design/work_design
+service: work
+image: work
 deploy_timeout: 100
 servers:
   web:
@@ -54,28 +54,6 @@ accessories:
       - ~/app/db_dump:/root/pg_dump
     files:
       - deploy/postgresql.conf:/var/lib/postgresql/custom.conf
-  emqx:
-    image: ccr.ccs.tencentyun.com/kamal/emqx:6.0.0
-    host: one.work
-    options:
-      publish:
-        - 1883:1883
-        - 8083:8083
-        - 8084:8084
-        - 8883:8883
-        - 18083:18083
-    volumes:
-      - ~/emqx_data:/opt/emqx/data
-    env:
-      clear:
-        EMQX_HOST: work_design-emqx
-        EMQX_TELEMETRY__ENABLE: false
-    proxy:
-      host: emqx.one.work
-      app_port: 18083
-      ssl: true
-      healthcheck:
-        path: /
 
 proxy:
   hosts:

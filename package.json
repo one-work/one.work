@@ -8,7 +8,7 @@
     "@fullcalendar/resource-daygrid": "^5.8.0",
     "@fullcalendar/resource-timegrid": "^5.8.0",
     "@fullcalendar/timegrid": "^5.8.0",
-    "rails_design": "file:engine/rails_design"
+    "rails_design": "file:engine/rails_ui"
   },
   "devDependencies": {
     "esbuild": "^0.27.0",
