@@ -79,3 +79,15 @@
 [submodule "engine/rails_print"]
   path = engine/rails_print
   url = git@github.com:one-work/rails_print.git
+[submodule "engine/rails_auth"]
+  path = engine/rails_auth
+  url = git@github.com:one-work/rails_auth.git
+[submodule "engine/rails_com"]
+  path = engine/rails_com
+  url = git@github.com:one-work/rails_com.git
+[submodule "engine/rails_ui"]
+  path = engine/rails_ui
+  url = git@github.com:one-work/rails_ui.git
+[submodule "engine/default_form"]
+  path = engine/default_form
+  url = git@github.com:one-work/default_form.git
