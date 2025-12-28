@@ -1,6 +1,3 @@
-[submodule "engine/rails_com"]
-  path = engine/rails_com
-  url = git@github.com:one-work/rails_com.git
 [submodule "engine/rails_crm"]
   path = engine/rails_crm
   url = git@github.com:one-work/rails_crm.git
@@ -13,9 +10,6 @@
 [submodule "engine/rails_org"]
   path = engine/rails_org
   url = git@github.com:one-work/rails_org.git
-[submodule "engine/rails_auth"]
-  path = engine/rails_auth
-  url = git@github.com:one-work/rails_auth.git
 [submodule "engine/rails_data"]
   path = engine/rails_data
   url = git@github.com:one-work/rails_data.git
@@ -43,9 +37,6 @@
 [submodule "engine/rails_attend"]
   path = engine/rails_attend
   url = git@github.com:one-work/rails_attend.git
-[submodule "engine/rails_design"]
-  path = engine/rails_design
-  url = git@github.com:one-work/rails_design.git
 [submodule "engine/rails_detail"]
   path = engine/rails_detail
   url = git@github.com:one-work/rails_detail.git
