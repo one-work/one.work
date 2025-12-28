@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
-  s.name = 'rails_design'
+  s.name = 'rails_ui'
   s.version = '0.0.1'
   s.authors = ['Mingyuan Qin']
   s.email = ['mingyuan0715@foxmail.com']
-  s.summary = 'Work Design UI Project'
+  s.summary = 'Inner UI Project'
   s.description = 'Description of RailsDesign'
 
   s.files = Dir[
