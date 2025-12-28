@@ -7,7 +7,7 @@ ENV RAILS_ENV='production' BUNDLE_PATH='/usr/local/bundle' BUNDLE_WITHOUT='devel
 FROM base AS build
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.ustc.edu.cn/alpine#g' /etc/apk/repositories
 RUN apk update
-RUN apk add --update --no-cache build-base libpq-dev gcompat git yaml-dev
+RUN apk add --update --no-cache build-base libpq-dev gcompat git yaml-dev libffi-dev
 
 # 安装 Ruby 依赖
 COPY Gemfile Gemfile.lock ./
@@ -20,7 +20,7 @@ COPY . .
 FROM base
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.ustc.edu.cn/alpine#g' /etc/apk/repositories
 RUN apk update
-RUN apk add --update --no-cache curl libgit2 poppler-glib vips tzdata libpq-dev fish postgresql17-client git openssh docker-cli docker-cli-buildx gcompat
+RUN apk add --update --no-cache curl libgit2 poppler-glib vips tzdata libpq-dev fish postgresql18-client git openssh docker-cli docker-cli-buildx gcompat
 RUN git config --global protocol.file.allow always
 RUN git config --global init.defaultBranch main
 
