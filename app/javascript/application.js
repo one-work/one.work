@@ -1,2 +1,2 @@
-import 'rails_design'
+import 'rails_ui'
 application.debug = true

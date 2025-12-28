@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
+ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -833,12 +833,30 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.index ["organ_id"], name: "index_cms_carousels_on_organ_id"
   end
 
+  create_table "cms_catalogs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "organ_id"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["organ_id"], name: "index_cms_catalogs_on_organ_id"
+  end
+
   create_table "cms_covers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "organ_id"
     t.string "title"
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_cms_covers_on_organ_id"
+  end
+
+  create_table "cms_posts", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "catalog_id"
+    t.datetime "created_at", null: false
+    t.uuid "organ_id"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["catalog_id"], name: "index_cms_posts_on_catalog_id"
+    t.index ["organ_id"], name: "index_cms_posts_on_organ_id"
   end
 
   create_table "cms_progressions", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -1093,6 +1111,19 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.string "uuid"
   end
 
+  create_table "com_log_summaries", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.float "duration_avg"
+    t.float "duration_max"
+    t.float "duration_min"
+    t.datetime "finish_at"
+    t.string "identifier"
+    t.string "kind"
+    t.datetime "start_at"
+    t.integer "total"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "com_logs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.virtual "accept", type: :string, as: "(headers #>> '{ACCEPT}'::text[])", stored: true
     t.string "action_name"
@@ -1104,6 +1135,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.integer "duration"
     t.string "format"
     t.jsonb "headers"
+    t.virtual "identifier", type: :string, as: "(((controller_name)::text || '#'::text) || (action_name)::text)", stored: true
     t.string "ip"
     t.jsonb "params"
     t.string "path"
@@ -3468,6 +3500,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.boolean "official", comment: "是否官方"
     t.jsonb "parent_ancestors"
     t.uuid "parent_id"
+    t.string "print_note"
     t.boolean "production_enabled"
     t.uuid "provider_id"
     t.string "service_url", comment: "客服 url"
@@ -3566,6 +3599,14 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.index ["tutor_id"], name: "index_org_tutorials_on_tutor_id"
   end
 
+  create_table "print_bluetooth_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.uuid "organ_id"
+    t.datetime "updated_at", null: false
+    t.index ["organ_id"], name: "index_print_bluetooth_printers_on_organ_id"
+  end
+
   create_table "print_devices", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "aim"
     t.datetime "created_at", null: false
@@ -3575,6 +3616,15 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_print_devices_on_organ_id"
     t.index ["printer_type", "printer_id"], name: "index_print_devices_on_printer"
+  end
+
+  create_table "print_errs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "err_msg"
+    t.string "name"
+    t.uuid "organ_id"
+    t.datetime "updated_at", null: false
+    t.index ["organ_id"], name: "index_print_errs_on_organ_id"
   end
 
   create_table "print_jia_bo_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3622,9 +3672,11 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.string "dev_vendor"
     t.jsonb "extra"
     t.boolean "online"
+    t.uuid "organ_id"
     t.string "password"
     t.datetime "updated_at", null: false
     t.string "username"
+    t.index ["organ_id"], name: "index_print_mqtt_printers_on_organ_id"
   end
 
   create_table "print_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3633,6 +3685,14 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.string "uid"
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_print_printers_on_organ_id"
+  end
+
+  create_table "print_tasks", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "aim"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.string "gid"
+    t.datetime "updated_at", null: false
   end
 
   create_table "roled_cache_roles", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3649,6 +3709,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.jsonb "role_hash"
     t.string "str_role_ids"
     t.datetime "updated_at", null: false
+    t.string "who_type"
     t.index ["str_role_ids"], name: "index_roled_caches_on_str_role_ids"
   end
 
@@ -4826,6 +4887,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.integer "payment_orders_count"
     t.string "payment_status"
     t.uuid "payment_strategy_id"
+    t.jsonb "print_info"
     t.uuid "produce_plan_id"
     t.uuid "provide_id"
     t.decimal "received_amount"
@@ -4942,6 +5004,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.uuid "payment_method_id"
     t.integer "payment_orders_count"
     t.string "payment_uuid"
+    t.jsonb "print_info"
     t.decimal "refunded_amount"
     t.integer "refunds_count"
     t.string "seller_identifier"
@@ -5361,6 +5424,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
     t.string "weapp_id", comment: "关联的小程序"
     t.string "webview_domain"
     t.jsonb "webview_domain_registered"
+    t.string "webview_path"
     t.index ["organ_id"], name: "index_wechat_apps_on_organ_id"
     t.index ["platform_id"], name: "index_wechat_apps_on_platform_id"
     t.index ["platform_template_id"], name: "index_wechat_apps_on_platform_template_id"
@@ -5818,8 +5882,10 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
 
   create_table "wechat_registers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "appid"
+    t.string "bank_name"
     t.string "bank_number"
     t.datetime "created_at", null: false
+    t.string "email"
     t.string "email_code"
     t.string "id_name"
     t.string "id_number"
@@ -5912,6 +5978,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_16_075011) do
   create_table "wechat_scenes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "aim"
     t.string "appid"
+    t.string "broadcast_to"
     t.datetime "created_at", null: false
     t.string "env_version"
     t.datetime "expire_at"
