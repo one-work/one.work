@@ -14,6 +14,4 @@
 #     }
 #   }
 # end
-Rails.application.config.after_initialize do
-  $mqtt_user = MqttUser.where(is_superuser: true).take
-end
+Rails.event.debug_mode = true
