@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-RailsOrg.configure do |config|
+RailsOrg.config.tap do |config|
   config.independent = true
 end

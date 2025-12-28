@@ -114,6 +114,12 @@ GIT
       zeitwerk (~> 2.6)
 
 PATH
+  remote: engine/default_form
+  specs:
+    default_form (0.0.1)
+      rails (>= 7.1.1)
+
+PATH
   remote: engine/rails_alipay
   specs:
     rails_alipay (0.0.1)
@@ -754,6 +760,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  default_form!
   default_where!
   image_processing
   jbuilder

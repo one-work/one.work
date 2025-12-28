@@ -1,4 +1,4 @@
-RailsWechat.configure do |config|
+RailsWechat.config.tap do |config|
   config.email_domain = 'mail.work.design'
   config.confirm = true
   config.rules.a1 = {
