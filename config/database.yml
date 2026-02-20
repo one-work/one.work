@@ -11,37 +11,31 @@ development:
   primary:
     <<: *default
     host: localhost
-    username: qinmingyuan
     database: work_development
     gssencmode: disable
   queue:
     <<: *default
     host: localhost
-    username: qinmingyuan
     database: work_queue_development
     migrations_paths: db/queue_migrate
     gssencmode: disable
   cache:
     <<: *default
     host: localhost
-    username: qinmingyuan
     database: work_cache_development
     migrations_paths: db/cache_migrate
 test:
   primary:
     <<: *default
     host: localhost
-    username: qinmingyuan
     database: work_test
   queue:
     <<: *default
     host: localhost
-    username: qinmingyuan
     database: work_test
   cache:
     <<: *default
     host: localhost
-    username: qinmingyuan
     database: work_test
 production:
   primary:
