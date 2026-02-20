@@ -18,6 +18,7 @@ gem 'rexml'
 gem 'nokogiri'
 gem 'sd_notify'
 gem 'net-ssh-gateway'
+gem 'xsv'
 
 # Third party
 gem 'octokit'
