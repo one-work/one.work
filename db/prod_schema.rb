@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
+ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -444,7 +444,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["provider_id"], name: "index_bench_facilitate_providers_on_provider_id"
   end
 
-  create_table "bench_facilitate_taxon_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "bench_facilitate_taxon_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -663,7 +663,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "bench_task_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "bench_task_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -674,7 +674,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["descendant_id"], name: "index_bench_task_hierarchies_on_descendant_id"
   end
 
-  create_table "bench_task_template_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "bench_task_template_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -1241,7 +1241,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["user_id"], name: "index_com_ssh_keys_on_user_id"
   end
 
-  create_table "com_state_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "com_state_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -1291,7 +1291,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["client_type", "client_id"], name: "index_crm_agencies_on_client"
   end
 
-  create_table "crm_client_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "crm_client_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -1468,7 +1468,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["trade_item_id"], name: "index_crm_source_contacts_on_trade_item_id"
   end
 
-  create_table "crm_source_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "crm_source_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -1709,7 +1709,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["knowledge_id"], name: "index_detail_knowings_on_knowledge_id"
   end
 
-  create_table "detail_knowledge_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "detail_knowledge_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -1921,6 +1921,20 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["position"], name: "index_email_templates_on_position"
   end
 
+  create_table "eventual_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "appid"
+    t.string "base_url"
+    t.datetime "created_at", null: false
+    t.boolean "default"
+    t.string "name"
+    t.uuid "organ_id"
+    t.string "secret"
+    t.string "type"
+    t.datetime "updated_at", null: false
+    t.index ["appid"], name: "index_eventual_apps_on_appid"
+    t.index ["organ_id"], name: "index_eventual_apps_on_organ_id"
+  end
+
   create_table "eventual_bookings", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "booked_id"
     t.string "booked_type"
@@ -1994,6 +2008,26 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["event_id"], name: "index_eventual_event_items_on_event_id"
   end
 
+  create_table "eventual_event_joins", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "assigned_status"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.uuid "crowd_member_id"
+    t.uuid "event_crowd_id"
+    t.uuid "event_id"
+    t.string "job_id"
+    t.uuid "participant_id"
+    t.string "participant_type"
+    t.string "quit_note"
+    t.integer "score"
+    t.string "state"
+    t.datetime "updated_at", null: false
+    t.index ["crowd_member_id"], name: "index_eventual_event_joins_on_crowd_member_id"
+    t.index ["event_crowd_id"], name: "index_eventual_event_joins_on_event_crowd_id"
+    t.index ["event_id"], name: "index_eventual_event_joins_on_event_id"
+    t.index ["participant_type", "participant_id"], name: "index_eventual_event_joins_on_participant"
+  end
+
   create_table "eventual_event_participants", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "assigned_status"
     t.string "comment"
@@ -2026,9 +2060,10 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.date "begin_on"
     t.datetime "created_at", null: false
     t.string "description"
+    t.integer "duration_mins"
     t.date "end_on"
     t.integer "event_items_count"
-    t.integer "event_participants_count"
+    t.integer "event_joins_count"
     t.uuid "event_taxon_id"
     t.integer "members_count"
     t.string "name"
@@ -2038,6 +2073,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.boolean "produce_done"
     t.date "produced_begin_on"
     t.date "produced_end_on"
+    t.string "ref_ident", comment: "外部资源关联 ID"
     t.integer "repeat_count", comment: "每几周/天"
     t.string "repeat_days", array: true
     t.string "repeat_type"
@@ -2049,7 +2085,20 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["time_list_id"], name: "index_eventual_events_on_time_list_id"
   end
 
-  create_table "eventual_place_taxon_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "eventual_halls", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.integer "cols"
+    t.datetime "created_at", null: false
+    t.integer "max_members"
+    t.integer "min_members"
+    t.string "name"
+    t.uuid "place_id"
+    t.integer "rows"
+    t.integer "seats_count"
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_eventual_halls_on_place_id"
+  end
+
+  create_table "eventual_place_taxon_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -2075,16 +2124,20 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
   end
 
   create_table "eventual_places", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "address"
     t.uuid "area_id"
     t.string "color"
     t.datetime "created_at", null: false
     t.string "description"
+    t.integer "halls_count"
     t.string "name"
     t.uuid "organ_id"
     t.jsonb "place_taxon_ancestors"
     t.uuid "place_taxon_id"
     t.integer "plans_count"
+    t.string "ref_ident"
     t.integer "seats_count"
+    t.string "tel"
     t.datetime "updated_at", null: false
     t.index ["area_id"], name: "index_eventual_places_on_area_id"
     t.index ["organ_id"], name: "index_eventual_places_on_organ_id"
@@ -2133,6 +2186,24 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["time_list_id"], name: "index_eventual_plan_items_on_time_list_id"
   end
 
+  create_table "eventual_plan_joins", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "event_join_id"
+    t.uuid "hall_id"
+    t.uuid "place_id"
+    t.datetime "plan_at"
+    t.uuid "plan_id"
+    t.string "status", comment: "默认 event_participant 有效"
+    t.string "type"
+    t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.index ["event_join_id"], name: "index_eventual_plan_joins_on_event_join_id"
+    t.index ["hall_id"], name: "index_eventual_plan_joins_on_hall_id"
+    t.index ["place_id"], name: "index_eventual_plan_joins_on_place_id"
+    t.index ["plan_id"], name: "index_eventual_plan_joins_on_plan_id"
+    t.index ["user_id"], name: "index_eventual_plan_joins_on_user_id"
+  end
+
   create_table "eventual_plan_participants", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "event_participant_id"
@@ -2148,13 +2219,46 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["planning_type", "planning_id"], name: "index_eventual_plan_participants_on_planning"
   end
 
-  create_table "eventual_seats", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "eventual_plans", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.integer "bookings_count"
     t.datetime "created_at", null: false
+    t.uuid "event_id"
+    t.uuid "event_item_id"
+    t.jsonb "extra"
+    t.uuid "hall_id"
+    t.uuid "place_id"
+    t.datetime "plan_at"
+    t.date "plan_on"
+    t.integer "plan_participants_count"
+    t.uuid "planned_id"
+    t.string "planned_type"
+    t.string "ref_ident"
+    t.string "repeat_index"
+    t.uuid "time_item_id"
+    t.uuid "time_list_id"
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_eventual_plans_on_event_id"
+    t.index ["event_item_id"], name: "index_eventual_plans_on_event_item_id"
+    t.index ["hall_id"], name: "index_eventual_plans_on_hall_id"
+    t.index ["place_id"], name: "index_eventual_plans_on_place_id"
+    t.index ["planned_type", "planned_id"], name: "index_eventual_plans_on_planned"
+    t.index ["ref_ident"], name: "index_eventual_plans_on_ref_ident"
+    t.index ["time_item_id"], name: "index_eventual_plans_on_time_item_id"
+    t.index ["time_list_id"], name: "index_eventual_plans_on_time_list_id"
+  end
+
+  create_table "eventual_seats", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.integer "col"
+    t.datetime "created_at", null: false
+    t.uuid "hall_id"
     t.integer "max_members"
     t.integer "min_members"
     t.string "name"
     t.uuid "place_id"
+    t.string "ref_ident"
+    t.integer "row"
     t.datetime "updated_at", null: false
+    t.index ["hall_id"], name: "index_eventual_seats_on_hall_id"
     t.index ["place_id"], name: "index_eventual_seats_on_place_id"
   end
 
@@ -2505,6 +2609,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.uuid "brand_id"
     t.datetime "created_at", null: false
     t.string "description"
+    t.boolean "enable_reorder", comment: "在某些场景下（如大批量数据导入），不需要同步"
     t.uuid "factory_taxon_id"
     t.integer "fits_count"
     t.decimal "max_price"
@@ -2570,7 +2675,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["organ_id"], name: "index_factory_scenes_on_organ_id"
   end
 
-  create_table "factory_serial_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "factory_serial_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -2608,7 +2713,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["source_type", "source_id"], name: "index_factory_stock_logs_on_source"
   end
 
-  create_table "factory_taxon_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "factory_taxon_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -2816,7 +2921,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["organ_id"], name: "index_finance_stocks_on_organ_id"
   end
 
-  create_table "finance_taxon_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "finance_taxon_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -3039,6 +3144,103 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.uuid "user_id"
     t.index ["starred_type", "starred_id"], name: "index_interact_stars_on_starred"
     t.index ["user_id"], name: "index_interact_stars_on_user_id"
+  end
+
+  create_table "log_queries", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.boolean "async"
+    t.string "commit_uuid"
+    t.datetime "created_at", null: false
+    t.float "duration"
+    t.string "name"
+    t.string "sql"
+    t.datetime "updated_at", null: false
+    t.string "uuid"
+  end
+
+  create_table "log_query_dailies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.date "date"
+    t.integer "day"
+    t.float "duration_avg"
+    t.float "duration_max"
+    t.float "duration_min"
+    t.string "identifier"
+    t.integer "month"
+    t.integer "total"
+    t.datetime "updated_at", null: false
+    t.integer "year"
+    t.string "year_month"
+    t.index ["year_month"], name: "index_log_query_dailies_on_year_month"
+  end
+
+  create_table "log_request_dailies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.date "date"
+    t.integer "day"
+    t.float "duration_avg"
+    t.float "duration_max"
+    t.float "duration_min"
+    t.string "identifier"
+    t.integer "month"
+    t.integer "total"
+    t.datetime "updated_at", null: false
+    t.integer "year"
+    t.string "year_month"
+    t.index ["year_month"], name: "index_log_request_dailies_on_year_month"
+  end
+
+  create_table "log_request_weeklies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "cweek"
+    t.float "duration_avg"
+    t.float "duration_max"
+    t.float "duration_min"
+    t.string "identifier"
+    t.integer "total"
+    t.datetime "updated_at", null: false
+    t.integer "year"
+  end
+
+  create_table "log_requests", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.virtual "accept", type: :string, as: "(headers #>> '{ACCEPT}'::text[])", stored: true
+    t.string "action_name"
+    t.string "commit_uuid"
+    t.string "controller_name"
+    t.jsonb "cookie"
+    t.datetime "created_at", null: false
+    t.float "db_duration"
+    t.integer "duration"
+    t.string "format"
+    t.jsonb "headers"
+    t.virtual "identifier", type: :string, as: "(((controller_name)::text || '#'::text) || (action_name)::text)", stored: true
+    t.string "ip"
+    t.jsonb "params"
+    t.string "path"
+    t.integer "query_cached_count"
+    t.integer "query_count"
+    t.virtual "referer", type: :string, as: "(headers #>> '{REFERER}'::text[])", stored: true
+    t.jsonb "session"
+    t.string "session_id"
+    t.integer "status"
+    t.datetime "updated_at", null: false
+    t.virtual "user_agent", type: :string, as: "(headers #>> '{USER_AGENT}'::text[])", stored: true
+    t.string "uuid"
+    t.float "view_duration"
+  end
+
+  create_table "log_summary_dailies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.date "date"
+    t.integer "day"
+    t.float "duration_avg"
+    t.float "duration_max"
+    t.float "duration_min"
+    t.integer "month"
+    t.integer "total"
+    t.datetime "updated_at", null: false
+    t.integer "year"
+    t.string "year_month"
+    t.index ["year_month"], name: "index_log_summary_dailies_on_year_month"
   end
 
   create_table "markdown_assets", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3315,7 +3517,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["organ_id"], name: "index_org_department_grants_on_organ_id"
   end
 
-  create_table "org_department_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "org_department_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -3451,7 +3653,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "org_organ_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "org_organ_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -3653,6 +3855,25 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["organ_id"], name: "index_print_printers_on_organ_id"
   end
 
+  create_table "print_template_items", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.string "kind"
+    t.string "name"
+    t.integer "position"
+    t.uuid "template_id"
+    t.datetime "updated_at", null: false
+    t.index ["template_id"], name: "index_print_template_items_on_template_id"
+  end
+
+  create_table "print_templates", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.uuid "organ_id"
+    t.datetime "updated_at", null: false
+    t.index ["organ_id"], name: "index_print_templates_on_organ_id"
+  end
+
   create_table "roled_cache_roles", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "cache_id"
     t.datetime "created_at", null: false
@@ -3770,7 +3991,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["user_id"], name: "index_ship_addresses_on_user_id"
   end
 
-  create_table "ship_area_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "ship_area_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -3976,6 +4197,17 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.uuid "user_id"
     t.index ["driver_id"], name: "index_ship_favorites_on_driver_id"
     t.index ["user_id"], name: "index_ship_favorites_on_user_id"
+  end
+
+  create_table "ship_ips", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.string "ip_address"
+    t.string "ip_city"
+    t.decimal "lat"
+    t.decimal "lng"
+    t.datetime "updated_at", null: false
+    t.index ["ip_address"], name: "index_ship_ips_on_ip_address"
   end
 
   create_table "ship_line_similars", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -4375,7 +4607,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["synchro_type", "synchro_id"], name: "index_sync_audits_on_synchro"
   end
 
-  create_table "sync_form_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "sync_form_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
@@ -4510,8 +4742,31 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["wallet_template_id"], name: "index_trade_advances_on_wallet_template_id"
   end
 
+  create_table "trade_card_prepayments", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.boolean "activated"
+    t.uuid "card_template_id"
+    t.datetime "created_at", null: false
+    t.integer "days"
+    t.datetime "expire_at"
+    t.uuid "member_id"
+    t.uuid "member_organ_id"
+    t.integer "months"
+    t.uuid "organ_id"
+    t.string "token"
+    t.datetime "updated_at", null: false
+    t.datetime "used_at"
+    t.uuid "user_id"
+    t.integer "years"
+    t.index ["card_template_id"], name: "index_trade_card_prepayments_on_card_template_id"
+    t.index ["member_id"], name: "index_trade_card_prepayments_on_member_id"
+    t.index ["member_organ_id"], name: "index_trade_card_prepayments_on_member_organ_id"
+    t.index ["organ_id"], name: "index_trade_card_prepayments_on_organ_id"
+    t.index ["user_id"], name: "index_trade_card_prepayments_on_user_id"
+  end
+
   create_table "trade_card_purchases", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "card_id"
+    t.uuid "card_prepayment_id"
     t.datetime "created_at", null: false
     t.integer "days"
     t.uuid "item_id"
@@ -4525,6 +4780,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.datetime "updated_at", null: false
     t.integer "years"
     t.index ["card_id"], name: "index_trade_card_purchases_on_card_id"
+    t.index ["card_prepayment_id"], name: "index_trade_card_purchases_on_card_prepayment_id"
     t.index ["item_id"], name: "index_trade_card_purchases_on_item_id"
     t.index ["purchase_id"], name: "index_trade_card_purchases_on_purchase_id"
   end
@@ -4630,6 +4886,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.uuid "payment_strategy_id"
     t.boolean "purchasable"
     t.decimal "retail_price", comment: "汇总：原价"
+    t.string "scope"
     t.uuid "station_id"
     t.decimal "total_quantity"
     t.datetime "updated_at", null: false
@@ -4770,6 +5027,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.decimal "reduced_amount", comment: "已优惠的价格"
     t.virtual "rest_number", type: :decimal, as: "(number - done_number)", stored: true
     t.uuid "scene_id"
+    t.string "scope"
     t.decimal "single_price", comment: "一份产品的价格"
     t.uuid "source_id"
     t.uuid "station_id"
@@ -5258,6 +5516,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.boolean "lawful"
     t.string "token"
     t.datetime "updated_at", null: false
+    t.datetime "used_at"
     t.uuid "wallet_template_id"
     t.index ["wallet_template_id"], name: "index_trade_wallet_prepayments_on_wallet_template_id"
   end
@@ -5412,7 +5671,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_28_052337) do
     t.index ["parent_id"], name: "index_wechat_categories_on_parent_id"
   end
 
-  create_table "wechat_category_hierarchies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+  create_table "wechat_category_hierarchies", id: false, force: :cascade do |t|
     t.uuid "ancestor_id"
     t.datetime "created_at"
     t.uuid "descendant_id"
