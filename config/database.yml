@@ -10,33 +10,33 @@ default: &default
 development:
   primary:
     <<: *default
-    host: localhost
     database: work_development
     gssencmode: disable
   queue:
     <<: *default
-    host: localhost
     database: work_queue_development
     migrations_paths: db/queue_migrate
     gssencmode: disable
   cache:
     <<: *default
-    host: localhost
     database: work_cache_development
     migrations_paths: db/cache_migrate
+  prod:
+    <<: *default
+    database: work_production
 test:
   primary:
     <<: *default
-    host: localhost
     database: work_test
   queue:
     <<: *default
-    host: localhost
     database: work_test
   cache:
     <<: *default
-    host: localhost
     database: work_test
+  prod:
+    <<: *default
+    database: work_production
 production:
   primary:
     <<: *default
@@ -49,3 +49,6 @@ production:
     <<: *default
     database: work_cache_production
     migrations_paths: db/cache_migrate
+  prod:
+    <<: *default
+    database: work_production
