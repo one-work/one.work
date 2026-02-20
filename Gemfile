@@ -76,12 +76,12 @@ group :development, :test do
   gem 'debug', require: 'debug/prelude'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'sass-embedded'
 end
 
 group :development do
   gem 'web-console'
   gem 'listen'
   gem 'brakeman'
-  gem 'sass-embedded'
   gem 'tidewave'
 end
