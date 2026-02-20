@@ -176,6 +176,7 @@ PATH
       net-scp
       ostruct
       positioning
+      psych-pure
       rails
       reline
       solid_cache
@@ -198,9 +199,8 @@ PATH
       nkf
       prawn
       prawn-table
-      roo
-      roo-xls
       write_xlsx
+      xsv
 
 PATH
   remote: engine/rails_deploy
@@ -435,13 +435,7 @@ GEM
       json (~> 2.0)
       mime-types (~> 3.4)
       rack (>= 2.0, < 4.0)
-    ffi (1.17.3-aarch64-linux-gnu)
-    ffi (1.17.3-aarch64-linux-musl)
-    ffi (1.17.3-arm-linux-gnu)
-    ffi (1.17.3-arm-linux-musl)
     ffi (1.17.3-arm64-darwin)
-    ffi (1.17.3-x86_64-linux-gnu)
-    ffi (1.17.3-x86_64-linux-musl)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -552,19 +546,7 @@ GEM
       net-ssh (>= 4.0.0)
     nio4r (2.7.5)
     nkf (0.2.0)
-    nokogiri (1.19.0-aarch64-linux-gnu)
-      racc (~> 1.4)
-    nokogiri (1.19.0-aarch64-linux-musl)
-      racc (~> 1.4)
-    nokogiri (1.19.0-arm-linux-gnu)
-      racc (~> 1.4)
-    nokogiri (1.19.0-arm-linux-musl)
-      racc (~> 1.4)
     nokogiri (1.19.0-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.19.0-x86_64-linux-gnu)
-      racc (~> 1.4)
-    nokogiri (1.19.0-x86_64-linux-musl)
       racc (~> 1.4)
     octokit (10.0.0)
       faraday (>= 1, < 3)
@@ -580,11 +562,7 @@ GEM
     ostruct (0.6.3)
     pdf-core (0.10.0)
     pg (1.6.3)
-    pg (1.6.3-aarch64-linux)
-    pg (1.6.3-aarch64-linux-musl)
     pg (1.6.3-arm64-darwin)
-    pg (1.6.3-x86_64-linux)
-    pg (1.6.3-x86_64-linux-musl)
     positioning (0.4.7)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
@@ -605,6 +583,9 @@ GEM
     psych (5.3.1)
       date
       stringio
+    psych-pure (0.3.0)
+      psych
+      strscan
     public_suffix (7.0.2)
     puma (7.2.0)
       nio4r (~> 2.0)
@@ -641,41 +622,17 @@ GEM
     reline (0.6.3)
       io-console (~> 0.5)
     rexml (3.4.4)
-    roo (3.0.0)
-      base64 (~> 0.2)
-      csv (~> 3)
-      logger (~> 1)
-      nokogiri (~> 1)
-      rubyzip (>= 3.0.0, < 4.0.0)
-    roo-xls (2.0.0)
-      csv
-      nokogiri
-      roo (>= 2.0.0, < 4)
-      spreadsheet (>= 1.3.4, < 2)
     rotp (6.3.0)
     rouge (4.7.0)
     rqrcode (3.2.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 2.0)
     rqrcode_core (2.1.0)
-    ruby-ole (1.2.13.1)
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
     rubyzip (3.2.2)
-    sass-embedded (1.97.3-aarch64-linux-gnu)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.97.3-aarch64-linux-musl)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.97.3-arm-linux-gnueabihf)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.97.3-arm-linux-musleabihf)
-      google-protobuf (~> 4.31)
     sass-embedded (1.97.3-arm64-darwin)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.97.3-x86_64-linux-gnu)
-      google-protobuf (~> 4.31)
-    sass-embedded (1.97.3-x86_64-linux-musl)
       google-protobuf (~> 4.31)
     sawyer (0.9.3)
       addressable (>= 2.3.5)
@@ -699,10 +656,6 @@ GEM
       fugit (~> 1.11)
       railties (>= 7.1)
       thor (>= 1.3.1)
-    spreadsheet (1.3.4)
-      bigdecimal
-      logger
-      ruby-ole
     sshkey (3.0.0)
     sshkit (1.25.0)
       base64
@@ -712,6 +665,7 @@ GEM
       net-ssh (>= 2.8.0)
       ostruct
     stringio (3.2.0)
+    strscan (3.1.7)
     thor (1.5.0)
     tidewave (0.4.1)
       fast-mcp (~> 1.6.0)
@@ -746,17 +700,13 @@ GEM
       rubyzip (>= 2.4.0, < 4.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    xsv (1.4.0)
+      rubyzip (>= 1.3, < 4)
     zeitwerk (2.7.4)
 
 PLATFORMS
-  aarch64-linux-gnu
-  aarch64-linux-musl
-  arm-linux-gnu
-  arm-linux-musl
   arm64-darwin-24
   arm64-darwin-25
-  x86_64-linux-gnu
-  x86_64-linux-musl
 
 DEPENDENCIES
   aliyunsdkcore
