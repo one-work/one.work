@@ -23,7 +23,7 @@ development:
     migrations_paths: db/cache_migrate
   prod:
     <<: *default
-    database: work_production
+    database: work_prod
 test:
   primary:
     <<: *default
@@ -36,7 +36,7 @@ test:
     database: work_test
   prod:
     <<: *default
-    database: work_production
+    database: work_prod
 production:
   primary:
     <<: *default
