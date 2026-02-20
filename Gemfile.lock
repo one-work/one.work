@@ -722,6 +722,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   pg
   propshaft
+  psych-pure
   puma
   rails!
   rails_alipay!

@@ -19,6 +19,7 @@ gem 'nokogiri'
 gem 'sd_notify'
 gem 'net-ssh-gateway'
 gem 'xsv'
+gem 'psych-pure'
 
 # Third party
 gem 'octokit'
