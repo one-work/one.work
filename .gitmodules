@@ -4,9 +4,6 @@
 [submodule "engine/rails_cms"]
   path = engine/rails_cms
   url = git@github.com:one-work/rails_cms.git
-[submodule "engine/rails_doc"]
-  path = engine/rails_doc
-  url = git@github.com:one-work/rails_doc.git
 [submodule "engine/rails_org"]
   path = engine/rails_org
   url = git@github.com:one-work/rails_org.git

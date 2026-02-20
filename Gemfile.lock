@@ -215,12 +215,6 @@ PATH
       rails_com
 
 PATH
-  remote: engine/rails_doc
-  specs:
-    rails_doc (0.0.2)
-      rails_com (>= 1.2)
-
-PATH
   remote: engine/rails_douyin
   specs:
     rails_douyin (0.0.1)
@@ -740,7 +734,6 @@ DEPENDENCIES
   rails_data!
   rails_deploy!
   rails_detail!
-  rails_doc!
   rails_douyin!
   rails_email!
   rails_event!
