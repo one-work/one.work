@@ -24,6 +24,7 @@ development:
   prod:
     <<: *default
     database: work_prod
+    schema_dump: false
 test:
   primary:
     <<: *default
@@ -37,6 +38,7 @@ test:
   prod:
     <<: *default
     database: work_prod
+    schema_dump: false
 production:
   primary:
     <<: *default

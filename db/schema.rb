@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
+ActiveRecord::Schema[8.2].define(version: 2026_03_27_013838) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -488,7 +488,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.boolean "published"
     t.string "qr_prefix"
     t.decimal "quantity"
-    t.string "sku"
     t.uuid "standard_id"
     t.decimal "step", comment: "Item Number Step"
     t.decimal "unified_quantity"
@@ -517,7 +516,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "organ_id"
     t.decimal "price"
     t.decimal "quantity"
-    t.string "sku"
     t.datetime "start_at"
     t.decimal "step", comment: "Item Number Step"
     t.decimal "unified_quantity"
@@ -1507,7 +1505,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "parent_id"
     t.decimal "price"
     t.decimal "quantity"
-    t.string "sku"
     t.decimal "step", comment: "Item Number Step"
     t.decimal "unified_quantity"
     t.string "unit"
@@ -1551,6 +1548,15 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "type"
     t.datetime "updated_at", null: false
     t.integer "x_position"
+  end
+
+  create_table "datum_errs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "from_id"
+    t.string "from_type"
+    t.string "target"
+    t.string "to_class"
+    t.datetime "updated_at", null: false
   end
 
   create_table "datum_export_items", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -2453,6 +2459,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.boolean "default"
     t.uuid "product_id"
     t.uuid "provide_id"
+    t.string "ref", comment: "用于数据迁移"
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_factory_product_provides_on_product_id"
     t.index ["provide_id"], name: "index_factory_product_provides_on_provide_id"
@@ -2600,6 +2607,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.integer "rent_charges_count"
     t.string "rent_unit"
     t.string "sku"
+    t.string "spu"
     t.string "state"
     t.decimal "step", comment: "Item Number Step"
     t.decimal "stock"
@@ -2614,6 +2622,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.index ["organ_id"], name: "index_factory_productions_on_organ_id"
     t.index ["product_host_id"], name: "index_factory_productions_on_product_host_id"
     t.index ["product_id"], name: "index_factory_productions_on_product_id"
+    t.index ["spu"], name: "index_factory_productions_on_spu"
     t.index ["str_part_ids"], name: "index_factory_productions_on_str_part_ids"
     t.index ["taxon_id"], name: "index_factory_productions_on_taxon_id"
   end
@@ -2637,8 +2646,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.decimal "profit_margin"
     t.boolean "published"
     t.string "qr_prefix"
-    t.string "sku"
     t.boolean "specialty"
+    t.string "spu"
     t.jsonb "taxon_ancestors"
     t.uuid "taxon_id"
     t.uuid "unifier_id"
@@ -2646,7 +2655,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.index ["brand_id"], name: "index_factory_products_on_brand_id"
     t.index ["factory_taxon_id"], name: "index_factory_products_on_factory_taxon_id"
     t.index ["organ_id"], name: "index_factory_products_on_organ_id"
-    t.index ["sku"], name: "index_factory_products_on_sku"
+    t.index ["spu"], name: "index_factory_products_on_spu"
     t.index ["taxon_id"], name: "index_factory_products_on_taxon_id"
     t.index ["unifier_id"], name: "index_factory_products_on_unifier_id"
   end
@@ -2657,6 +2666,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "invite_token"
     t.string "name"
     t.uuid "organ_id"
+    t.integer "product_provides_count"
     t.uuid "provider_id"
     t.datetime "updated_at", null: false
     t.index ["factory_provider_id"], name: "index_factory_provides_on_factory_provider_id"
@@ -2907,7 +2917,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "organ_id"
     t.decimal "price"
     t.decimal "quantity"
-    t.string "sku"
     t.decimal "step", comment: "Item Number Step"
     t.decimal "unified_quantity"
     t.string "unit"
@@ -3324,7 +3333,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "organ_id"
     t.string "path"
     t.integer "position"
-    t.boolean "ppt"
     t.boolean "published"
     t.boolean "shared"
     t.string "slug"
@@ -3338,6 +3346,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
   create_table "mqtt_acl", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "action"
     t.datetime "created_at", null: false
+    t.string "ip"
     t.string "permission"
     t.string "topic"
     t.datetime "updated_at", null: false
@@ -3346,7 +3355,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
 
   create_table "mqtt_user", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "ip"
     t.boolean "is_superuser"
+    t.string "note"
     t.string "password"
     t.string "password_hash"
     t.datetime "updated_at", null: false
@@ -3683,6 +3694,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "appid"
     t.jsonb "area_ancestors"
     t.uuid "area_id"
+    t.boolean "auto_purchase"
     t.uuid "cache_id"
     t.integer "children_count"
     t.string "code"
@@ -3862,8 +3874,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
   end
 
   create_table "print_mqtt_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.datetime "authorized_at"
     t.datetime "created_at", null: false
     t.boolean "dev_cut"
+    t.string "dev_cut_type"
     t.string "dev_desc"
     t.string "dev_imei"
     t.string "dev_ip"
@@ -3872,10 +3886,13 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "dev_tel"
     t.string "dev_type"
     t.string "dev_vendor"
+    t.string "dev_version"
     t.jsonb "extra"
     t.boolean "online"
     t.uuid "organ_id"
     t.string "password"
+    t.datetime "ready_at"
+    t.datetime "registered_at"
     t.datetime "updated_at", null: false
     t.string "username"
     t.index ["organ_id"], name: "index_print_mqtt_printers_on_organ_id"
@@ -3891,20 +3908,21 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
 
   create_table "print_tasks", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "aim"
-    t.text "body"
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.uuid "device_id"
     t.string "gid"
-    t.uuid "mqtt_printer_id"
+    t.string "imei"
+    t.string "note"
     t.jsonb "payload"
     t.datetime "print_at"
+    t.string "raw", comment: "经过Base64压缩的字节码"
     t.uuid "template_id"
     t.string "type"
     t.string "uid"
     t.datetime "updated_at", null: false
     t.index ["device_id"], name: "index_print_tasks_on_device_id"
-    t.index ["mqtt_printer_id"], name: "index_print_tasks_on_mqtt_printer_id"
+    t.index ["imei"], name: "index_print_tasks_on_imei"
     t.index ["template_id"], name: "index_print_tasks_on_template_id"
   end
 
@@ -4060,6 +4078,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "code"
     t.datetime "created_at", null: false
     t.string "full"
+    t.integer "level"
     t.string "locale"
     t.string "name"
     t.string "names", array: true
@@ -4106,7 +4125,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.decimal "quantity"
     t.integer "rent_charges_count"
     t.string "rent_unit"
-    t.string "sku"
     t.decimal "step", comment: "Item Number Step"
     t.integer "tradable_count", comment: "可交易数量，可租亦可卖"
     t.virtual "traded_count", type: :integer, as: "(boxes_count - tradable_count)", stored: true
@@ -4438,6 +4456,23 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.index ["user_id"], name: "index_ship_ways_on_user_id"
   end
 
+  create_table "solid_queue_job_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.date "begin_on"
+    t.integer "count"
+    t.integer "counter_days_count"
+    t.integer "counter_months_count"
+    t.integer "counter_years_count"
+    t.datetime "created_at", null: false
+    t.date "end_on"
+    t.string "note"
+    t.string "queue_name"
+    t.date "today"
+    t.string "today_begin_id"
+    t.datetime "updated_at", null: false
+    t.jsonb "values"
+    t.integer "version"
+  end
+
   create_table "space_buildings", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "code"
     t.datetime "created_at", null: false
@@ -4534,9 +4569,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.datetime "created_at", null: false
     t.date "date"
     t.integer "day"
-    t.jsonb "filter"
     t.integer "month"
     t.datetime "updated_at", null: false
+    t.jsonb "values"
+    t.string "version"
     t.integer "year"
     t.string "year_month"
     t.index ["config_id"], name: "index_statis_counter_days_on_config_id"
@@ -4547,9 +4583,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "config_id"
     t.integer "count"
     t.datetime "created_at", null: false
-    t.jsonb "filter"
     t.integer "month"
     t.datetime "updated_at", null: false
+    t.jsonb "values"
+    t.string "version"
     t.integer "year"
     t.string "year_month"
     t.index ["config_id"], name: "index_statis_counter_months_on_config_id"
@@ -4561,8 +4598,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "config_id"
     t.integer "count"
     t.datetime "created_at", null: false
-    t.jsonb "filter"
     t.datetime "updated_at", null: false
+    t.jsonb "values"
+    t.string "version"
     t.integer "year"
     t.index ["config_id"], name: "index_statis_counter_years_on_config_id"
   end
@@ -4775,6 +4813,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.jsonb "card_price"
     t.uuid "card_template_id"
     t.datetime "created_at", null: false
+    t.boolean "enabled"
     t.jsonb "extra"
     t.string "good_type"
     t.decimal "invest_ratio", comment: "抽成比例"
@@ -4784,7 +4823,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "organ_id"
     t.decimal "price"
     t.decimal "quantity"
-    t.string "sku"
     t.decimal "step", comment: "Item Number Step"
     t.decimal "unified_quantity"
     t.string "unit"
@@ -5023,6 +5061,25 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.index ["user_id"], name: "index_trade_holds_on_user_id"
   end
 
+  create_table "trade_item_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.date "begin_on"
+    t.integer "count"
+    t.integer "counter_days_count"
+    t.integer "counter_months_count"
+    t.integer "counter_years_count"
+    t.datetime "created_at", null: false
+    t.date "end_on"
+    t.string "note"
+    t.uuid "organ_id"
+    t.string "status"
+    t.date "today"
+    t.string "today_begin_id"
+    t.datetime "updated_at", null: false
+    t.jsonb "values"
+    t.integer "version"
+    t.index ["organ_id"], name: "index_trade_item_counter_caches_on_organ_id"
+  end
+
   create_table "trade_item_promotes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.decimal "amount"
     t.datetime "created_at", null: false
@@ -5077,6 +5134,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "provide_id"
     t.integer "purchase_id"
     t.integer "purchase_items_count"
+    t.jsonb "purchase_res"
     t.string "purchase_status"
     t.decimal "reduced_amount", comment: "已优惠的价格"
     t.virtual "rest_number", type: :decimal, as: "(number - done_number)", stored: true
@@ -5114,6 +5172,26 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.index ["station_id"], name: "index_trade_items_on_station_id"
     t.index ["unit_id"], name: "index_trade_items_on_unit_id"
     t.index ["user_id"], name: "index_trade_items_on_user_id"
+  end
+
+  create_table "trade_order_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.date "begin_on"
+    t.integer "count"
+    t.integer "counter_days_count"
+    t.integer "counter_months_count"
+    t.integer "counter_years_count"
+    t.datetime "created_at", null: false
+    t.date "end_on"
+    t.string "note"
+    t.uuid "organ_id"
+    t.string "payment_status"
+    t.string "state"
+    t.date "today"
+    t.string "today_begin_id"
+    t.datetime "updated_at", null: false
+    t.jsonb "values"
+    t.integer "version"
+    t.index ["organ_id"], name: "index_trade_order_counter_caches_on_organ_id"
   end
 
   create_table "trade_orders", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -5190,6 +5268,26 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.index ["provide_id"], name: "index_trade_orders_on_provide_id"
     t.index ["station_id"], name: "index_trade_orders_on_station_id"
     t.index ["user_id"], name: "index_trade_orders_on_user_id"
+  end
+
+  create_table "trade_payment_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.date "begin_on"
+    t.integer "count"
+    t.integer "counter_days_count"
+    t.integer "counter_months_count"
+    t.integer "counter_years_count"
+    t.datetime "created_at", null: false
+    t.date "end_on"
+    t.string "note"
+    t.uuid "organ_id"
+    t.string "pay_state"
+    t.string "state"
+    t.date "today"
+    t.string "today_begin_id"
+    t.datetime "updated_at", null: false
+    t.jsonb "values"
+    t.integer "version"
+    t.index ["organ_id"], name: "index_trade_payment_counter_caches_on_organ_id"
   end
 
   create_table "trade_payment_methods", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -5430,7 +5528,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "note"
     t.decimal "price"
     t.decimal "quantity"
-    t.string "sku"
     t.decimal "step", comment: "Item Number Step"
     t.string "title"
     t.decimal "unified_quantity"
@@ -5509,18 +5606,20 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "advance_id"
     t.decimal "amount"
     t.datetime "created_at", null: false
+    t.datetime "expire_at"
     t.uuid "item_id"
     t.string "kind"
     t.string "note"
-    t.uuid "operator_id"
     t.decimal "price"
+    t.decimal "remaining_amount"
     t.string "state"
+    t.decimal "total"
     t.datetime "updated_at", null: false
+    t.decimal "used_amount"
     t.uuid "wallet_id"
     t.uuid "wallet_prepayment_id"
     t.index ["advance_id"], name: "index_trade_wallet_advances_on_advance_id"
     t.index ["item_id"], name: "index_trade_wallet_advances_on_item_id"
-    t.index ["operator_id"], name: "index_trade_wallet_advances_on_operator_id"
     t.index ["wallet_id"], name: "index_trade_wallet_advances_on_wallet_id"
     t.index ["wallet_prepayment_id"], name: "index_trade_wallet_advances_on_wallet_prepayment_id"
   end
@@ -5533,34 +5632,41 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.uuid "operator_id"
     t.string "state"
     t.datetime "updated_at", null: false
+    t.uuid "wallet_advance_id"
     t.uuid "wallet_id"
     t.index ["item_id"], name: "index_trade_wallet_frozens_on_item_id"
     t.index ["operator_id"], name: "index_trade_wallet_frozens_on_operator_id"
+    t.index ["wallet_advance_id"], name: "index_trade_wallet_frozens_on_wallet_advance_id"
     t.index ["wallet_id"], name: "index_trade_wallet_frozens_on_wallet_id"
   end
 
   create_table "trade_wallet_goods", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.uuid "good_id"
     t.string "good_type"
+    t.decimal "ratio"
     t.datetime "updated_at", null: false
     t.string "wallet_code"
     t.uuid "wallet_template_id"
-    t.index ["good_type", "good_id"], name: "index_trade_wallet_goods_on_good"
     t.index ["wallet_template_id"], name: "index_trade_wallet_goods_on_wallet_template_id"
   end
 
   create_table "trade_wallet_logs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.decimal "amount"
     t.datetime "created_at", null: false
+    t.uuid "operator_id"
     t.uuid "source_id"
     t.string "source_type"
     t.string "tag_str"
     t.string "title"
     t.datetime "updated_at", null: false
+    t.uuid "wallet_advance_id"
     t.uuid "wallet_id"
+    t.uuid "wallet_payment_id"
+    t.index ["operator_id"], name: "index_trade_wallet_logs_on_operator_id"
     t.index ["source_type", "source_id"], name: "index_trade_wallet_logs_on_source"
+    t.index ["wallet_advance_id"], name: "index_trade_wallet_logs_on_wallet_advance_id"
     t.index ["wallet_id"], name: "index_trade_wallet_logs_on_wallet_id"
+    t.index ["wallet_payment_id"], name: "index_trade_wallet_logs_on_wallet_payment_id"
   end
 
   create_table "trade_wallet_prepayments", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -5568,6 +5674,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.datetime "created_at", null: false
     t.datetime "expire_at"
     t.boolean "lawful"
+    t.string "secret"
     t.string "token"
     t.datetime "updated_at", null: false
     t.datetime "used_at"
@@ -5593,19 +5700,25 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
   end
 
   create_table "trade_wallet_templates", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "appid", comment: "推广微信公众号"
     t.string "code"
     t.datetime "created_at", null: false
     t.string "description"
     t.integer "digit", comment: "精确到小数点后几位"
     t.boolean "enabled"
+    t.datetime "expire_max"
+    t.datetime "expire_min"
+    t.boolean "hot"
+    t.decimal "limit"
     t.string "name"
     t.uuid "organ_id"
     t.string "platform"
+    t.decimal "prepay_max"
+    t.decimal "prepay_min"
     t.string "rate", comment: "相对于默认货币的比率"
     t.string "unit"
     t.string "unit_name"
     t.datetime "updated_at", null: false
+    t.integer "wallet_prepayments_count"
     t.integer "wallets_count"
     t.index ["organ_id"], name: "index_trade_wallet_templates_on_organ_id"
   end
@@ -5614,15 +5727,19 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "account_bank"
     t.string "account_name"
     t.string "account_number"
+    t.decimal "adjust_amount", comment: "用于矫正计算"
     t.decimal "advances_amount", comment: "收入：主动充值"
     t.uuid "agent_id"
     t.decimal "amount"
     t.uuid "client_id"
+    t.string "code"
     t.uuid "contact_id"
     t.datetime "created_at", null: false
+    t.boolean "enabled"
     t.decimal "expense_amount"
     t.decimal "frozen_amount", comment: "支出：冻结金额"
     t.decimal "income_amount"
+    t.decimal "limit", comment: "支付限额"
     t.integer "lock_version"
     t.uuid "member_id"
     t.uuid "member_organ_id"
@@ -5671,6 +5788,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_02_20_120327) do
     t.string "logo_media_id"
     t.string "nick_name"
     t.string "oauth_domain"
+    t.boolean "oauth_enable"
     t.string "open_appid"
     t.uuid "organ_id"
     t.string "platform_appid"
