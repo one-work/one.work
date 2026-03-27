@@ -53,4 +53,5 @@ production:
     migrations_paths: db/cache_migrate
   prod:
     <<: *default
-    database: work_production
+    database: work_prod
+    schema_dump: false
