@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
+ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -783,23 +783,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "bluetooth_devices", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name"
-    t.uuid "organ_id"
-    t.datetime "updated_at", null: false
-    t.index ["organ_id"], name: "index_bluetooth_devices_on_organ_id"
-  end
-
-  create_table "bluetooth_errs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "err_msg"
-    t.string "name"
-    t.uuid "organ_id"
-    t.datetime "updated_at", null: false
-    t.index ["organ_id"], name: "index_bluetooth_errs_on_organ_id"
-  end
-
   create_table "cms_audio_tags", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "audio_id"
     t.datetime "created_at", null: false
@@ -1097,147 +1080,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.datetime "updated_at", null: false
     t.string "value"
     t.string "version"
-  end
-
-  create_table "com_log_sqls", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.boolean "async"
-    t.string "commit_uuid"
-    t.datetime "created_at", null: false
-    t.float "duration"
-    t.string "name"
-    t.string "sql"
-    t.string "uuid"
-  end
-
-  create_table "com_log_summaries", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.float "duration_avg"
-    t.float "duration_max"
-    t.float "duration_min"
-    t.datetime "finish_at"
-    t.string "identifier"
-    t.string "kind"
-    t.datetime "start_at"
-    t.integer "total"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "com_logs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.virtual "accept", type: :string, as: "(headers #>> '{ACCEPT}'::text[])", stored: true
-    t.string "action_name"
-    t.string "commit_uuid"
-    t.string "controller_name"
-    t.jsonb "cookie"
-    t.datetime "created_at", null: false
-    t.float "db_duration"
-    t.integer "duration"
-    t.string "format"
-    t.jsonb "headers"
-    t.virtual "identifier", type: :string, as: "(((controller_name)::text || '#'::text) || (action_name)::text)", stored: true
-    t.string "ip"
-    t.jsonb "params"
-    t.string "path"
-    t.integer "query_cached_count"
-    t.integer "query_count"
-    t.virtual "referer", type: :string, as: "(headers #>> '{REFERER}'::text[])", stored: true
-    t.jsonb "session"
-    t.string "session_id"
-    t.integer "status"
-    t.virtual "user_agent", type: :string, as: "(headers #>> '{USER_AGENT}'::text[])", stored: true
-    t.string "uuid"
-    t.float "view_duration"
-  end
-
-  create_table "com_meta_actions", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "action_name"
-    t.string "business_identifier", null: false
-    t.string "controller_name", null: false
-    t.string "controller_path", null: false
-    t.datetime "created_at", null: false
-    t.boolean "landmark"
-    t.string "namespace_identifier", null: false
-    t.string "operation"
-    t.string "path"
-    t.integer "position"
-    t.string "required_parts", array: true
-    t.datetime "synced_at"
-    t.datetime "updated_at", null: false
-    t.string "verb"
-    t.index ["business_identifier"], name: "index_com_meta_actions_on_business_identifier"
-    t.index ["controller_path"], name: "index_com_meta_actions_on_controller_path"
-    t.index ["namespace_identifier"], name: "index_com_meta_actions_on_namespace_identifier"
-  end
-
-  create_table "com_meta_businesses", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "identifier", null: false
-    t.string "name"
-    t.integer "position"
-    t.datetime "synced_at"
-    t.datetime "updated_at", null: false
-    t.index ["identifier"], name: "index_com_meta_businesses_on_identifier"
-  end
-
-  create_table "com_meta_columns", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.boolean "belongs_enable"
-    t.string "belongs_table"
-    t.integer "column_limit"
-    t.string "column_name"
-    t.string "column_type"
-    t.string "comment"
-    t.datetime "created_at", null: false
-    t.boolean "defined_db"
-    t.boolean "defined_model"
-    t.string "record_name"
-    t.string "sql_type"
-    t.datetime "updated_at", null: false
-    t.index ["record_name"], name: "index_com_meta_columns_on_record_name"
-  end
-
-  create_table "com_meta_controllers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "business_identifier", null: false
-    t.string "controller_name", null: false
-    t.string "controller_path", null: false
-    t.datetime "created_at", null: false
-    t.string "namespace_identifier", null: false
-    t.integer "position"
-    t.datetime "synced_at"
-    t.datetime "updated_at", null: false
-    t.index ["business_identifier"], name: "index_com_meta_controllers_on_business_identifier"
-    t.index ["controller_path"], name: "index_com_meta_controllers_on_controller_path"
-    t.index ["namespace_identifier"], name: "index_com_meta_controllers_on_namespace_identifier"
-  end
-
-  create_table "com_meta_models", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "business_identifier", null: false
-    t.datetime "created_at", null: false
-    t.boolean "customizable", comment: "是否允许用户定制"
-    t.boolean "defined_db"
-    t.string "description"
-    t.string "name"
-    t.string "record_name"
-    t.string "table_name"
-    t.datetime "updated_at", null: false
-    t.index ["business_identifier"], name: "index_com_meta_models_on_business_identifier"
-    t.index ["record_name"], name: "index_com_meta_models_on_record_name"
-  end
-
-  create_table "com_meta_namespaces", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "identifier", null: false
-    t.string "name"
-    t.datetime "updated_at", null: false
-    t.boolean "verify_member"
-    t.boolean "verify_organ"
-    t.boolean "verify_user"
-    t.index ["identifier"], name: "index_com_meta_namespaces_on_identifier"
-  end
-
-  create_table "com_meta_operations", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "action_name"
-    t.datetime "created_at", null: false
-    t.string "operation"
-    t.datetime "updated_at", null: false
   end
 
   create_table "com_ssh_keys", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -2048,26 +1890,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.index ["participant_type", "participant_id"], name: "index_eventual_event_joins_on_participant"
   end
 
-  create_table "eventual_event_participants", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "assigned_status"
-    t.string "comment"
-    t.datetime "created_at", null: false
-    t.uuid "crowd_member_id"
-    t.uuid "event_crowd_id"
-    t.uuid "event_id"
-    t.string "job_id"
-    t.uuid "participant_id"
-    t.string "participant_type"
-    t.string "quit_note"
-    t.integer "score"
-    t.string "state"
-    t.datetime "updated_at", null: false
-    t.index ["crowd_member_id"], name: "index_eventual_event_participants_on_crowd_member_id"
-    t.index ["event_crowd_id"], name: "index_eventual_event_participants_on_event_crowd_id"
-    t.index ["event_id"], name: "index_eventual_event_participants_on_event_id"
-    t.index ["participant_type", "participant_id"], name: "index_eventual_event_participants_on_participant"
-  end
-
   create_table "eventual_event_taxons", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -2183,29 +2005,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.index ["plan_participant_id"], name: "index_eventual_plan_attenders_on_plan_participant_id"
   end
 
-  create_table "eventual_plan_items", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.integer "bookings_count"
-    t.datetime "created_at", null: false
-    t.uuid "event_id"
-    t.uuid "event_item_id"
-    t.jsonb "extra"
-    t.uuid "place_id"
-    t.date "plan_on"
-    t.integer "plan_participants_count"
-    t.uuid "planned_id"
-    t.string "planned_type"
-    t.string "repeat_index"
-    t.uuid "time_item_id"
-    t.uuid "time_list_id"
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_eventual_plan_items_on_event_id"
-    t.index ["event_item_id"], name: "index_eventual_plan_items_on_event_item_id"
-    t.index ["place_id"], name: "index_eventual_plan_items_on_place_id"
-    t.index ["planned_type", "planned_id"], name: "index_eventual_plan_items_on_planned"
-    t.index ["time_item_id"], name: "index_eventual_plan_items_on_time_item_id"
-    t.index ["time_list_id"], name: "index_eventual_plan_items_on_time_list_id"
-  end
-
   create_table "eventual_plan_joins", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "event_join_id"
@@ -2222,21 +2021,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.index ["place_id"], name: "index_eventual_plan_joins_on_place_id"
     t.index ["plan_id"], name: "index_eventual_plan_joins_on_plan_id"
     t.index ["user_id"], name: "index_eventual_plan_joins_on_user_id"
-  end
-
-  create_table "eventual_plan_participants", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.uuid "event_participant_id"
-    t.uuid "participant_id"
-    t.string "participant_type"
-    t.uuid "planning_id"
-    t.string "planning_type"
-    t.string "status", comment: "默认 event_participant 有效"
-    t.string "type"
-    t.datetime "updated_at", null: false
-    t.index ["event_participant_id"], name: "index_eventual_plan_participants_on_event_participant_id"
-    t.index ["participant_type", "participant_id"], name: "index_eventual_plan_participants_on_participant"
-    t.index ["planning_type", "planning_id"], name: "index_eventual_plan_participants_on_planning"
   end
 
   create_table "eventual_plans", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3898,14 +3682,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.index ["organ_id"], name: "index_print_mqtt_printers_on_organ_id"
   end
 
-  create_table "print_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.uuid "organ_id"
-    t.string "uid"
-    t.datetime "updated_at", null: false
-    t.index ["organ_id"], name: "index_print_printers_on_organ_id"
-  end
-
   create_table "print_tasks", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "aim"
     t.datetime "completed_at"
@@ -3943,12 +3719,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.uuid "organ_id"
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_print_templates_on_organ_id"
-  end
-
-  create_table "requirements", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "xx"
   end
 
   create_table "roled_cache_roles", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -4552,23 +4322,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.index ["organ_id"], name: "index_space_stations_on_organ_id"
   end
 
-  create_table "statis_configs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.date "begin_on"
-    t.integer "counter_days_count"
-    t.integer "counter_months_count"
-    t.integer "counter_years_count"
-    t.datetime "created_at", null: false
-    t.date "end_on"
-    t.jsonb "keys"
-    t.string "note"
-    t.jsonb "scopes"
-    t.string "statistical_type"
-    t.jsonb "sums"
-    t.date "today"
-    t.integer "today_begin_id"
-    t.datetime "updated_at", null: false
-  end
-
   create_table "statis_counter_days", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "config_id"
     t.integer "count"
@@ -4609,64 +4362,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_062931) do
     t.string "version"
     t.integer "year"
     t.index ["config_id"], name: "index_statis_counter_years_on_config_id"
-  end
-
-  create_table "statis_statistic_days", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.date "date"
-    t.integer "day"
-    t.integer "month"
-    t.uuid "statistic_id"
-    t.datetime "updated_at", null: false
-    t.decimal "value"
-    t.integer "year"
-    t.string "year_month"
-    t.index ["statistic_id"], name: "index_statis_statistic_days_on_statistic_id"
-    t.index ["year_month"], name: "index_statis_statistic_days_on_year_month"
-  end
-
-  create_table "statis_statistic_months", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "month"
-    t.uuid "statistic_id"
-    t.datetime "updated_at", null: false
-    t.decimal "value"
-    t.integer "year"
-    t.string "year_month"
-    t.index ["statistic_id"], name: "index_statis_statistic_months_on_statistic_id"
-    t.index ["year_month"], name: "index_statis_statistic_months_on_year_month"
-  end
-
-  create_table "statis_statistic_years", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.uuid "statistic_id"
-    t.datetime "updated_at", null: false
-    t.decimal "value"
-    t.integer "year"
-    t.index ["statistic_id"], name: "index_statis_statistic_years_on_statistic_id"
-  end
-
-  create_table "statis_statistics", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.boolean "cached"
-    t.string "column"
-    t.datetime "created_at", null: false
-    t.jsonb "extra"
-    t.integer "statistic_days_count"
-    t.integer "statistic_months_count"
-    t.integer "statistic_years_count"
-    t.string "statistical_type"
-    t.datetime "updated_at", null: false
-    t.string "value"
-  end
-
-  create_table "stats", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.date "date"
-    t.integer "oauth_users_count"
-    t.integer "requirements_count"
-    t.integer "subscribed_requests_count"
-    t.datetime "updated_at", null: false
-    t.integer "users_count"
   end
 
   create_table "sync_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
