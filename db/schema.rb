@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_04_11_134334) do
+ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3160,6 +3160,90 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_134334) do
     t.datetime "updated_at", null: false
     t.index ["git_id"], name: "index_markdown_posts_on_git_id"
     t.index ["organ_id"], name: "index_markdown_posts_on_organ_id"
+  end
+
+  create_table "meta_actions", force: :cascade do |t|
+    t.string "action_name", null: false
+    t.string "business_identifier", null: false
+    t.string "controller_name", null: false
+    t.string "controller_path", null: false
+    t.datetime "created_at", null: false
+    t.string "identifier"
+    t.boolean "landmark"
+    t.string "namespace_identifier", null: false
+    t.string "operation"
+    t.string "path"
+    t.integer "position"
+    t.string "request_as"
+    t.string "required_parts", array: true
+    t.datetime "synced_at"
+    t.boolean "testable"
+    t.datetime "updated_at", null: false
+    t.string "verb"
+  end
+
+  create_table "meta_businesses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "identifier", null: false
+    t.string "name"
+    t.integer "position"
+    t.datetime "synced_at"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meta_columns", force: :cascade do |t|
+    t.boolean "belongs_enable"
+    t.string "belongs_table"
+    t.integer "column_limit"
+    t.string "column_name"
+    t.string "column_type"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.boolean "defined_db"
+    t.boolean "defined_model"
+    t.string "record_name"
+    t.string "sql_type"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meta_controllers", force: :cascade do |t|
+    t.string "business_identifier", null: false
+    t.string "controller_name", null: false
+    t.string "controller_path", null: false
+    t.datetime "created_at", null: false
+    t.string "namespace_identifier", null: false
+    t.integer "position"
+    t.datetime "synced_at"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meta_namespaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "identifier", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.boolean "verify_member"
+    t.boolean "verify_organ"
+    t.boolean "verify_user"
+  end
+
+  create_table "meta_operations", force: :cascade do |t|
+    t.string "action_name"
+    t.datetime "created_at", null: false
+    t.string "operation"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meta_records", force: :cascade do |t|
+    t.string "business_identifier"
+    t.datetime "created_at", null: false
+    t.boolean "customizable", comment: "是否允许用户定制"
+    t.boolean "defined_db"
+    t.string "description"
+    t.string "name"
+    t.string "record_name"
+    t.string "table_name"
+    t.datetime "updated_at", null: false
   end
 
   create_table "mqtt_acl", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
