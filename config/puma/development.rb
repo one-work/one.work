@@ -1,7 +1,6 @@
 dir = ENV['PWD']
 
 port 3000
-workers 1
 threads 1, 1
 environment 'development'
 directory dir
@@ -11,9 +10,11 @@ pidfile "#{File.expand_path('tmp/pids/puma.pid', dir)}"
 state_path "#{File.expand_path('tmp/sockets/puma.state', dir)}"
 activate_control_app 'tcp://127.0.0.1:9293', { auth_token: '123456' }
 
-before_worker_boot do
+after_booted do
   #Rails.event.subscribe(EventRequestSubscriber.new) { |event| event[:name].start_with?('controller.') }
   #Rails.event.subscribe(EventSqlSubscriber.new) { |event| ['active_record.sql'].include?(event[:name]) }
+  Rails.event.debug_mode = true
+  Rails.event.subscribe(EventSqlSubscriber.new) { |event| ['active_record.sql'].include?(event[:name]) }
 end
 
 before_restart do
