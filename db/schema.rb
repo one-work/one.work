@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
+ActiveRecord::Schema[8.2].define(version: 2026_04_11_134334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1784,10 +1784,13 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
   end
 
   create_table "eventual_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "agentid"
     t.string "appid"
     t.string "base_url"
     t.datetime "created_at", null: false
     t.boolean "default"
+    t.jsonb "extra"
+    t.boolean "missed_event"
     t.string "name"
     t.uuid "organ_id"
     t.string "secret"
@@ -1907,6 +1910,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.integer "event_items_count"
     t.integer "event_joins_count"
     t.uuid "event_taxon_id"
+    t.jsonb "extra"
     t.integer "members_count"
     t.string "name"
     t.uuid "organ_id"
@@ -1919,6 +1923,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.integer "repeat_count", comment: "每几周/天"
     t.string "repeat_days", array: true
     t.string "repeat_type"
+    t.datetime "synced_at"
     t.uuid "time_list_id"
     t.datetime "updated_at", null: false
     t.index ["event_taxon_id"], name: "index_eventual_events_on_event_taxon_id"
@@ -1938,6 +1943,17 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.integer "seats_count"
     t.datetime "updated_at", null: false
     t.index ["place_id"], name: "index_eventual_halls_on_place_id"
+  end
+
+  create_table "eventual_place_plans", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "event_id"
+    t.uuid "place_id"
+    t.date "plan_on"
+    t.integer "plans_count"
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_eventual_place_plans_on_event_id"
+    t.index ["place_id"], name: "index_eventual_place_plans_on_place_id"
   end
 
   create_table "eventual_place_taxon_hierarchies", id: false, force: :cascade do |t|
@@ -2006,16 +2022,30 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
   end
 
   create_table "eventual_plan_joins", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.decimal "advance_price"
+    t.jsonb "card_price"
     t.datetime "created_at", null: false
     t.uuid "event_join_id"
+    t.jsonb "extra"
+    t.string "good_type"
     t.uuid "hall_id"
+    t.decimal "invest_ratio", comment: "抽成比例"
+    t.string "name"
     t.uuid "place_id"
     t.datetime "plan_at"
     t.uuid "plan_id"
+    t.decimal "price"
+    t.decimal "quantity"
+    t.jsonb "res"
+    t.string "seat_no"
     t.string "status", comment: "默认 event_participant 有效"
+    t.decimal "step", comment: "Item Number Step"
     t.string "type"
+    t.decimal "unified_quantity"
+    t.string "unit"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
+    t.jsonb "wallet_price"
     t.index ["event_join_id"], name: "index_eventual_plan_joins_on_event_join_id"
     t.index ["hall_id"], name: "index_eventual_plan_joins_on_hall_id"
     t.index ["place_id"], name: "index_eventual_plan_joins_on_place_id"
@@ -2036,8 +2066,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.integer "plan_participants_count"
     t.uuid "planned_id"
     t.string "planned_type"
+    t.decimal "price_max"
+    t.decimal "price_min"
     t.string "ref_ident"
     t.string "repeat_index"
+    t.jsonb "seats"
+    t.datetime "synced_at"
     t.uuid "time_item_id"
     t.uuid "time_list_id"
     t.datetime "updated_at", null: false
@@ -2052,6 +2086,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
   end
 
   create_table "eventual_seats", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "area"
     t.integer "col"
     t.datetime "created_at", null: false
     t.uuid "hall_id"
@@ -3672,6 +3707,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.string "dev_vendor"
     t.string "dev_version"
     t.jsonb "extra"
+    t.datetime "offline_at"
     t.boolean "online"
     t.uuid "organ_id"
     t.string "password"
@@ -3820,6 +3856,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.uuid "member_organ_id"
     t.string "name"
     t.uuid "organ_id"
+    t.integer "pending_count", comment: "待发货"
     t.string "post_code"
     t.boolean "principal"
     t.string "room", comment: "房间号"
@@ -4113,15 +4150,15 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
 
   create_table "ship_packageds", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.uuid "good_item_id"
-    t.string "good_item_type"
+    t.uuid "good_id"
+    t.string "good_type"
+    t.uuid "item_id"
+    t.string "item_status"
     t.uuid "package_id"
-    t.uuid "trade_item_id"
-    t.string "trade_item_status"
     t.datetime "updated_at", null: false
-    t.index ["good_item_type", "good_item_id"], name: "index_ship_packageds_on_good_item"
+    t.index ["good_type", "good_id"], name: "index_ship_packageds_on_good"
+    t.index ["item_id"], name: "index_ship_packageds_on_item_id"
     t.index ["package_id"], name: "index_ship_packageds_on_package_id"
-    t.index ["trade_item_id"], name: "index_ship_packageds_on_trade_item_id"
   end
 
   create_table "ship_packages", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -4142,6 +4179,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.integer "shipment_items_count"
     t.string "state"
     t.uuid "station_id"
+    t.string "tracking_number"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.index ["address_id"], name: "index_ship_packages_on_address_id"
@@ -5006,6 +5044,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
   end
 
   create_table "trade_payment_orders", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "batch_no"
     t.datetime "created_at", null: false
     t.string "kind"
     t.decimal "order_amount"
@@ -5014,8 +5053,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_03_27_080458) do
     t.uuid "payment_id"
     t.string "state"
     t.datetime "updated_at", null: false
+    t.uuid "wallet_id"
     t.index ["order_id"], name: "index_trade_payment_orders_on_order_id"
     t.index ["payment_id"], name: "index_trade_payment_orders_on_payment_id"
+    t.index ["wallet_id"], name: "index_trade_payment_orders_on_wallet_id"
   end
 
   create_table "trade_payment_references", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
