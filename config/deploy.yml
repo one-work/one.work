@@ -62,6 +62,7 @@ proxy:
     - '*.admin.one.work'
     - '*.mp.one.work'
     - '*.org.one.work'
+    - shu.ren
   ssl:
     certificate_path: /certs/one.work.pem
     private_key_path: /certs/one.work.key
