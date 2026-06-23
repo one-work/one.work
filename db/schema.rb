@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
+ActiveRecord::Schema[8.2].define(version: 2026_06_23_095218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -309,7 +309,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "app_name"
     t.string "appid"
     t.string "avatar_url"
-    t.boolean "confirmed"
     t.datetime "created_at", null: false
     t.datetime "expires_at"
     t.jsonb "extra"
@@ -324,7 +323,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "scene_tag"
     t.string "scope"
     t.string "session_key"
-    t.string "source"
     t.string "state"
     t.string "type"
     t.string "uid"
@@ -332,6 +330,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "unsubscribe_at"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
+    t.boolean "confirmed"
+    t.string "source"
     t.index ["identity"], name: "index_auth_oauth_users_on_identity"
     t.index ["organ_id"], name: "index_auth_oauth_users_on_organ_id"
     t.index ["unionid"], name: "index_auth_oauth_users_on_unionid"
@@ -360,9 +360,21 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "updated_at", null: false
     t.string "user_agent"
     t.uuid "user_id"
+    t.string "host"
     t.index ["identity"], name: "index_auth_sessions_on_identity"
     t.index ["member_id"], name: "index_auth_sessions_on_member_id"
     t.index ["user_id"], name: "index_auth_sessions_on_user_id"
+  end
+
+  create_table "auth_user_invites", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "inviter_id"
+    t.string "code"
+    t.string "scene"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inviter_id"], name: "index_auth_user_invites_on_inviter_id"
+    t.index ["user_id"], name: "index_auth_user_invites_on_user_id"
   end
 
   create_table "auth_user_taggeds", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -393,7 +405,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.jsonb "counters"
     t.datetime "created_at", null: false
     t.boolean "disabled"
-    t.string "invited_code"
+    t.string "invite_code"
     t.datetime "last_login_at"
     t.string "last_login_ip"
     t.string "locale"
@@ -407,6 +419,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "timezone"
     t.datetime "updated_at", null: false
     t.index ["cache_id"], name: "index_auth_users_on_cache_id"
+    t.index ["invite_code"], name: "index_auth_users_on_invite_code"
   end
 
   create_table "auth_verify_tokens", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -433,15 +446,48 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.index ["indicator_id"], name: "index_bench_facilitate_indicators_on_indicator_id"
   end
 
-  create_table "bench_facilitate_providers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.uuid "facilitate_id"
-    t.string "note"
+  create_table "bench_facilitate_provides", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
     t.uuid "provider_id"
-    t.boolean "selected"
+    t.uuid "facilitate_id"
+    t.uuid "provide_id"
+    t.string "note"
+    t.boolean "default"
+    t.integer "facilitatings_count"
+    t.integer "facilitators_count"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["facilitate_id"], name: "index_bench_facilitate_providers_on_facilitate_id"
-    t.index ["provider_id"], name: "index_bench_facilitate_providers_on_provider_id"
+    t.index ["facilitate_id"], name: "index_bench_facilitate_provides_on_facilitate_id"
+    t.index ["organ_id"], name: "index_bench_facilitate_provides_on_organ_id"
+    t.index ["provide_id"], name: "index_bench_facilitate_provides_on_provide_id"
+    t.index ["provider_id"], name: "index_bench_facilitate_provides_on_provider_id"
+  end
+
+  create_table "bench_facilitate_resells", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
+    t.uuid "seller_id"
+    t.uuid "facilitate_id"
+    t.uuid "provide_id"
+    t.string "name"
+    t.decimal "price"
+    t.decimal "advance_price"
+    t.jsonb "card_price"
+    t.jsonb "wallet_price"
+    t.jsonb "extra"
+    t.string "unit"
+    t.decimal "quantity"
+    t.decimal "unified_quantity"
+    t.decimal "invest_ratio", comment: "抽成比例"
+    t.string "good_type"
+    t.decimal "step", comment: "Item Number Step"
+    t.string "note"
+    t.integer "facilitatings_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facilitate_id"], name: "index_bench_facilitate_resells_on_facilitate_id"
+    t.index ["organ_id"], name: "index_bench_facilitate_resells_on_organ_id"
+    t.index ["provide_id"], name: "index_bench_facilitate_resells_on_provide_id"
+    t.index ["seller_id"], name: "index_bench_facilitate_resells_on_seller_id"
   end
 
   create_table "bench_facilitate_taxon_hierarchies", id: false, force: :cascade do |t|
@@ -513,7 +559,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "item_id"
     t.uuid "member_id"
     t.string "name"
-    t.uuid "organ_id"
     t.decimal "price"
     t.decimal "quantity"
     t.datetime "start_at"
@@ -524,11 +569,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "user_id"
     t.uuid "wallet_payment_id"
     t.jsonb "wallet_price"
+    t.uuid "organ_id"
+    t.uuid "provide_id"
+    t.datetime "estimate_start_at"
+    t.boolean "confirmed"
     t.index ["facilitate_id"], name: "index_bench_facilitatings_on_facilitate_id"
     t.index ["facilitator_id"], name: "index_bench_facilitatings_on_facilitator_id"
     t.index ["item_id"], name: "index_bench_facilitatings_on_item_id"
     t.index ["member_id"], name: "index_bench_facilitatings_on_member_id"
     t.index ["organ_id"], name: "index_bench_facilitatings_on_organ_id"
+    t.index ["provide_id"], name: "index_bench_facilitatings_on_provide_id"
     t.index ["user_id"], name: "index_bench_facilitatings_on_user_id"
     t.index ["wallet_payment_id"], name: "index_bench_facilitatings_on_wallet_payment_id"
   end
@@ -540,8 +590,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "member_id"
     t.string "name"
     t.datetime "updated_at", null: false
+    t.uuid "organ_id"
     t.index ["facilitate_id"], name: "index_bench_facilitators_on_facilitate_id"
     t.index ["member_id"], name: "index_bench_facilitators_on_member_id"
+    t.index ["organ_id"], name: "index_bench_facilitators_on_organ_id"
   end
 
   create_table "bench_indicators", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -553,6 +605,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "target_source"
     t.string "unit"
     t.datetime "updated_at", null: false
+    t.uuid "taxon_id"
+    t.index ["taxon_id"], name: "index_bench_indicators_on_taxon_id"
   end
 
   create_table "bench_mileposts", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -645,20 +699,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.index ["taxon_id"], name: "index_bench_projects_on_taxon_id"
   end
 
-  create_table "bench_standard_providers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.decimal "export_price"
-    t.uuid "facilitate_id"
-    t.string "note"
-    t.boolean "selected"
-    t.datetime "updated_at", null: false
-    t.index ["facilitate_id"], name: "index_bench_standard_providers_on_facilitate_id"
-  end
-
-  create_table "bench_standards", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
+  create_table "bench_provides", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
+    t.uuid "provider_id"
     t.string "name"
+    t.string "invite_token"
+    t.integer "facilitate_provides_count"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["organ_id"], name: "index_bench_provides_on_organ_id"
+    t.index ["provider_id"], name: "index_bench_provides_on_provider_id"
   end
 
   create_table "bench_task_hierarchies", id: false, force: :cascade do |t|
@@ -815,9 +865,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "cms_catalogs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
     t.uuid "organ_id"
     t.string "title"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_cms_catalogs_on_organ_id"
   end
@@ -831,10 +881,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "cms_posts", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.uuid "catalog_id"
-    t.datetime "created_at", null: false
     t.uuid "organ_id"
+    t.uuid "catalog_id"
     t.string "title"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["catalog_id"], name: "index_cms_posts_on_catalog_id"
     t.index ["organ_id"], name: "index_cms_posts_on_organ_id"
@@ -1124,9 +1174,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "request_method"
     t.jsonb "session"
     t.string "session_id"
-    t.boolean "skip_back"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
+    t.boolean "skip_back"
     t.index ["organ_id"], name: "index_com_states_on_organ_id"
     t.index ["user_id"], name: "index_com_states_on_user_id"
   end
@@ -1393,11 +1443,11 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "datum_errs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "from_id"
     t.string "from_type"
-    t.string "target"
+    t.string "from_id"
     t.string "to_class"
+    t.string "target"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
@@ -1641,31 +1691,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.index ["taxon_type", "taxon_id"], name: "index_detail_taxon_items_on_taxon"
   end
 
-  create_table "doc_maps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.jsonb "mappings"
-    t.string "name"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "doc_subjects", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name"
-    t.string "note"
-    t.jsonb "path_params"
-    t.jsonb "request_body"
-    t.jsonb "request_headers"
-    t.jsonb "request_params"
-    t.string "request_type"
-    t.string "response_body"
-    t.jsonb "response_headers"
-    t.string "response_status"
-    t.string "response_type"
-    t.uuid "rule_id"
-    t.datetime "updated_at", null: false
-    t.index ["rule_id"], name: "index_doc_subjects_on_rule_id"
-  end
-
   create_table "douyin_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "access_token"
     t.datetime "access_token_expires_at"
@@ -1784,18 +1809,18 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "eventual_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "agentid"
-    t.string "appid"
-    t.string "base_url"
-    t.datetime "created_at", null: false
-    t.boolean "default"
-    t.jsonb "extra"
-    t.boolean "missed_event"
-    t.string "name"
     t.uuid "organ_id"
-    t.string "secret"
     t.string "type"
+    t.string "name"
+    t.string "appid"
+    t.string "secret"
+    t.string "base_url"
+    t.boolean "default"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "agentid"
+    t.boolean "missed_event"
+    t.jsonb "extra"
     t.index ["appid"], name: "index_eventual_apps_on_appid"
     t.index ["organ_id"], name: "index_eventual_apps_on_organ_id"
   end
@@ -1874,18 +1899,18 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "eventual_event_joins", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "assigned_status"
-    t.string "comment"
-    t.datetime "created_at", null: false
-    t.uuid "crowd_member_id"
     t.uuid "event_crowd_id"
     t.uuid "event_id"
-    t.string "job_id"
-    t.uuid "participant_id"
+    t.uuid "crowd_member_id"
     t.string "participant_type"
-    t.string "quit_note"
+    t.uuid "participant_id"
     t.integer "score"
+    t.string "comment"
+    t.string "quit_note"
+    t.string "assigned_status"
+    t.string "job_id"
     t.string "state"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["crowd_member_id"], name: "index_eventual_event_joins_on_crowd_member_id"
     t.index ["event_crowd_id"], name: "index_eventual_event_joins_on_event_crowd_id"
@@ -1905,12 +1930,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.date "begin_on"
     t.datetime "created_at", null: false
     t.string "description"
-    t.integer "duration_mins"
     t.date "end_on"
     t.integer "event_items_count"
-    t.integer "event_joins_count"
     t.uuid "event_taxon_id"
-    t.jsonb "extra"
     t.integer "members_count"
     t.string "name"
     t.uuid "organ_id"
@@ -1919,13 +1941,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.boolean "produce_done"
     t.date "produced_begin_on"
     t.date "produced_end_on"
-    t.string "ref_ident", comment: "外部资源关联 ID"
     t.integer "repeat_count", comment: "每几周/天"
     t.string "repeat_days", array: true
     t.string "repeat_type"
-    t.datetime "synced_at"
     t.uuid "time_list_id"
     t.datetime "updated_at", null: false
+    t.integer "event_joins_count"
+    t.integer "duration_mins"
+    t.string "ref_ident", comment: "外部资源关联 ID"
+    t.jsonb "extra"
+    t.datetime "synced_at"
     t.index ["event_taxon_id"], name: "index_eventual_events_on_event_taxon_id"
     t.index ["organ_id"], name: "index_eventual_events_on_organ_id"
     t.index ["place_id"], name: "index_eventual_events_on_place_id"
@@ -1933,24 +1958,24 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "eventual_halls", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.integer "cols"
-    t.datetime "created_at", null: false
-    t.integer "max_members"
-    t.integer "min_members"
-    t.string "name"
     t.uuid "place_id"
+    t.string "name"
     t.integer "rows"
+    t.integer "cols"
+    t.integer "min_members"
+    t.integer "max_members"
     t.integer "seats_count"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["place_id"], name: "index_eventual_halls_on_place_id"
   end
 
   create_table "eventual_place_plans", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.uuid "event_id"
     t.uuid "place_id"
+    t.uuid "event_id"
     t.date "plan_on"
     t.integer "plans_count"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_eventual_place_plans_on_event_id"
     t.index ["place_id"], name: "index_eventual_place_plans_on_place_id"
@@ -1982,21 +2007,21 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "eventual_places", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "address"
     t.uuid "area_id"
     t.string "color"
     t.datetime "created_at", null: false
     t.string "description"
-    t.integer "halls_count"
     t.string "name"
     t.uuid "organ_id"
     t.jsonb "place_taxon_ancestors"
     t.uuid "place_taxon_id"
     t.integer "plans_count"
-    t.string "ref_ident"
     t.integer "seats_count"
-    t.string "tel"
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.string "tel"
+    t.integer "halls_count"
+    t.string "ref_ident"
     t.index ["area_id"], name: "index_eventual_places_on_area_id"
     t.index ["organ_id"], name: "index_eventual_places_on_organ_id"
     t.index ["place_taxon_id"], name: "index_eventual_places_on_place_taxon_id"
@@ -2022,30 +2047,30 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "eventual_plan_joins", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "plan_id"
+    t.uuid "place_id"
+    t.uuid "hall_id"
+    t.uuid "event_join_id"
+    t.string "type"
+    t.string "status", comment: "默认 event_participant 有效"
+    t.datetime "plan_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.decimal "price"
     t.decimal "advance_price"
     t.jsonb "card_price"
-    t.datetime "created_at", null: false
-    t.uuid "event_join_id"
-    t.jsonb "extra"
-    t.string "good_type"
-    t.uuid "hall_id"
-    t.decimal "invest_ratio", comment: "抽成比例"
-    t.string "name"
-    t.uuid "place_id"
-    t.datetime "plan_at"
-    t.uuid "plan_id"
-    t.decimal "price"
-    t.decimal "quantity"
-    t.jsonb "res"
-    t.string "seat_no"
-    t.string "status", comment: "默认 event_participant 有效"
-    t.decimal "step", comment: "Item Number Step"
-    t.string "type"
-    t.decimal "unified_quantity"
-    t.string "unit"
-    t.datetime "updated_at", null: false
-    t.uuid "user_id"
     t.jsonb "wallet_price"
+    t.jsonb "extra"
+    t.string "unit"
+    t.decimal "quantity"
+    t.decimal "unified_quantity"
+    t.decimal "invest_ratio", comment: "抽成比例"
+    t.string "good_type"
+    t.decimal "step", comment: "Item Number Step"
+    t.string "seat_no"
+    t.jsonb "res"
     t.index ["event_join_id"], name: "index_eventual_plan_joins_on_event_join_id"
     t.index ["hall_id"], name: "index_eventual_plan_joins_on_hall_id"
     t.index ["place_id"], name: "index_eventual_plan_joins_on_place_id"
@@ -2054,27 +2079,27 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "eventual_plans", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.integer "bookings_count"
-    t.datetime "created_at", null: false
-    t.uuid "event_id"
-    t.uuid "event_item_id"
-    t.jsonb "extra"
-    t.uuid "hall_id"
-    t.uuid "place_id"
-    t.datetime "plan_at"
-    t.date "plan_on"
-    t.integer "plan_participants_count"
-    t.uuid "planned_id"
     t.string "planned_type"
-    t.decimal "price_max"
-    t.decimal "price_min"
-    t.string "ref_ident"
-    t.string "repeat_index"
-    t.jsonb "seats"
-    t.datetime "synced_at"
+    t.uuid "planned_id"
     t.uuid "time_item_id"
     t.uuid "time_list_id"
+    t.uuid "place_id"
+    t.uuid "hall_id"
+    t.uuid "event_id"
+    t.uuid "event_item_id"
+    t.date "plan_on"
+    t.datetime "plan_at"
+    t.integer "bookings_count"
+    t.integer "plan_participants_count"
+    t.string "repeat_index"
+    t.jsonb "extra"
+    t.string "ref_ident"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price_min"
+    t.decimal "price_max"
+    t.datetime "synced_at"
+    t.jsonb "seats"
     t.index ["event_id"], name: "index_eventual_plans_on_event_id"
     t.index ["event_item_id"], name: "index_eventual_plans_on_event_item_id"
     t.index ["hall_id"], name: "index_eventual_plans_on_hall_id"
@@ -2086,17 +2111,17 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "eventual_seats", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "area"
-    t.integer "col"
     t.datetime "created_at", null: false
-    t.uuid "hall_id"
     t.integer "max_members"
     t.integer "min_members"
     t.string "name"
     t.uuid "place_id"
-    t.string "ref_ident"
-    t.integer "row"
     t.datetime "updated_at", null: false
+    t.uuid "hall_id"
+    t.integer "row"
+    t.integer "col"
+    t.string "ref_ident"
+    t.string "area"
     t.index ["hall_id"], name: "index_eventual_seats_on_hall_id"
     t.index ["place_id"], name: "index_eventual_seats_on_place_id"
   end
@@ -2125,17 +2150,17 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "factory_barcodes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.uuid "brand_id"
-    t.string "brand_name"
-    t.datetime "created_at", null: false
-    t.string "gtin"
-    t.string "made_in"
-    t.string "name"
-    t.decimal "price"
-    t.string "spec"
-    t.string "supplier"
     t.uuid "unit_id"
+    t.uuid "brand_id"
+    t.string "gtin"
+    t.string "name"
+    t.string "spec"
+    t.string "brand_name"
     t.string "unit_name"
+    t.string "supplier"
+    t.string "made_in"
+    t.decimal "price"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_factory_barcodes_on_brand_id"
     t.index ["gtin"], name: "index_factory_barcodes_on_gtin", unique: true
@@ -2278,8 +2303,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.boolean "default"
     t.uuid "product_id"
     t.uuid "provide_id"
-    t.string "ref", comment: "用于数据迁移"
     t.datetime "updated_at", null: false
+    t.string "ref", comment: "用于数据迁移"
     t.index ["product_id"], name: "index_factory_product_provides_on_product_id"
     t.index ["provide_id"], name: "index_factory_product_provides_on_provide_id"
   end
@@ -2426,7 +2451,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.integer "rent_charges_count"
     t.string "rent_unit"
     t.string "sku"
-    t.string "spu"
     t.string "state"
     t.decimal "step", comment: "Item Number Step"
     t.decimal "stock"
@@ -2437,6 +2461,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "updated_at", null: false
     t.jsonb "wallet_price"
     t.string "word", comment: "搜索关键词"
+    t.string "spu"
     t.index ["factory_taxon_id"], name: "index_factory_productions_on_factory_taxon_id"
     t.index ["organ_id"], name: "index_factory_productions_on_organ_id"
     t.index ["product_host_id"], name: "index_factory_productions_on_product_host_id"
@@ -2451,7 +2476,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "brand_id"
     t.datetime "created_at", null: false
     t.string "description"
-    t.boolean "enable_reorder", comment: "在某些场景下（如大批量数据导入），不需要同步"
     t.uuid "factory_taxon_id"
     t.integer "fits_count"
     t.decimal "max_price"
@@ -2465,12 +2489,13 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.decimal "profit_margin"
     t.boolean "published"
     t.string "qr_prefix"
-    t.boolean "specialty"
     t.string "spu"
+    t.boolean "specialty"
     t.jsonb "taxon_ancestors"
     t.uuid "taxon_id"
     t.uuid "unifier_id"
     t.datetime "updated_at", null: false
+    t.boolean "enable_reorder", comment: "在某些场景下（如大批量数据导入），不需要同步"
     t.index ["brand_id"], name: "index_factory_products_on_brand_id"
     t.index ["factory_taxon_id"], name: "index_factory_products_on_factory_taxon_id"
     t.index ["organ_id"], name: "index_factory_products_on_organ_id"
@@ -2485,9 +2510,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "invite_token"
     t.string "name"
     t.uuid "organ_id"
-    t.integer "product_provides_count"
     t.uuid "provider_id"
     t.datetime "updated_at", null: false
+    t.integer "product_provides_count"
     t.index ["factory_provider_id"], name: "index_factory_provides_on_factory_provider_id"
     t.index ["organ_id"], name: "index_factory_provides_on_organ_id"
     t.index ["provider_id"], name: "index_factory_provides_on_provider_id"
@@ -2647,15 +2672,15 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "budget_id"
     t.datetime "created_at", null: false
     t.uuid "expense_id"
-    t.uuid "financial_taxon_id"
     t.string "note"
     t.decimal "price"
     t.integer "quantity"
     t.string "state"
     t.datetime "updated_at", null: false
+    t.uuid "taxon_id"
     t.index ["budget_id"], name: "index_finance_expense_items_on_budget_id"
     t.index ["expense_id"], name: "index_finance_expense_items_on_expense_id"
-    t.index ["financial_taxon_id"], name: "index_finance_expense_items_on_financial_taxon_id"
+    t.index ["taxon_id"], name: "index_finance_expense_items_on_taxon_id"
   end
 
   create_table "finance_expense_members", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -2679,7 +2704,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "created_at", null: false
     t.uuid "creator_id"
     t.uuid "financial_id"
-    t.uuid "financial_taxon_id"
     t.string "financial_type"
     t.uuid "fund_id"
     t.integer "invoices_count"
@@ -2692,15 +2716,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "subject"
     t.string "type"
     t.datetime "updated_at", null: false
+    t.uuid "taxon_id"
     t.index ["budget_id"], name: "index_finance_expenses_on_budget_id"
     t.index ["creator_id"], name: "index_finance_expenses_on_creator_id"
-    t.index ["financial_taxon_id"], name: "index_finance_expenses_on_financial_taxon_id"
     t.index ["financial_type", "financial_id"], name: "index_finance_expenses_on_financial"
     t.index ["fund_id"], name: "index_finance_expenses_on_fund_id"
     t.index ["organ_id"], name: "index_finance_expenses_on_organ_id"
     t.index ["payment_method_id"], name: "index_finance_expenses_on_payment_method_id"
     t.index ["payout_id"], name: "index_finance_expenses_on_payout_id"
     t.index ["stock_id"], name: "index_finance_expenses_on_stock_id"
+    t.index ["taxon_id"], name: "index_finance_expenses_on_taxon_id"
   end
 
   create_table "finance_fund_incomes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -2989,99 +3014,99 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "log_queries", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.boolean "async"
-    t.string "commit_uuid"
-    t.datetime "created_at", null: false
-    t.float "duration"
-    t.string "name"
-    t.string "sql"
-    t.datetime "updated_at", null: false
     t.string "uuid"
+    t.string "commit_uuid"
+    t.string "name"
+    t.boolean "async"
+    t.string "sql"
+    t.float "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "log_query_dailies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.date "date"
+    t.integer "year"
+    t.integer "month"
     t.integer "day"
+    t.date "date"
+    t.string "year_month"
+    t.string "identifier"
     t.float "duration_avg"
     t.float "duration_max"
     t.float "duration_min"
-    t.string "identifier"
-    t.integer "month"
     t.integer "total"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "year"
-    t.string "year_month"
     t.index ["year_month"], name: "index_log_query_dailies_on_year_month"
   end
 
   create_table "log_request_dailies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.date "date"
+    t.integer "year"
+    t.integer "month"
     t.integer "day"
+    t.date "date"
+    t.string "year_month"
+    t.string "identifier"
     t.float "duration_avg"
     t.float "duration_max"
     t.float "duration_min"
-    t.string "identifier"
-    t.integer "month"
     t.integer "total"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "year"
-    t.string "year_month"
     t.index ["year_month"], name: "index_log_request_dailies_on_year_month"
   end
 
   create_table "log_request_weeklies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
+    t.integer "year"
     t.integer "cweek"
+    t.string "identifier"
     t.float "duration_avg"
     t.float "duration_max"
     t.float "duration_min"
-    t.string "identifier"
     t.integer "total"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "year"
   end
 
   create_table "log_requests", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.virtual "accept", type: :string, as: "(headers #>> '{ACCEPT}'::text[])", stored: true
-    t.string "action_name"
-    t.string "commit_uuid"
-    t.string "controller_name"
-    t.jsonb "cookie"
-    t.datetime "created_at", null: false
-    t.float "db_duration"
-    t.integer "duration"
-    t.string "format"
-    t.jsonb "headers"
-    t.virtual "identifier", type: :string, as: "(((controller_name)::text || '#'::text) || (action_name)::text)", stored: true
-    t.string "ip"
-    t.jsonb "params"
-    t.string "path"
-    t.integer "query_cached_count"
-    t.integer "query_count"
-    t.virtual "referer", type: :string, as: "(headers #>> '{REFERER}'::text[])", stored: true
-    t.jsonb "session"
-    t.string "session_id"
-    t.integer "status"
-    t.datetime "updated_at", null: false
-    t.virtual "user_agent", type: :string, as: "(headers #>> '{USER_AGENT}'::text[])", stored: true
     t.string "uuid"
+    t.string "path"
+    t.string "controller_name"
+    t.string "action_name"
+    t.jsonb "params"
+    t.jsonb "headers"
+    t.jsonb "cookie"
+    t.jsonb "session"
+    t.string "ip"
+    t.string "session_id"
+    t.string "format"
+    t.string "commit_uuid"
+    t.integer "status"
+    t.integer "duration"
     t.float "view_duration"
+    t.float "db_duration"
+    t.integer "query_count"
+    t.integer "query_cached_count"
+    t.virtual "user_agent", type: :string, as: "(headers #>> '{USER_AGENT}'::text[])", stored: true
+    t.virtual "accept", type: :string, as: "(headers #>> '{ACCEPT}'::text[])", stored: true
+    t.virtual "referer", type: :string, as: "(headers #>> '{REFERER}'::text[])", stored: true
+    t.virtual "identifier", type: :string, as: "(((controller_name)::text || '#'::text) || (action_name)::text)", stored: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "log_summary_dailies", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.date "date"
+    t.integer "year"
+    t.integer "month"
     t.integer "day"
+    t.date "date"
+    t.string "year_month"
     t.float "duration_avg"
     t.float "duration_max"
     t.float "duration_min"
-    t.integer "month"
     t.integer "total"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "year"
-    t.string "year_month"
     t.index ["year_month"], name: "index_log_summary_dailies_on_year_month"
   end
 
@@ -3107,8 +3132,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "parent_path"
     t.string "path"
     t.integer "position"
-    t.boolean "published"
     t.datetime "updated_at", null: false
+    t.boolean "published"
     t.index ["git_id"], name: "index_markdown_catalogs_on_git_id"
     t.index ["organ_id"], name: "index_markdown_catalogs_on_organ_id"
   end
@@ -3117,16 +3142,15 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "client_id"
     t.string "client_secret"
     t.datetime "created_at", null: false
-    t.uuid "organ_id"
-    t.string "state"
     t.datetime "updated_at", null: false
+    t.string "state"
+    t.uuid "organ_id"
     t.index ["organ_id"], name: "index_markdown_github_apps_on_organ_id"
   end
 
   create_table "markdown_gits", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "base_name"
     t.datetime "created_at", null: false
-    t.uuid "github_user_id"
     t.datetime "last_commit_at"
     t.string "last_commit_message"
     t.uuid "organ_id"
@@ -3135,6 +3159,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "type"
     t.datetime "updated_at", null: false
     t.string "working_directory"
+    t.uuid "github_user_id"
     t.index ["github_user_id"], name: "index_markdown_gits_on_github_user_id"
     t.index ["organ_id"], name: "index_markdown_gits_on_organ_id"
   end
@@ -3151,120 +3176,36 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "oid"
     t.uuid "organ_id"
     t.string "path"
-    t.integer "position"
     t.boolean "published"
     t.boolean "shared"
     t.string "slug"
     t.string "target"
     t.string "title"
     t.datetime "updated_at", null: false
+    t.integer "position"
     t.index ["git_id"], name: "index_markdown_posts_on_git_id"
     t.index ["organ_id"], name: "index_markdown_posts_on_organ_id"
   end
 
-  create_table "meta_actions", force: :cascade do |t|
-    t.string "action_name", null: false
-    t.string "business_identifier", null: false
-    t.string "controller_name", null: false
-    t.string "controller_path", null: false
-    t.datetime "created_at", null: false
-    t.string "identifier"
-    t.boolean "landmark"
-    t.string "namespace_identifier", null: false
-    t.string "operation"
-    t.string "path"
-    t.integer "position"
-    t.string "request_as"
-    t.string "required_parts", array: true
-    t.datetime "synced_at"
-    t.boolean "testable"
-    t.datetime "updated_at", null: false
-    t.string "verb"
-  end
-
-  create_table "meta_businesses", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "identifier", null: false
-    t.string "name"
-    t.integer "position"
-    t.datetime "synced_at"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "meta_columns", force: :cascade do |t|
-    t.boolean "belongs_enable"
-    t.string "belongs_table"
-    t.integer "column_limit"
-    t.string "column_name"
-    t.string "column_type"
-    t.string "comment"
-    t.datetime "created_at", null: false
-    t.boolean "defined_db"
-    t.boolean "defined_model"
-    t.string "record_name"
-    t.string "sql_type"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "meta_controllers", force: :cascade do |t|
-    t.string "business_identifier", null: false
-    t.string "controller_name", null: false
-    t.string "controller_path", null: false
-    t.datetime "created_at", null: false
-    t.string "namespace_identifier", null: false
-    t.integer "position"
-    t.datetime "synced_at"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "meta_namespaces", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "identifier", null: false
-    t.string "name"
-    t.datetime "updated_at", null: false
-    t.boolean "verify_member"
-    t.boolean "verify_organ"
-    t.boolean "verify_user"
-  end
-
-  create_table "meta_operations", force: :cascade do |t|
-    t.string "action_name"
-    t.datetime "created_at", null: false
-    t.string "operation"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "meta_records", force: :cascade do |t|
-    t.string "business_identifier"
-    t.datetime "created_at", null: false
-    t.boolean "customizable", comment: "是否允许用户定制"
-    t.boolean "defined_db"
-    t.string "description"
-    t.string "name"
-    t.string "record_name"
-    t.string "table_name"
-    t.datetime "updated_at", null: false
-  end
-
   create_table "mqtt_acl", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "action"
-    t.datetime "created_at", null: false
-    t.string "ip"
-    t.string "permission"
-    t.string "topic"
-    t.datetime "updated_at", null: false
     t.string "username"
+    t.string "permission"
+    t.string "action"
+    t.string "topic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ip"
   end
 
   create_table "mqtt_user", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "ip"
-    t.boolean "is_superuser"
-    t.string "note"
-    t.string "password"
-    t.string "password_hash"
-    t.datetime "updated_at", null: false
     t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_hash"
+    t.string "password"
+    t.boolean "is_superuser"
+    t.string "ip"
+    t.string "note"
   end
 
   create_table "notice_announcement_departments", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3597,16 +3538,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "appid"
     t.jsonb "area_ancestors"
     t.uuid "area_id"
-    t.boolean "auto_purchase"
     t.uuid "cache_id"
-    t.integer "children_count"
     t.string "code"
     t.uuid "corp_user_id"
     t.jsonb "counters", default: {}
     t.datetime "created_at", null: false
-    t.boolean "debug_enabled"
     t.string "dispatch"
-    t.string "dispatches", default: [], array: true
     t.boolean "joinable", comment: "是否可搜索并加入"
     t.string "license"
     t.integer "limit_wechat"
@@ -3617,12 +3554,17 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.boolean "official", comment: "是否官方"
     t.jsonb "parent_ancestors"
     t.uuid "parent_id"
-    t.string "print_note"
     t.boolean "production_enabled"
     t.uuid "provider_id"
     t.string "service_url", comment: "客服 url"
     t.jsonb "theme_settings"
     t.datetime "updated_at", null: false
+    t.boolean "debug_enabled"
+    t.string "dispatches", default: [], array: true
+    t.integer "children_count"
+    t.string "print_note"
+    t.boolean "auto_purchase"
+    t.boolean "admin"
     t.index ["area_id"], name: "index_org_organs_on_area_id"
     t.index ["cache_id"], name: "index_org_organs_on_cache_id"
     t.index ["corp_user_id"], name: "index_org_organs_on_corp_user_id"
@@ -3716,56 +3658,13 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.index ["tutor_id"], name: "index_org_tutorials_on_tutor_id"
   end
 
-  create_table "print_bluetooth_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name"
-    t.uuid "organ_id"
-    t.datetime "updated_at", null: false
-    t.index ["organ_id"], name: "index_print_bluetooth_printers_on_organ_id"
-  end
-
-  create_table "print_devices", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "aim"
-    t.datetime "created_at", null: false
-    t.uuid "organ_id"
-    t.uuid "printer_id"
-    t.string "printer_type"
-    t.datetime "updated_at", null: false
-    t.index ["organ_id"], name: "index_print_devices_on_organ_id"
-    t.index ["printer_type", "printer_id"], name: "index_print_devices_on_printer"
-  end
-
   create_table "print_errs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "err_msg"
-    t.string "name"
     t.uuid "organ_id"
+    t.string "name"
+    t.string "err_msg"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_print_errs_on_organ_id"
-  end
-
-  create_table "print_jia_bo_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "api_key"
-    t.datetime "created_at", null: false
-    t.integer "jia_bo_printers_count"
-    t.string "member_code"
-    t.string "name"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "print_jia_bo_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "cmd_type"
-    t.datetime "created_at", null: false
-    t.string "dev_id"
-    t.string "dev_name"
-    t.string "device_id"
-    t.string "grp_id"
-    t.uuid "jia_bo_app_id"
-    t.boolean "online"
-    t.uuid "organ_id"
-    t.datetime "updated_at", null: false
-    t.index ["jia_bo_app_id"], name: "index_print_jia_bo_printers_on_jia_bo_app_id"
-    t.index ["organ_id"], name: "index_print_jia_bo_printers_on_organ_id"
   end
 
   create_table "print_mqtt_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3776,67 +3675,78 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "print_mqtt_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "authorized_at"
-    t.datetime "created_at", null: false
-    t.boolean "dev_cut"
-    t.string "dev_cut_type"
-    t.string "dev_desc"
-    t.string "dev_imei"
-    t.string "dev_ip"
-    t.string "dev_network"
-    t.string "dev_spec"
-    t.string "dev_tel"
-    t.string "dev_type"
-    t.string "dev_vendor"
-    t.string "dev_version"
-    t.jsonb "extra"
-    t.datetime "offline_at"
-    t.boolean "online"
+  create_table "print_printer_aims", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "organ_id"
-    t.string "password"
-    t.datetime "ready_at"
-    t.datetime "registered_at"
+    t.uuid "printer_id"
+    t.string "aim"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["organ_id"], name: "index_print_printer_aims_on_organ_id"
+    t.index ["printer_id"], name: "index_print_printer_aims_on_printer_id"
+  end
+
+  create_table "print_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.boolean "online"
+    t.string "bluetooth_addr"
+    t.string "dev_network"
+    t.string "dev_ip"
+    t.datetime "registered_at"
+    t.datetime "authorized_at"
+    t.datetime "ready_at"
+    t.datetime "offline_at"
+    t.datetime "except_at"
     t.string "username"
-    t.index ["organ_id"], name: "index_print_mqtt_printers_on_organ_id"
+    t.string "password"
+    t.string "type"
+    t.string "name"
+    t.string "dev_imei"
+    t.string "dev_vendor"
+    t.string "dev_tel"
+    t.string "dev_spec"
+    t.boolean "dev_cut"
+    t.boolean "dev_step"
+    t.string "dev_desc"
+    t.string "dev_version"
+    t.string "dev_type"
+    t.string "dev_cut_type"
+    t.jsonb "extra"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "print_tasks", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "gid"
     t.string "aim"
     t.datetime "completed_at"
     t.datetime "created_at", null: false
-    t.uuid "device_id"
-    t.string "gid"
-    t.string "imei"
-    t.string "note"
-    t.jsonb "payload"
-    t.datetime "print_at"
-    t.string "raw", comment: "经过Base64压缩的字节码"
+    t.datetime "updated_at", null: false
     t.uuid "template_id"
+    t.jsonb "payload"
     t.string "type"
     t.string "uid"
-    t.datetime "updated_at", null: false
-    t.index ["device_id"], name: "index_print_tasks_on_device_id"
-    t.index ["imei"], name: "index_print_tasks_on_imei"
+    t.datetime "print_at"
+    t.string "raw", comment: "经过Base64压缩的字节码"
+    t.string "note"
+    t.uuid "printer_id"
+    t.index ["printer_id"], name: "index_print_tasks_on_printer_id"
     t.index ["template_id"], name: "index_print_tasks_on_template_id"
   end
 
   create_table "print_template_items", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "code"
-    t.datetime "created_at", null: false
-    t.string "kind"
-    t.string "name"
-    t.integer "position"
     t.uuid "template_id"
+    t.string "name"
+    t.string "code"
+    t.integer "position"
+    t.string "kind"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["template_id"], name: "index_print_template_items_on_template_id"
   end
 
   create_table "print_templates", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name"
     t.uuid "organ_id"
+    t.string "name"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_print_templates_on_organ_id"
   end
@@ -3856,6 +3766,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "str_role_ids"
     t.datetime "updated_at", null: false
     t.string "who_type"
+    t.jsonb "business_hash"
     t.index ["str_role_ids"], name: "index_roled_caches_on_str_role_ids"
   end
 
@@ -3864,13 +3775,13 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "business_identifier"
     t.string "controller_path"
     t.datetime "created_at", null: false
-    t.uuid "meta_action_id"
     t.string "namespace_identifier"
     t.string "params_identifier"
     t.string "params_name"
     t.uuid "role_id"
     t.datetime "updated_at", null: false
-    t.index ["meta_action_id"], name: "index_roled_role_rules_on_meta_action_id"
+    t.string "identifier"
+    t.index ["identifier"], name: "index_roled_role_rules_on_identifier"
     t.index ["role_id"], name: "index_roled_role_rules_on_role_id"
   end
 
@@ -3897,12 +3808,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.boolean "default"
     t.string "description"
     t.string "name"
-    t.uuid "organ_id"
     t.jsonb "role_hash"
     t.string "tip"
     t.datetime "updated_at", null: false
     t.boolean "visible"
-    t.index ["organ_id"], name: "index_roled_roles_on_organ_id"
+    t.jsonb "business_hash"
+    t.string "subdomain"
   end
 
   create_table "roled_tabs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3940,7 +3851,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "member_organ_id"
     t.string "name"
     t.uuid "organ_id"
-    t.integer "pending_count", comment: "待发货"
     t.string "post_code"
     t.boolean "principal"
     t.string "room", comment: "房间号"
@@ -3949,6 +3859,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "tel"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
+    t.integer "pending_count", comment: "待发货"
     t.index ["agent_id"], name: "index_ship_addresses_on_agent_id"
     t.index ["area_id"], name: "index_ship_addresses_on_area_id"
     t.index ["client_id"], name: "index_ship_addresses_on_client_id"
@@ -3975,7 +3886,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "code"
     t.datetime "created_at", null: false
     t.string "full"
-    t.integer "level"
     t.string "locale"
     t.string "name"
     t.string "names", array: true
@@ -3985,6 +3895,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.boolean "published"
     t.string "timezone"
     t.datetime "updated_at", null: false
+    t.integer "level"
     t.index ["parent_id"], name: "index_ship_areas_on_parent_id"
   end
 
@@ -4169,12 +4080,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "ship_ips", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "code"
-    t.datetime "created_at", null: false
     t.string "ip_address"
     t.string "ip_city"
     t.decimal "lat"
     t.decimal "lng"
+    t.string "code"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ip_address"], name: "index_ship_ips_on_ip_address"
   end
@@ -4234,12 +4145,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
 
   create_table "ship_packageds", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.uuid "good_id"
-    t.string "good_type"
-    t.uuid "item_id"
-    t.string "item_status"
     t.uuid "package_id"
     t.datetime "updated_at", null: false
+    t.uuid "item_id"
+    t.string "good_type"
+    t.uuid "good_id"
+    t.string "item_status"
     t.index ["good_type", "good_id"], name: "index_ship_packageds_on_good"
     t.index ["item_id"], name: "index_ship_packageds_on_item_id"
     t.index ["package_id"], name: "index_ship_packageds_on_package_id"
@@ -4263,9 +4174,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.integer "shipment_items_count"
     t.string "state"
     t.uuid "station_id"
-    t.string "tracking_number"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
+    t.string "tracking_number"
     t.index ["address_id"], name: "index_ship_packages_on_address_id"
     t.index ["box_id"], name: "index_ship_packages_on_box_id"
     t.index ["current_shipment_id"], name: "index_ship_packages_on_current_shipment_id"
@@ -4356,19 +4267,19 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
 
   create_table "solid_queue_job_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.date "begin_on"
-    t.integer "count"
-    t.integer "counter_days_count"
-    t.integer "counter_months_count"
-    t.integer "counter_years_count"
-    t.datetime "created_at", null: false
     t.date "end_on"
     t.string "note"
-    t.string "queue_name"
+    t.integer "count"
+    t.jsonb "values"
     t.date "today"
     t.string "today_begin_id"
-    t.datetime "updated_at", null: false
-    t.jsonb "values"
     t.integer "version"
+    t.integer "counter_years_count"
+    t.integer "counter_months_count"
+    t.integer "counter_days_count"
+    t.string "queue_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "space_buildings", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -4382,7 +4293,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
 
   create_table "space_desks", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "code"
-    t.jsonb "counters", default: {}
     t.datetime "created_at", null: false
     t.integer "height"
     t.integer "length"
@@ -4391,6 +4301,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "room_id"
     t.datetime "updated_at", null: false
     t.integer "width"
+    t.jsonb "counters", default: {}
     t.index ["organ_id"], name: "index_space_desks_on_organ_id"
     t.index ["room_id"], name: "index_space_desks_on_room_id"
   end
@@ -4452,10 +4363,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.integer "day"
     t.integer "month"
     t.datetime "updated_at", null: false
-    t.jsonb "values"
-    t.string "version"
     t.integer "year"
     t.string "year_month"
+    t.jsonb "values"
+    t.string "version"
     t.index ["config_id"], name: "index_statis_counter_days_on_config_id"
     t.index ["year_month"], name: "index_statis_counter_days_on_year_month"
   end
@@ -4466,10 +4377,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "created_at", null: false
     t.integer "month"
     t.datetime "updated_at", null: false
-    t.jsonb "values"
-    t.string "version"
     t.integer "year"
     t.string "year_month"
+    t.jsonb "values"
+    t.string "version"
     t.index ["config_id"], name: "index_statis_counter_months_on_config_id"
     t.index ["year_month"], name: "index_statis_counter_months_on_year_month"
   end
@@ -4480,9 +4391,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "year"
     t.jsonb "values"
     t.string "version"
-    t.integer "year"
     t.index ["config_id"], name: "index_statis_counter_years_on_config_id"
   end
 
@@ -4636,7 +4547,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.jsonb "card_price"
     t.uuid "card_template_id"
     t.datetime "created_at", null: false
-    t.boolean "enabled"
     t.jsonb "extra"
     t.string "good_type"
     t.decimal "invest_ratio", comment: "抽成比例"
@@ -4652,26 +4562,27 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "updated_at", null: false
     t.jsonb "wallet_price"
     t.uuid "wallet_template_id"
+    t.boolean "enabled"
     t.index ["card_template_id"], name: "index_trade_advances_on_card_template_id"
     t.index ["organ_id"], name: "index_trade_advances_on_organ_id"
     t.index ["wallet_template_id"], name: "index_trade_advances_on_wallet_template_id"
   end
 
   create_table "trade_card_prepayments", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.boolean "activated"
-    t.uuid "card_template_id"
-    t.datetime "created_at", null: false
-    t.integer "days"
-    t.datetime "expire_at"
+    t.uuid "organ_id"
+    t.uuid "user_id"
     t.uuid "member_id"
     t.uuid "member_organ_id"
-    t.integer "months"
-    t.uuid "organ_id"
+    t.uuid "card_template_id"
     t.string "token"
-    t.datetime "updated_at", null: false
-    t.datetime "used_at"
-    t.uuid "user_id"
+    t.integer "days"
+    t.integer "months"
     t.integer "years"
+    t.datetime "expire_at"
+    t.datetime "used_at"
+    t.boolean "activated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["card_template_id"], name: "index_trade_card_prepayments_on_card_template_id"
     t.index ["member_id"], name: "index_trade_card_prepayments_on_member_id"
     t.index ["member_organ_id"], name: "index_trade_card_prepayments_on_member_organ_id"
@@ -4681,7 +4592,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
 
   create_table "trade_card_purchases", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "card_id"
-    t.uuid "card_prepayment_id"
     t.datetime "created_at", null: false
     t.integer "days"
     t.uuid "item_id"
@@ -4694,6 +4604,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "state"
     t.datetime "updated_at", null: false
     t.integer "years"
+    t.uuid "card_prepayment_id"
     t.index ["card_id"], name: "index_trade_card_purchases_on_card_id"
     t.index ["card_prepayment_id"], name: "index_trade_card_purchases_on_card_prepayment_id"
     t.index ["item_id"], name: "index_trade_card_purchases_on_item_id"
@@ -4801,11 +4712,11 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "payment_strategy_id"
     t.boolean "purchasable"
     t.decimal "retail_price", comment: "汇总：原价"
-    t.string "scope"
     t.uuid "station_id"
     t.decimal "total_quantity"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
+    t.string "scope"
     t.index ["address_id"], name: "index_trade_carts_on_address_id"
     t.index ["agent_id"], name: "index_trade_carts_on_agent_id"
     t.index ["client_id"], name: "index_trade_carts_on_client_id"
@@ -4885,21 +4796,21 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "trade_item_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
     t.date "begin_on"
-    t.integer "count"
-    t.integer "counter_days_count"
-    t.integer "counter_months_count"
-    t.integer "counter_years_count"
-    t.datetime "created_at", null: false
     t.date "end_on"
     t.string "note"
-    t.uuid "organ_id"
-    t.string "status"
+    t.integer "count"
+    t.jsonb "values"
     t.date "today"
     t.string "today_begin_id"
-    t.datetime "updated_at", null: false
-    t.jsonb "values"
     t.integer "version"
+    t.integer "counter_years_count"
+    t.integer "counter_months_count"
+    t.integer "counter_days_count"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_trade_item_counter_caches_on_organ_id"
   end
 
@@ -4957,12 +4868,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "provide_id"
     t.integer "purchase_id"
     t.integer "purchase_items_count"
-    t.jsonb "purchase_res"
     t.string "purchase_status"
     t.decimal "reduced_amount", comment: "已优惠的价格"
     t.virtual "rest_number", type: :decimal, as: "(number - done_number)", stored: true
     t.uuid "scene_id"
-    t.string "scope"
     t.decimal "single_price", comment: "一份产品的价格"
     t.uuid "source_id"
     t.uuid "station_id"
@@ -4975,6 +4884,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.integer "volume", comment: "体积"
     t.jsonb "wallet_amount"
     t.integer "weight", comment: "重量"
+    t.string "scope"
+    t.jsonb "purchase_res"
     t.index ["address_id"], name: "index_trade_items_on_address_id"
     t.index ["agent_id"], name: "index_trade_items_on_agent_id"
     t.index ["client_id"], name: "index_trade_items_on_client_id"
@@ -4998,22 +4909,22 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "trade_order_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
     t.date "begin_on"
-    t.integer "count"
-    t.integer "counter_days_count"
-    t.integer "counter_months_count"
-    t.integer "counter_years_count"
-    t.datetime "created_at", null: false
     t.date "end_on"
     t.string "note"
-    t.uuid "organ_id"
-    t.string "payment_status"
-    t.string "state"
+    t.integer "count"
+    t.jsonb "values"
     t.date "today"
     t.string "today_begin_id"
-    t.datetime "updated_at", null: false
-    t.jsonb "values"
     t.integer "version"
+    t.integer "counter_years_count"
+    t.integer "counter_months_count"
+    t.integer "counter_days_count"
+    t.string "state"
+    t.string "payment_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_trade_order_counter_caches_on_organ_id"
   end
 
@@ -5057,7 +4968,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.integer "payment_orders_count"
     t.string "payment_status"
     t.uuid "payment_strategy_id"
-    t.jsonb "print_info"
     t.uuid "produce_plan_id"
     t.uuid "provide_id"
     t.decimal "received_amount"
@@ -5070,6 +4980,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "user_id"
     t.string "uuid"
     t.decimal "verifying_amount", comment: "待核销金额"
+    t.jsonb "print_info"
     t.index ["address_id"], name: "index_trade_orders_on_address_id"
     t.index ["agent_id"], name: "index_trade_orders_on_agent_id"
     t.index ["client_id"], name: "index_trade_orders_on_client_id"
@@ -5094,22 +5005,22 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "trade_payment_counter_caches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
     t.date "begin_on"
-    t.integer "count"
-    t.integer "counter_days_count"
-    t.integer "counter_months_count"
-    t.integer "counter_years_count"
-    t.datetime "created_at", null: false
     t.date "end_on"
     t.string "note"
-    t.uuid "organ_id"
-    t.string "pay_state"
-    t.string "state"
+    t.integer "count"
+    t.jsonb "values"
     t.date "today"
     t.string "today_begin_id"
-    t.datetime "updated_at", null: false
-    t.jsonb "values"
     t.integer "version"
+    t.integer "counter_years_count"
+    t.integer "counter_months_count"
+    t.integer "counter_days_count"
+    t.string "state"
+    t.string "pay_state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["organ_id"], name: "index_trade_payment_counter_caches_on_organ_id"
   end
 
@@ -5128,7 +5039,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   end
 
   create_table "trade_payment_orders", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "batch_no"
     t.datetime "created_at", null: false
     t.string "kind"
     t.decimal "order_amount"
@@ -5138,6 +5048,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "state"
     t.datetime "updated_at", null: false
     t.uuid "wallet_id"
+    t.string "batch_no"
     t.index ["order_id"], name: "index_trade_payment_orders_on_order_id"
     t.index ["payment_id"], name: "index_trade_payment_orders_on_payment_id"
     t.index ["wallet_id"], name: "index_trade_payment_orders_on_wallet_id"
@@ -5197,7 +5108,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "payment_method_id"
     t.integer "payment_orders_count"
     t.string "payment_uuid"
-    t.jsonb "print_info"
     t.decimal "refunded_amount"
     t.integer "refunds_count"
     t.string "seller_identifier"
@@ -5208,6 +5118,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "user_id"
     t.boolean "verified", comment: "是否已确认收款"
     t.uuid "wallet_id"
+    t.jsonb "print_info"
     t.index ["operator_type", "operator_id"], name: "index_trade_payments_on_operator"
     t.index ["organ_id"], name: "index_trade_payments_on_organ_id"
     t.index ["payment_method_id"], name: "index_trade_payments_on_payment_method_id"
@@ -5432,18 +5343,18 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "advance_id"
     t.decimal "amount"
     t.datetime "created_at", null: false
-    t.datetime "expire_at"
     t.uuid "item_id"
     t.string "kind"
     t.string "note"
     t.decimal "price"
-    t.decimal "remaining_amount"
     t.string "state"
-    t.decimal "total"
     t.datetime "updated_at", null: false
-    t.decimal "used_amount"
     t.uuid "wallet_id"
     t.uuid "wallet_prepayment_id"
+    t.decimal "used_amount"
+    t.decimal "remaining_amount"
+    t.datetime "expire_at"
+    t.decimal "total"
     t.index ["advance_id"], name: "index_trade_wallet_advances_on_advance_id"
     t.index ["item_id"], name: "index_trade_wallet_advances_on_item_id"
     t.index ["wallet_id"], name: "index_trade_wallet_advances_on_wallet_id"
@@ -5458,8 +5369,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "operator_id"
     t.string "state"
     t.datetime "updated_at", null: false
-    t.uuid "wallet_advance_id"
     t.uuid "wallet_id"
+    t.uuid "wallet_advance_id"
     t.index ["item_id"], name: "index_trade_wallet_frozens_on_item_id"
     t.index ["operator_id"], name: "index_trade_wallet_frozens_on_operator_id"
     t.index ["wallet_advance_id"], name: "index_trade_wallet_frozens_on_wallet_advance_id"
@@ -5469,24 +5380,24 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   create_table "trade_wallet_goods", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "good_type"
-    t.decimal "ratio"
     t.datetime "updated_at", null: false
     t.string "wallet_code"
     t.uuid "wallet_template_id"
+    t.decimal "ratio"
     t.index ["wallet_template_id"], name: "index_trade_wallet_goods_on_wallet_template_id"
   end
 
   create_table "trade_wallet_logs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.decimal "amount"
     t.datetime "created_at", null: false
-    t.uuid "operator_id"
     t.uuid "source_id"
     t.string "source_type"
     t.string "tag_str"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.uuid "wallet_advance_id"
     t.uuid "wallet_id"
+    t.uuid "operator_id"
+    t.uuid "wallet_advance_id"
     t.uuid "wallet_payment_id"
     t.index ["operator_id"], name: "index_trade_wallet_logs_on_operator_id"
     t.index ["source_type", "source_id"], name: "index_trade_wallet_logs_on_source"
@@ -5500,11 +5411,11 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.datetime "created_at", null: false
     t.datetime "expire_at"
     t.boolean "lawful"
-    t.string "secret"
     t.string "token"
     t.datetime "updated_at", null: false
-    t.datetime "used_at"
     t.uuid "wallet_template_id"
+    t.datetime "used_at"
+    t.string "secret"
     t.index ["wallet_template_id"], name: "index_trade_wallet_prepayments_on_wallet_template_id"
   end
 
@@ -5531,21 +5442,21 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "description"
     t.integer "digit", comment: "精确到小数点后几位"
     t.boolean "enabled"
-    t.datetime "expire_max"
-    t.datetime "expire_min"
-    t.boolean "hot"
-    t.decimal "limit"
     t.string "name"
     t.uuid "organ_id"
     t.string "platform"
-    t.decimal "prepay_max"
-    t.decimal "prepay_min"
     t.string "rate", comment: "相对于默认货币的比率"
     t.string "unit"
     t.string "unit_name"
     t.datetime "updated_at", null: false
-    t.integer "wallet_prepayments_count"
     t.integer "wallets_count"
+    t.boolean "hot"
+    t.decimal "limit"
+    t.decimal "prepay_min"
+    t.decimal "prepay_max"
+    t.datetime "expire_min"
+    t.datetime "expire_max"
+    t.integer "wallet_prepayments_count"
     t.index ["organ_id"], name: "index_trade_wallet_templates_on_organ_id"
   end
 
@@ -5553,19 +5464,15 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "account_bank"
     t.string "account_name"
     t.string "account_number"
-    t.decimal "adjust_amount", comment: "用于矫正计算"
     t.decimal "advances_amount", comment: "收入：主动充值"
     t.uuid "agent_id"
     t.decimal "amount"
     t.uuid "client_id"
-    t.string "code"
     t.uuid "contact_id"
     t.datetime "created_at", null: false
-    t.boolean "enabled"
     t.decimal "expense_amount"
     t.decimal "frozen_amount", comment: "支出：冻结金额"
     t.decimal "income_amount"
-    t.decimal "limit", comment: "支付限额"
     t.integer "lock_version"
     t.uuid "member_id"
     t.uuid "member_organ_id"
@@ -5580,6 +5487,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.uuid "user_id"
     t.uuid "wallet_template_id"
     t.decimal "withdrawable_amount", comment: "可提现的额度"
+    t.string "code"
+    t.decimal "limit", comment: "支付限额"
+    t.decimal "adjust_amount", comment: "用于矫正计算"
+    t.boolean "enabled"
     t.index ["agent_id"], name: "index_trade_wallets_on_agent_id"
     t.index ["client_id"], name: "index_trade_wallets_on_client_id"
     t.index ["contact_id"], name: "index_trade_wallets_on_contact_id"
@@ -5614,7 +5525,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "logo_media_id"
     t.string "nick_name"
     t.string "oauth_domain"
-    t.boolean "oauth_enable"
     t.string "open_appid"
     t.uuid "organ_id"
     t.string "platform_appid"
@@ -5624,9 +5534,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "qrcode_url"
     t.string "refresh_token"
     t.string "secret"
-    t.string "service_corp"
     t.string "service_type"
-    t.string "service_url"
     t.string "ticket"
     t.string "token"
     t.string "type"
@@ -5638,7 +5546,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "weapp_id", comment: "关联的小程序"
     t.string "webview_domain"
     t.jsonb "webview_domain_registered"
+    t.string "service_url"
+    t.string "service_corp"
     t.string "webview_path"
+    t.boolean "oauth_enable"
     t.index ["organ_id"], name: "index_wechat_apps_on_organ_id"
     t.index ["platform_id"], name: "index_wechat_apps_on_platform_id"
     t.index ["platform_template_id"], name: "index_wechat_apps_on_platform_template_id"
@@ -5834,9 +5745,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   create_table "wechat_menu_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "appid"
     t.datetime "created_at", null: false
-    t.uuid "menu_id"
-    t.uuid "menu_root_app_id"
-    t.uuid "menu_root_id"
     t.string "mp_appid"
     t.string "mp_pagepath"
     t.string "name"
@@ -5846,10 +5754,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "type"
     t.datetime "updated_at", null: false
     t.string "value"
+    t.integer "root_position"
+    t.integer "menu_position"
     t.index ["appid"], name: "index_wechat_menu_apps_on_appid"
-    t.index ["menu_id"], name: "index_wechat_menu_apps_on_menu_id"
-    t.index ["menu_root_app_id"], name: "index_wechat_menu_apps_on_menu_root_app_id"
-    t.index ["menu_root_id"], name: "index_wechat_menu_apps_on_menu_root_id"
     t.index ["scene_id"], name: "index_wechat_menu_apps_on_scene_id"
     t.index ["tag_id"], name: "index_wechat_menu_apps_on_tag_id"
   end
@@ -5866,11 +5773,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   create_table "wechat_menu_root_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "appid"
     t.datetime "created_at", null: false
-    t.uuid "menu_root_id"
     t.string "name"
     t.integer "position"
     t.datetime "updated_at", null: false
-    t.index ["menu_root_id"], name: "index_wechat_menu_root_apps_on_menu_root_id"
   end
 
   create_table "wechat_menu_roots", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -5882,7 +5787,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
 
   create_table "wechat_menus", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.uuid "menu_root_id"
     t.string "mp_appid"
     t.string "mp_pagepath"
     t.string "name"
@@ -5890,7 +5794,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "type"
     t.datetime "updated_at", null: false
     t.string "value"
-    t.index ["menu_root_id"], name: "index_wechat_menus_on_menu_root_id"
+    t.integer "root_position"
   end
 
   create_table "wechat_messages", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -6096,10 +6000,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
 
   create_table "wechat_registers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "appid"
-    t.string "bank_name"
     t.string "bank_number"
     t.datetime "created_at", null: false
-    t.string "email"
     t.string "email_code"
     t.string "id_name"
     t.string "id_number"
@@ -6113,6 +6015,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "state"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
+    t.string "bank_name"
+    t.string "email"
     t.index ["organ_id"], name: "index_wechat_registers_on_organ_id"
     t.index ["user_id"], name: "index_wechat_registers_on_user_id"
   end
@@ -6192,7 +6096,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
   create_table "wechat_scenes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "aim"
     t.string "appid"
-    t.string "broadcast_to"
     t.datetime "created_at", null: false
     t.string "env_version"
     t.datetime "expire_at"
@@ -6208,9 +6111,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_04_11_150924) do
     t.string "state_uuid"
     t.string "tag_name"
     t.datetime "updated_at", null: false
+    t.string "broadcast_to"
+    t.string "uuid"
     t.index ["appid"], name: "index_wechat_scenes_on_appid"
     t.index ["handle_type", "handle_id"], name: "index_wechat_scenes_on_handle"
     t.index ["organ_id"], name: "index_wechat_scenes_on_organ_id"
+    t.index ["uuid"], name: "index_wechat_scenes_on_uuid"
   end
 
   create_table "wechat_services", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|

@@ -24,7 +24,7 @@ development:
   prod:
     <<: *default
     database: work_prod
-    schema_dump: false
+    migrations_paths: db/prod_migrate
 test:
   primary:
     <<: *default
@@ -38,7 +38,7 @@ test:
   prod:
     <<: *default
     database: work_prod
-    schema_dump: false
+    migrations_paths: db/prod_migrate
 production:
   primary:
     <<: *default
@@ -54,4 +54,4 @@ production:
   prod:
     <<: *default
     database: work_prod
-    schema_dump: false
+    migrations_paths: db/prod_migrate
