@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:gitee) { |repo| "https://gitee.com/#{repo}.git" }
 
 # 核心依赖
-gem 'rails', github: 'rails/rails'
+gem 'rails', gitee: 'work-design/rails'
 gem 'pg'
 gem 'puma'
 gem 'jbuilder'
@@ -24,11 +24,9 @@ gem 'psych-pure'
 # Third party
 gem 'octokit'
 gem 'omniauth-rails_csrf_protection'
-#git 'https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git' do
-  #gem 'tencentcloud-sdk-common'
-  #gem 'tencentcloud-sdk-ocr'
-#end
-gem 'aliyunsdkcore'
+git 'https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git' do
+  gem 'tencentcloud-sdk-dnspod'
+end
 
 # Payment method
 #gem 'paypal-sdk-core'
