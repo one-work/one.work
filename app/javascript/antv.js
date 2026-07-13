@@ -1,1 +1,1 @@
-import 'rails_ui/stimulus_antv'
+import 'rails_ui/stimulus/antv'

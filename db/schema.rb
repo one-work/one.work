@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_06_23_095218) do
+ActiveRecord::Schema[8.2].define(version: 2026_07_13_132355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -418,8 +418,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_06_23_095218) do
     t.string "source"
     t.string "timezone"
     t.datetime "updated_at", null: false
+    t.uuid "mock_cache_id"
     t.index ["cache_id"], name: "index_auth_users_on_cache_id"
     t.index ["invite_code"], name: "index_auth_users_on_invite_code"
+    t.index ["mock_cache_id"], name: "index_auth_users_on_mock_cache_id"
   end
 
   create_table "auth_verify_tokens", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3489,10 +3491,11 @@ ActiveRecord::Schema[8.2].define(version: 2026_06_23_095218) do
     t.integer "showtime"
     t.string "state"
     t.datetime "updated_at", null: false
-    t.string "wechat_openid"
+    t.uuid "mock_cache_id"
     t.index ["cache_id"], name: "index_org_members_on_cache_id"
     t.index ["identity"], name: "index_org_members_on_identity"
     t.index ["member_inviter_id"], name: "index_org_members_on_member_inviter_id"
+    t.index ["mock_cache_id"], name: "index_org_members_on_mock_cache_id"
     t.index ["organ_id"], name: "index_org_members_on_organ_id"
   end
 
@@ -3565,9 +3568,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_06_23_095218) do
     t.string "print_note"
     t.boolean "auto_purchase"
     t.boolean "admin"
+    t.uuid "mock_cache_id"
+    t.string "address_short"
     t.index ["area_id"], name: "index_org_organs_on_area_id"
     t.index ["cache_id"], name: "index_org_organs_on_cache_id"
     t.index ["corp_user_id"], name: "index_org_organs_on_corp_user_id"
+    t.index ["mock_cache_id"], name: "index_org_organs_on_mock_cache_id"
     t.index ["parent_id"], name: "index_org_organs_on_parent_id"
     t.index ["provider_id"], name: "index_org_organs_on_provider_id"
   end
@@ -3767,6 +3773,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_06_23_095218) do
     t.datetime "updated_at", null: false
     t.string "who_type"
     t.jsonb "business_hash"
+    t.string "str_roles"
+    t.boolean "mock"
     t.index ["str_role_ids"], name: "index_roled_caches_on_str_role_ids"
   end
 
@@ -3799,13 +3807,13 @@ ActiveRecord::Schema[8.2].define(version: 2026_06_23_095218) do
     t.datetime "updated_at", null: false
     t.uuid "who_id"
     t.string "who_type"
+    t.boolean "mock"
     t.index ["role_id"], name: "index_roled_role_whos_on_role_id"
     t.index ["who_type", "who_id"], name: "index_roled_role_whos_on_who"
   end
 
   create_table "roled_roles", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.boolean "default"
     t.string "description"
     t.string "name"
     t.jsonb "role_hash"

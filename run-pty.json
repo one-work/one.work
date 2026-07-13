@@ -21,7 +21,7 @@
     "defaultStatus": ["⏳", "S"]
   },
   {
-    "command": ["npm", "run", "build:css", "--", "--watch", "--poll"],
+    "command": ["npm", "run", "build:css", "--", "--embed-sources", "--watch"],
     "status": {
       "Sass is watching for changes": null
     },
