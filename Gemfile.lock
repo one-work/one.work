@@ -425,7 +425,7 @@ GEM
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
     json (2.19.9)
-    kamal (2.10.1)
+    kamal (2.12.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
       bcrypt_pbkdf (~> 1.0)
@@ -670,7 +670,7 @@ DEPENDENCIES
   default_where!
   image_processing
   jbuilder
-  kamal (= 2.10.1)
+  kamal (= 2.12.0)
   listen
   mini_magick
   net-ssh-gateway

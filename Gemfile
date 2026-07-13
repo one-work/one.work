@@ -6,7 +6,7 @@ gem 'rails', gitee: 'work-design/rails'
 gem 'pg'
 gem 'puma'
 gem 'jbuilder'
-gem 'kamal', '2.10.1', require: false
+gem 'kamal', '2.12.0', require: false
 gem 'rails_deploy', path: 'engine/rails_deploy', require: false
 
 # Utils
