@@ -73,3 +73,7 @@ proxy:
   healthcheck:
     interval: 5
     timeout: 150
+  run:
+    registry: ccr.ccs.tencentyun.com
+    repository: kamal/kamal-proxy
+    version: v0.9.2
