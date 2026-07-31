@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_07_13_132355) do
+ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -300,7 +300,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_13_132355) do
     t.string "host"
     t.string "key"
     t.datetime "updated_at", null: false
+    t.uuid "creator_id"
+    t.string "name"
     t.index ["appid"], name: "index_auth_apps_on_appid"
+    t.index ["creator_id"], name: "index_auth_apps_on_creator_id"
   end
 
   create_table "auth_oauth_users", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -3311,7 +3314,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_13_132355) do
     t.string "state"
     t.string "title"
     t.string "type"
-    t.boolean "verbose"
     t.index ["created_at"], name: "index_notice_notifications_on_created_at"
     t.index ["linked_type", "linked_id"], name: "index_notice_notifications_on_linked"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notice_notifications_on_notifiable"
@@ -3773,8 +3775,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_13_132355) do
     t.datetime "updated_at", null: false
     t.string "who_type"
     t.jsonb "business_hash"
-    t.string "str_roles"
     t.boolean "mock"
+    t.jsonb "roles_arr"
     t.index ["str_role_ids"], name: "index_roled_caches_on_str_role_ids"
   end
 
@@ -3822,6 +3824,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_13_132355) do
     t.boolean "visible"
     t.jsonb "business_hash"
     t.string "subdomain"
+    t.string "with_mock_id"
   end
 
   create_table "roled_tabs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -5887,8 +5890,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_13_132355) do
     t.string "domain"
     t.string "mch_id"
     t.datetime "updated_at", null: false
+    t.uuid "organ_id"
     t.index ["domain"], name: "index_wechat_payee_domains_on_domain"
     t.index ["mch_id"], name: "index_wechat_payee_domains_on_mch_id"
+    t.index ["organ_id"], name: "index_wechat_payee_domains_on_organ_id"
   end
 
   create_table "wechat_payees", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|

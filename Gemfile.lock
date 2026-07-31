@@ -171,7 +171,7 @@ PATH
   specs:
     rails_com (1.3.0)
       acme-client
-      closure_tree (>= 7.3)
+      closure_tree (~> 9.7)
       csv
       default_where (~> 2.2)
       http-form_data (~> 2.3)
@@ -188,7 +188,7 @@ PATH
       rails
       reline
       solid_cache
-      solid_queue
+      solid_queue (~> 1.5)
       sshkey
       turbo-rails
 
@@ -610,7 +610,7 @@ GEM
       activejob (>= 7.2)
       activerecord (>= 7.2)
       railties (>= 7.2)
-    solid_queue (1.4.0)
+    solid_queue (1.5.1)
       activejob (>= 7.1)
       activerecord (>= 7.1)
       concurrent-ruby (>= 1.3.1)
