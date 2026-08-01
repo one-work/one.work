@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
+ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -971,7 +971,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
     t.uuid "acme_account_id"
     t.datetime "created_at", null: false
     t.datetime "expire_at", comment: "过期时间"
-    t.string "identifiers", array: true
     t.datetime "issued_at"
     t.string "orderid"
     t.string "status"
@@ -979,6 +978,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
     t.string "sync_path"
     t.datetime "updated_at", null: false
     t.string "url"
+    t.jsonb "identifiers"
     t.index ["acme_account_id"], name: "index_com_acme_orders_on_acme_account_id"
   end
 
@@ -2133,9 +2133,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
 
   create_table "eventual_time_items", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.time "finish_at"
+    t.time "finish_at", precision: 6
     t.integer "position"
-    t.time "start_at"
+    t.time "start_at", precision: 6
     t.uuid "time_list_id"
     t.datetime "updated_at", null: false
     t.index ["time_list_id"], name: "index_eventual_time_items_on_time_list_id"
@@ -2534,13 +2534,13 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
   end
 
   create_table "factory_scenes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.time "book_finish_at"
+    t.time "book_finish_at", precision: 6
     t.integer "book_finish_days"
-    t.time "book_start_at"
+    t.time "book_start_at", precision: 6
     t.integer "book_start_days"
     t.datetime "created_at", null: false
-    t.time "deliver_finish_at"
-    t.time "deliver_start_at"
+    t.time "deliver_finish_at", precision: 6
+    t.time "deliver_start_at", precision: 6
     t.uuid "organ_id"
     t.boolean "specialty"
     t.string "title"
@@ -5715,7 +5715,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
 
   create_table "wechat_extractors", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.time "finish_at"
+    t.time "finish_at", precision: 6
     t.string "invalid_response"
     t.boolean "more"
     t.string "name"
@@ -5723,7 +5723,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_07_31_153309) do
     t.uuid "response_id"
     t.boolean "serial"
     t.integer "serial_start"
-    t.time "start_at"
+    t.time "start_at", precision: 6
     t.string "suffix"
     t.datetime "updated_at", null: false
     t.string "valid_response"
