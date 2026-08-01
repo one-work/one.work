@@ -7,8 +7,23 @@ GIT
       tencentcloud-sdk-common (~> 3.0)
 
 GIT
-  remote: https://gitee.com/work-design/rails.git
-  revision: 464d8ce7d38c9adb8a180ebbfcf9fd9a468a47b9
+  remote: https://github.com/one-work/default_where.git
+  revision: 46e8c5af7a1b256b318dbb3374cfce8353fe38ed
+  specs:
+    default_where (2.3.0)
+      activerecord
+
+GIT
+  remote: https://github.com/qinmingyuan/upyun_rails.git
+  revision: 0dafb4f38ea9693c2be65d1713f9cfbdbe2d55ca
+  specs:
+    upyun_rails (0.1.1)
+      activestorage
+      httpx
+
+GIT
+  remote: https://github.com/rails/rails.git
+  revision: 1925e83e8ed5ded651cde431643dca30c1ed75f5
   specs:
     actioncable (8.2.0.alpha)
       actionpack (= 8.2.0.alpha)
@@ -56,7 +71,7 @@ GIT
       rails-html-sanitizer (~> 1.7)
     activejob (8.2.0.alpha)
       activesupport (= 8.2.0.alpha)
-      globalid (>= 0.3.6)
+      globalid (>= 1.4.0)
     activemodel (8.2.0.alpha)
       activesupport (= 8.2.0.alpha)
     activerecord (8.2.0.alpha)
@@ -80,6 +95,7 @@ GIT
       logger (>= 1.4.2)
       minitest (>= 5.1)
       psych (>= 4)
+      ractor-dispatch (>= 0.2.0)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
@@ -106,21 +122,6 @@ GIT
       thor (~> 1.0, >= 1.2.2)
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
-
-GIT
-  remote: https://github.com/one-work/default_where.git
-  revision: 46e8c5af7a1b256b318dbb3374cfce8353fe38ed
-  specs:
-    default_where (2.3.0)
-      activerecord
-
-GIT
-  remote: https://github.com/qinmingyuan/upyun_rails.git
-  revision: 0dafb4f38ea9693c2be65d1713f9cfbdbe2d55ca
-  specs:
-    upyun_rails (0.1.1)
-      activestorage
-      httpx
 
 PATH
   remote: engine/default_form
@@ -561,6 +562,7 @@ GEM
       rack (>= 1.3)
     rackup (2.3.1)
       rack (>= 3)
+    ractor-dispatch (0.2.0)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
