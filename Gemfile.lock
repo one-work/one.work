@@ -1,12 +1,4 @@
 GIT
-  remote: https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git
-  revision: 673a71274d30d898e34bebdf9076a49a1c51bf7d
-  specs:
-    tencentcloud-sdk-common (3.0.1302)
-    tencentcloud-sdk-dnspod (3.0.1301)
-      tencentcloud-sdk-common (~> 3.0)
-
-GIT
   remote: https://github.com/one-work/default_where.git
   revision: 46e8c5af7a1b256b318dbb3374cfce8353fe38ed
   specs:
@@ -122,6 +114,14 @@ GIT
       thor (~> 1.0, >= 1.2.2)
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
+
+GIT
+  remote: https://github.com/tencentcloud/tencentcloud-sdk-ruby.git
+  revision: adbfb36c4fcf4a9706ec7086f5bbfe16e99c48dd
+  specs:
+    tencentcloud-sdk-common (3.0.1318)
+    tencentcloud-sdk-dnspod (3.0.1301)
+      tencentcloud-sdk-common (~> 3.0)
 
 PATH
   remote: engine/default_form

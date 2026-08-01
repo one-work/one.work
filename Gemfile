@@ -24,7 +24,7 @@ gem 'psych-pure'
 # Third party
 gem 'octokit'
 gem 'omniauth-rails_csrf_protection'
-git 'https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git' do
+git 'https://github.com/tencentcloud/tencentcloud-sdk-ruby.git' do
   gem 'tencentcloud-sdk-dnspod'
 end
 
