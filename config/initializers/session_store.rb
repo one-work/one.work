@@ -2,5 +2,5 @@
 
 Rails.application.config.session_store(
   :cookie_store,
-  key: '_work_design_session'
+  key: '_one_work_session'
 )
