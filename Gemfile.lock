@@ -152,6 +152,7 @@ PATH
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
+      jwt
       rails_com (~> 1.2)
       rotp
 
@@ -426,6 +427,8 @@ GEM
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
     json (2.21.1)
+    jwt (3.2.0)
+      base64
     kamal (2.12.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)

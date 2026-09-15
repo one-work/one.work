@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
+ActiveRecord::Schema[8.2].define(version: 2026_09_15_012729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -294,6 +294,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.index ["verifiable_type", "verifiable_id"], name: "index_auditor_verifiers_on_verifiable"
   end
 
+  create_table "auth_app_views", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "app_id"
+    t.string "session_id"
+    t.datetime "view_at"
+    t.boolean "starred"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_auth_app_views_on_app_id"
+  end
+
   create_table "auth_apps", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "appid"
     t.datetime "created_at", null: false
@@ -302,6 +312,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.datetime "updated_at", null: false
     t.uuid "creator_id"
     t.string "name"
+    t.string "note"
     t.index ["appid"], name: "index_auth_apps_on_appid"
     t.index ["creator_id"], name: "index_auth_apps_on_creator_id"
   end
@@ -364,6 +375,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.string "user_agent"
     t.uuid "user_id"
     t.string "host"
+    t.uuid "from_organ_id"
+    t.index ["from_organ_id"], name: "index_auth_sessions_on_from_organ_id"
     t.index ["identity"], name: "index_auth_sessions_on_identity"
     t.index ["member_id"], name: "index_auth_sessions_on_member_id"
     t.index ["user_id"], name: "index_auth_sessions_on_user_id"
@@ -2467,6 +2480,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.jsonb "wallet_price"
     t.string "word", comment: "搜索关键词"
     t.string "spu"
+    t.boolean "hot", comment: "推荐"
     t.index ["factory_taxon_id"], name: "index_factory_productions_on_factory_taxon_id"
     t.index ["organ_id"], name: "index_factory_productions_on_organ_id"
     t.index ["product_host_id"], name: "index_factory_productions_on_product_host_id"
@@ -3572,6 +3586,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.boolean "admin"
     t.uuid "mock_cache_id"
     t.string "address_short"
+    t.boolean "partnership"
+    t.string "provider_token"
     t.index ["area_id"], name: "index_org_organs_on_area_id"
     t.index ["cache_id"], name: "index_org_organs_on_cache_id"
     t.index ["corp_user_id"], name: "index_org_organs_on_corp_user_id"
@@ -4313,6 +4329,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.datetime "updated_at", null: false
     t.integer "width"
     t.jsonb "counters", default: {}
+    t.integer "people"
     t.index ["organ_id"], name: "index_space_desks_on_organ_id"
     t.index ["room_id"], name: "index_space_desks_on_room_id"
   end
@@ -4936,6 +4953,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.string "payment_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "agent_id"
+    t.index ["agent_id"], name: "index_trade_order_counter_caches_on_agent_id"
     t.index ["organ_id"], name: "index_trade_order_counter_caches_on_organ_id"
   end
 
@@ -5891,7 +5910,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_08_01_105707) do
     t.string "mch_id"
     t.datetime "updated_at", null: false
     t.uuid "organ_id"
+    t.uuid "domain_organ_id"
     t.index ["domain"], name: "index_wechat_payee_domains_on_domain"
+    t.index ["domain_organ_id"], name: "index_wechat_payee_domains_on_domain_organ_id"
     t.index ["mch_id"], name: "index_wechat_payee_domains_on_mch_id"
     t.index ["organ_id"], name: "index_wechat_payee_domains_on_organ_id"
   end
