@@ -1,4 +1,12 @@
 GIT
+  remote: https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git
+  revision: 492a52101acf1e32e4c532a94be0f1375e993eb0
+  specs:
+    tencentcloud-sdk-common (3.0.1349)
+    tencentcloud-sdk-dnspod (3.0.1301)
+      tencentcloud-sdk-common (~> 3.0)
+
+GIT
   remote: https://gitee.com/work-design/rails.git
   revision: 729d2e96fffd8f066f753b7db704d3a686d7f4f7
   specs:
@@ -114,14 +122,6 @@ GIT
     upyun_rails (0.1.1)
       activestorage
       httpx
-
-GIT
-  remote: https://github.com/tencentcloud/tencentcloud-sdk-ruby.git
-  revision: adbfb36c4fcf4a9706ec7086f5bbfe16e99c48dd
-  specs:
-    tencentcloud-sdk-common (3.0.1318)
-    tencentcloud-sdk-dnspod (3.0.1301)
-      tencentcloud-sdk-common (~> 3.0)
 
 PATH
   remote: engine/default_form
