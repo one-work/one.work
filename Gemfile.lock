@@ -109,13 +109,6 @@ GIT
       zeitwerk (~> 2.6)
 
 GIT
-  remote: https://github.com/one-work/default_where.git
-  revision: 46e8c5af7a1b256b318dbb3374cfce8353fe38ed
-  specs:
-    default_where (2.3.0)
-      activerecord
-
-GIT
   remote: https://github.com/qinmingyuan/upyun_rails.git
   revision: 0dafb4f38ea9693c2be65d1713f9cfbdbe2d55ca
   specs:
@@ -128,6 +121,12 @@ PATH
   specs:
     default_form (0.0.1)
       rails (>= 7.1.1)
+
+PATH
+  remote: engine/default_where
+  specs:
+    default_where (2.3.0)
+      activerecord
 
 PATH
   remote: engine/rails_alipay

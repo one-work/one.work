@@ -36,7 +36,7 @@ end
 gem 'upyun_rails', github: 'qinmingyuan/upyun_rails'
 
 # Rails Helpers
-gem 'default_where', github: 'one-work/default_where'
+gem 'default_where', path: 'engine/default_where'
 gem 'default_form', path: 'engine/default_form'
 
 # Engines
