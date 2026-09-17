@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails_com', '~> 1.2'
   s.add_dependency 'bcrypt', '~> 3.1'
   s.add_dependency 'rotp'
+  s.add_dependency 'jwt'
 end
