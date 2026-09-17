@@ -1,21 +1,6 @@
 GIT
-  remote: https://github.com/one-work/default_where.git
-  revision: 46e8c5af7a1b256b318dbb3374cfce8353fe38ed
-  specs:
-    default_where (2.3.0)
-      activerecord
-
-GIT
-  remote: https://github.com/qinmingyuan/upyun_rails.git
-  revision: 0dafb4f38ea9693c2be65d1713f9cfbdbe2d55ca
-  specs:
-    upyun_rails (0.1.1)
-      activestorage
-      httpx
-
-GIT
-  remote: https://github.com/rails/rails.git
-  revision: 1925e83e8ed5ded651cde431643dca30c1ed75f5
+  remote: https://gitee.com/work-design/rails.git
+  revision: 729d2e96fffd8f066f753b7db704d3a686d7f4f7
   specs:
     actioncable (8.2.0.alpha)
       actionpack (= 8.2.0.alpha)
@@ -114,6 +99,21 @@ GIT
       thor (~> 1.0, >= 1.2.2)
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
+
+GIT
+  remote: https://github.com/one-work/default_where.git
+  revision: 46e8c5af7a1b256b318dbb3374cfce8353fe38ed
+  specs:
+    default_where (2.3.0)
+      activerecord
+
+GIT
+  remote: https://github.com/qinmingyuan/upyun_rails.git
+  revision: 0dafb4f38ea9693c2be65d1713f9cfbdbe2d55ca
+  specs:
+    upyun_rails (0.1.1)
+      activestorage
+      httpx
 
 GIT
   remote: https://github.com/tencentcloud/tencentcloud-sdk-ruby.git
