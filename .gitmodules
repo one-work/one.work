@@ -91,3 +91,6 @@
 [submodule "engine/default_where"]
 	path = engine/default_where
 	url = git@github.com:one-work/default_where.git
+[submodule "engine/upyun_rails"]
+	path = engine/upyun_rails
+	url = git@github.com:qinmingyuan/upyun_rails.git

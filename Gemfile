@@ -33,7 +33,7 @@ end
 #gem 'paypal-sdk-rest'
 
 # Files
-gem 'upyun_rails', github: 'qinmingyuan/upyun_rails'
+gem 'upyun_rails', path: 'engine/upyun_rails'
 
 # Rails Helpers
 gem 'default_where', path: 'engine/default_where'

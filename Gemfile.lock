@@ -108,14 +108,6 @@ GIT
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
 
-GIT
-  remote: https://github.com/qinmingyuan/upyun_rails.git
-  revision: 0dafb4f38ea9693c2be65d1713f9cfbdbe2d55ca
-  specs:
-    upyun_rails (0.1.1)
-      activestorage
-      httpx
-
 PATH
   remote: engine/default_form
   specs:
@@ -341,6 +333,13 @@ PATH
     rails_wechat (0.1.2)
       rails_com
       rqrcode
+
+PATH
+  remote: engine/upyun_rails
+  specs:
+    upyun_rails (0.1.1)
+      activestorage
+      httpx
 
 GEM
   remote: https://rubygems.org/
