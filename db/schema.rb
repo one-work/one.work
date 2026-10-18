@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_18_153906) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_18_234136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3198,6 +3198,17 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_18_153906) do
     t.uuid "github_user_id"
     t.index ["github_user_id"], name: "index_markdown_gits_on_github_user_id"
     t.index ["organ_id"], name: "index_markdown_gits_on_organ_id"
+  end
+
+  create_table "markdown_post_documents", force: :cascade do |t|
+    t.uuid "markdown_post_id", null: false
+    t.text "title"
+    t.text "content"
+    t.tsvector "title_vector"
+    t.tsvector "content_vector"
+    t.index ["content_vector"], name: "index_markdown_post_documents_on_content_vector", using: :gin
+    t.index ["markdown_post_id"], name: "index_markdown_post_documents_on_markdown_post_id", unique: true
+    t.index ["title_vector"], name: "index_markdown_post_documents_on_title_vector", using: :gin
   end
 
   create_table "markdown_posts", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
