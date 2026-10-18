@@ -121,6 +121,12 @@ PATH
       activerecord
 
 PATH
+  remote: engine/rails-active_search
+  specs:
+    rails-active_search (0.1.0)
+      rails (>= 8.1)
+
+PATH
   remote: engine/rails_alipay
   specs:
     rails_alipay (0.0.1)
@@ -690,6 +696,7 @@ DEPENDENCIES
   psych-pure
   puma
   rails!
+  rails-active_search!
   rails_alipay!
   rails_attend!
   rails_audit!

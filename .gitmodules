@@ -94,3 +94,6 @@
 [submodule "engine/upyun_rails"]
 	path = engine/upyun_rails
 	url = git@github.com:qinmingyuan/upyun_rails.git
+[submodule "engine/rails-active_search"]
+	path = engine/rails-active_search
+	url = git@github.com:basecamp/rails-active_search.git

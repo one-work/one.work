@@ -38,6 +38,7 @@ gem 'upyun_rails', path: 'engine/upyun_rails'
 # Rails Helpers
 gem 'default_where', path: 'engine/default_where'
 gem 'default_form', path: 'engine/default_form'
+gem 'rails-active_search', path: 'engine/rails-active_search'
 
 # Engines
 gem 'rails_com', path: 'engine/rails_com'
