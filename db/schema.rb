@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_09_15_012729) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_18_153906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -313,6 +313,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_09_15_012729) do
     t.uuid "creator_id"
     t.string "name"
     t.string "note"
+    t.boolean "enabled"
     t.index ["appid"], name: "index_auth_apps_on_appid"
     t.index ["creator_id"], name: "index_auth_apps_on_creator_id"
   end
@@ -2265,6 +2266,14 @@ ActiveRecord::Schema[8.2].define(version: 2026_09_15_012729) do
     t.index ["production_id"], name: "index_factory_fits_on_production_id"
   end
 
+  create_table "factory_logos", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "organ_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organ_id"], name: "index_factory_logos_on_organ_id"
+  end
+
   create_table "factory_part_plans", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "finish_at"
@@ -2323,8 +2332,12 @@ ActiveRecord::Schema[8.2].define(version: 2026_09_15_012729) do
     t.uuid "provide_id"
     t.datetime "updated_at", null: false
     t.string "ref", comment: "用于数据迁移"
+    t.uuid "organ_id"
+    t.uuid "upstream_product_id"
+    t.index ["organ_id"], name: "index_factory_product_provides_on_organ_id"
     t.index ["product_id"], name: "index_factory_product_provides_on_product_id"
     t.index ["provide_id"], name: "index_factory_product_provides_on_provide_id"
+    t.index ["upstream_product_id"], name: "index_factory_product_provides_on_upstream_product_id"
   end
 
   create_table "factory_production_carts", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -2416,10 +2429,14 @@ ActiveRecord::Schema[8.2].define(version: 2026_09_15_012729) do
     t.datetime "updated_at", null: false
     t.uuid "upstream_product_id"
     t.uuid "upstream_production_id"
+    t.uuid "organ_id"
+    t.uuid "provider_id"
+    t.index ["organ_id"], name: "index_factory_production_provides_on_organ_id"
     t.index ["product_id"], name: "index_factory_production_provides_on_product_id"
     t.index ["production_id"], name: "index_factory_production_provides_on_production_id"
     t.index ["provide_config_type", "provide_config_id"], name: "index_factory_production_provides_on_provide_config"
     t.index ["provide_id"], name: "index_factory_production_provides_on_provide_id"
+    t.index ["provider_id"], name: "index_factory_production_provides_on_provider_id"
     t.index ["taxon_id"], name: "index_factory_production_provides_on_taxon_id"
     t.index ["upstream_product_id"], name: "index_factory_production_provides_on_upstream_product_id"
     t.index ["upstream_production_id"], name: "index_factory_production_provides_on_upstream_production_id"
@@ -3764,7 +3781,18 @@ ActiveRecord::Schema[8.2].define(version: 2026_09_15_012729) do
     t.string "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
     t.index ["template_id"], name: "index_print_template_items_on_template_id"
+  end
+
+  create_table "print_template_table_items", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "template_table_id"
+    t.string "name"
+    t.string "width"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["template_table_id"], name: "index_print_template_table_items_on_template_table_id"
   end
 
   create_table "print_templates", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
