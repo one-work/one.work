@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveSearch.define_index(:markdown_posts) do
+ActiveSearch.define_index(:markdown_posts, document_class: 'Markdown::PostDocument') do
   text :title
   text :markdown
 end
