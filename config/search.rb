@@ -2,5 +2,5 @@
 
 ActiveSearch.define_index(:markdown_posts) do
   text :title
-  text :content
+  text :markdown
 end

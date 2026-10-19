@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_18_234136) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_19_090809) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -3203,11 +3203,11 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_18_234136) do
   create_table "markdown_post_documents", force: :cascade do |t|
     t.uuid "markdown_post_id", null: false
     t.text "title"
-    t.text "content"
     t.tsvector "title_vector"
-    t.tsvector "content_vector"
-    t.index ["content_vector"], name: "index_markdown_post_documents_on_content_vector", using: :gin
+    t.text "markdown"
+    t.tsvector "markdown_vector"
     t.index ["markdown_post_id"], name: "index_markdown_post_documents_on_markdown_post_id", unique: true
+    t.index ["markdown_vector"], name: "index_markdown_post_documents_on_markdown_vector", using: :gin
     t.index ["title_vector"], name: "index_markdown_post_documents_on_title_vector", using: :gin
   end
 
