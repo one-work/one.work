@@ -1,8 +1,6 @@
-require_relative "lib/active_search/version"
-
 Gem::Specification.new do |spec|
   spec.name        = "rails-active_search"
-  spec.version     = ActiveSearch::VERSION
+  spec.version     = '0.1.0'
   spec.authors     = [ "Donal McBreen" ]
   spec.email       = [ "donal@37signals.com" ]
   spec.homepage    = "https://github.com/basecamp/rails-active_search"
