@@ -1,2 +1,0 @@
-class MarkdownPostDocument < ApplicationRecord
-end
