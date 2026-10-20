@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_20_060532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1112,7 +1112,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.jsonb "cookie"
     t.datetime "created_at", null: false
     t.string "exception"
-    t.string "exception_backtrace", array: true
     t.string "exception_object"
     t.jsonb "headers"
     t.string "ip"
@@ -1120,6 +1119,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.string "path"
     t.jsonb "session"
     t.datetime "updated_at", null: false
+    t.jsonb "exception_backtrace"
   end
 
   create_table "com_filter_columns", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
@@ -1961,7 +1961,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.date "produced_begin_on"
     t.date "produced_end_on"
     t.integer "repeat_count", comment: "每几周/天"
-    t.string "repeat_days", array: true
     t.string "repeat_type"
     t.uuid "time_list_id"
     t.datetime "updated_at", null: false
@@ -1970,6 +1969,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.string "ref_ident", comment: "外部资源关联 ID"
     t.jsonb "extra"
     t.datetime "synced_at"
+    t.jsonb "repeat_days"
     t.index ["event_taxon_id"], name: "index_eventual_events_on_event_taxon_id"
     t.index ["organ_id"], name: "index_eventual_events_on_organ_id"
     t.index ["place_id"], name: "index_eventual_events_on_place_id"
@@ -3607,7 +3607,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.jsonb "theme_settings"
     t.datetime "updated_at", null: false
     t.boolean "debug_enabled"
-    t.string "dispatches", default: [], array: true
     t.integer "children_count"
     t.string "print_note"
     t.boolean "auto_purchase"
@@ -3616,6 +3615,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.string "address_short"
     t.boolean "partnership"
     t.string "provider_token"
+    t.jsonb "dispatches"
     t.index ["area_id"], name: "index_org_organs_on_area_id"
     t.index ["cache_id"], name: "index_org_organs_on_cache_id"
     t.index ["corp_user_id"], name: "index_org_organs_on_corp_user_id"
@@ -3954,7 +3954,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.string "full"
     t.string "locale"
     t.string "name"
-    t.string "names", array: true
     t.jsonb "parent_ancestors"
     t.uuid "parent_id"
     t.boolean "popular"
@@ -3962,6 +3961,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.string "timezone"
     t.datetime "updated_at", null: false
     t.integer "level"
+    t.jsonb "names"
     t.index ["parent_id"], name: "index_ship_areas_on_parent_id"
   end
 
@@ -5586,7 +5586,6 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.string "encoding_aes_key"
     t.boolean "encrypt_mode"
     t.jsonb "extra"
-    t.string "func_infos", array: true
     t.boolean "global"
     t.string "head_img"
     t.string "jsapi_ticket"
@@ -5619,6 +5618,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_19_095303) do
     t.string "service_corp"
     t.string "webview_path"
     t.boolean "oauth_enable"
+    t.jsonb "func_infos"
     t.index ["organ_id"], name: "index_wechat_apps_on_organ_id"
     t.index ["platform_id"], name: "index_wechat_apps_on_platform_id"
     t.index ["platform_template_id"], name: "index_wechat_apps_on_platform_template_id"
