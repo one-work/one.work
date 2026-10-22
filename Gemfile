@@ -77,7 +77,7 @@ group :development, :test do
   gem 'debug', require: 'debug/prelude'
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'sass-embedded'
+  #gem 'sass-embedded'
 end
 
 group :development do
