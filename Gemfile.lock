@@ -428,6 +428,9 @@ GEM
       raabro (~> 1.4)
     globalid (1.4.0)
       activesupport (>= 6.1)
+    google-protobuf (4.36.2)
+      bigdecimal
+      rake (~> 13.3)
     hashie (5.1.0)
       logger
     herb (0.11.1)
@@ -612,6 +615,8 @@ GEM
       rqrcode_core (~> 2.0)
     rqrcode_core (2.1.0)
     rubyzip (3.7.0)
+    sass-embedded (1.106.1-arm64-darwin)
+      google-protobuf (~> 4.31)
     sawyer (0.9.3)
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
@@ -736,6 +741,7 @@ DEPENDENCIES
   rails_wechat!
   rexml
   rqrcode
+  sass-embedded
   sd_notify
   selenium-webdriver
   tencentcloud-sdk-dnspod!
