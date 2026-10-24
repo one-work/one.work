@@ -59,10 +59,9 @@ Rails.application.configure do
     'http://lvh.me:3000'
   ]
   config.hosts += [
-    '.lvh.me',
-    '.admin.lvh.me',
-    '.org.lvh.me',
-    '.frp.work.design'
+    '.linli.test',
+    '.admin.linli.test',
+    '.org.linli.test'
   ]
 
   config.x.role_debug = false
@@ -71,5 +70,5 @@ ActiveRecord.verbose_query_logs = true
 
 #ActionCable.server.config.logger = Logger.new(nil)
 Rails.application.routes.default_url_options = {
-  host: 'lvh.me'
+  host: 'linli.test'
 }
