@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[8.2].define(version: 2026_10_24_041644) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
+  enable_extension "plpgsql"
 
   create_table "solid_queue_batch_executions", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.uuid "job_id"

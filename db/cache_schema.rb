@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[8.2].define(version: 2025_07_12_150319) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
+  enable_extension "plpgsql"
 
   create_table "solid_cache_entries", force: :cascade do |t|
     t.integer "byte_size", null: false
