@@ -1,4 +1,4 @@
-FROM ccr.ccs.tencentyun.com/kamal/ruby:4.0.3-alpine AS base
+FROM ccr.ccs.tencentyun.com/kamal/ruby:4.1-rc-alpine AS base
 
 # Rails App 所在位置
 WORKDIR /rails
