@@ -3580,49 +3580,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_20_060532) do
     t.index ["descendant_id"], name: "index_org_organ_hierarchies_on_descendant_id"
   end
 
-  create_table "org_organs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "address"
-    t.string "appid"
-    t.jsonb "area_ancestors"
-    t.uuid "area_id"
-    t.uuid "cache_id"
-    t.string "code"
-    t.uuid "corp_user_id"
-    t.jsonb "counters", default: {}
-    t.datetime "created_at", null: false
-    t.string "dispatch"
-    t.boolean "joinable", comment: "是否可搜索并加入"
-    t.string "license"
-    t.integer "limit_wechat"
-    t.integer "limit_wechat_menu"
-    t.integer "members_count"
-    t.string "name"
-    t.string "name_short"
-    t.boolean "official", comment: "是否官方"
-    t.jsonb "parent_ancestors"
-    t.uuid "parent_id"
-    t.boolean "production_enabled"
-    t.uuid "provider_id"
-    t.string "service_url", comment: "客服 url"
-    t.jsonb "theme_settings"
-    t.datetime "updated_at", null: false
-    t.boolean "debug_enabled"
-    t.integer "children_count"
-    t.string "print_note"
-    t.boolean "auto_purchase"
-    t.boolean "admin"
-    t.uuid "mock_cache_id"
-    t.string "address_short"
-    t.boolean "partnership"
-    t.string "provider_token"
-    t.jsonb "dispatches"
-    t.index ["area_id"], name: "index_org_organs_on_area_id"
-    t.index ["cache_id"], name: "index_org_organs_on_cache_id"
-    t.index ["corp_user_id"], name: "index_org_organs_on_corp_user_id"
-    t.index ["mock_cache_id"], name: "index_org_organs_on_mock_cache_id"
-    t.index ["parent_id"], name: "index_org_organs_on_parent_id"
-    t.index ["provider_id"], name: "index_org_organs_on_provider_id"
-  end
+# Could not dump table "org_organs" because of following ArgumentError
+#   wrong number of arguments (given 2, expected 1)
+
 
   create_table "org_resign_reasons", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -4357,21 +4317,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_20_060532) do
     t.index ["station_id"], name: "index_space_buildings_on_station_id"
   end
 
-  create_table "space_desks", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
-    t.string "code"
-    t.datetime "created_at", null: false
-    t.integer "height"
-    t.integer "length"
-    t.string "name"
-    t.uuid "organ_id"
-    t.uuid "room_id"
-    t.datetime "updated_at", null: false
-    t.integer "width"
-    t.jsonb "counters", default: {}
-    t.integer "people"
-    t.index ["organ_id"], name: "index_space_desks_on_organ_id"
-    t.index ["room_id"], name: "index_space_desks_on_room_id"
-  end
+# Could not dump table "space_desks" because of following ArgumentError
+#   wrong number of arguments (given 2, expected 1)
+
 
   create_table "space_grids", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "code"

@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 1) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_24_041644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "solid_queue_batch_executions", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "job_id"
+    t.uuid "batch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_solid_queue_batch_executions_on_batch_id"
+    t.index ["job_id"], name: "index_solid_queue_batch_executions_on_job_id"
+  end
+
+  create_table "solid_queue_batches", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "on_finish"
+    t.string "on_success"
+    t.string "on_failure"
+    t.string "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
     t.string "concurrency_key", null: false
