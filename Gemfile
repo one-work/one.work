@@ -20,6 +20,7 @@ gem 'sd_notify'
 gem 'net-ssh-gateway'
 gem 'xsv'
 gem 'psych-pure'
+gem 'kaminari', github: 'qinmingyuan/kaminari'
 
 # Third party
 gem 'octokit'

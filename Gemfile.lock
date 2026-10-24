@@ -109,6 +109,23 @@ GIT
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
 
+GIT
+  remote: https://github.com/qinmingyuan/kaminari.git
+  revision: bfccd40c6bba742a9c69093f1c0f706dc8bd3613
+  specs:
+    kaminari (1.3.0)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.3.0)
+      kaminari-activerecord (= 1.3.0)
+      kaminari-core (= 1.3.0)
+    kaminari-actionview (1.3.0)
+      actionview
+      kaminari-core (= 1.3.0)
+    kaminari-activerecord (1.3.0)
+      activerecord
+      kaminari-core (= 1.3.0)
+    kaminari-core (1.3.0)
+
 PATH
   remote: engine/default_form
   specs:
@@ -444,18 +461,6 @@ GEM
       sshkit (>= 1.23.0, < 2.0)
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
-    kaminari (1.3.0)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.3.0)
-      kaminari-activerecord (= 1.3.0)
-      kaminari-core (= 1.3.0)
-    kaminari-actionview (1.3.0)
-      actionview
-      kaminari-core (= 1.3.0)
-    kaminari-activerecord (1.3.0)
-      activerecord
-      kaminari-core (= 1.3.0)
-    kaminari-core (1.3.0)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
     kramdown-parser-gfm (1.1.0)
@@ -687,6 +692,7 @@ DEPENDENCIES
   image_processing
   jbuilder
   kamal (= 2.12.0)
+  kaminari!
   listen
   mini_magick
   net-ssh-gateway
