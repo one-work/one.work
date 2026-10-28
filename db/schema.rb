@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_24_130504) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_28_075617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -2849,6 +2849,15 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_24_130504) do
     t.index ["parent_id"], name: "index_finance_taxons_on_parent_id"
   end
 
+  create_table "form_examples", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "text"
+    t.string "textarea"
+    t.boolean "checkbox"
+    t.boolean "radio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "growth_aim_codes", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.string "action_name"
     t.uuid "aim_id"
@@ -3780,6 +3789,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_24_130504) do
     t.string "raw", comment: "经过Base64压缩的字节码"
     t.string "note"
     t.uuid "printer_id"
+    t.uuid "organ_id"
+    t.index ["organ_id"], name: "index_print_tasks_on_organ_id"
     t.index ["printer_id"], name: "index_print_tasks_on_printer_id"
     t.index ["template_id"], name: "index_print_tasks_on_template_id"
   end
@@ -3793,6 +3804,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_24_130504) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"
+    t.string "unit"
     t.index ["template_id"], name: "index_print_template_items_on_template_id"
   end
 
@@ -3811,6 +3823,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_24_130504) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "spec"
     t.index ["organ_id"], name: "index_print_templates_on_organ_id"
   end
 
