@@ -85,5 +85,5 @@ group :development do
   gem 'web-console'
   gem 'listen'
   gem 'brakeman'
-  gem 'tidewave'
+  #gem 'tidewave'
 end
