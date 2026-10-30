@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_28_075617) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_30_082611) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -1075,6 +1075,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_28_075617) do
     t.string "name"
     t.datetime "updated_at", null: false
     t.string "url"
+    t.date "expire_on"
+    t.string "note"
+    t.boolean "enabled"
   end
 
   create_table "com_err_bots", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|

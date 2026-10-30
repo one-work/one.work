@@ -13,7 +13,9 @@ RailsCom.config.tap do |config|
     '/images'
   #'/rails/active_storage'
   ]
-  config.ignore_models += []
+  config.ignore_models += [
+    'Markdown::PostDocument'
+  ]
   config.override_prefixes = [
     'application'
   ]
