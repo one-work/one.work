@@ -1,2 +1,6 @@
 brands:
   - github
+light:
+  - chart-line
+  - circle-check
+  - cubes

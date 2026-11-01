@@ -1,18 +1,29 @@
-<section class="hero is-cover">
-  <div class="hero-body is-middle text-centered">
-    <h1 class="title">
-      <span>One Work</span>
-      <div class="typer-wrap" data-controller="animate-typer">
-        <span class="display-none" data-animate-typer-target="item">一站式办公</span>
-        <span class="display-none" data-animate-typer-target="item">超级个体平台</span>
-        <span class="display-none" data-animate-typer-target="item">开源业务组件</span>
+<section class="hero is-cover hero-home">
+  <div class="hero-body container">
+    <div class="columns is-vcentered">
+      <div class="column is-6 hero-intro">
+        <span class="hero-tag">一人可开发的全栈系统</span>
+        <h1 class="title">
+          <span class="display-block">One Work</span>
+          <div class="typer-wrap" data-controller="animate-typer">
+            <span class="display-none" data-animate-typer-target="item">一站式办公</span>
+            <span class="display-none" data-animate-typer-target="item">超级个体平台</span>
+            <span class="display-none" data-animate-typer-target="item">开源业务组件</span>
+          </div>
+        </h1>
+        <p class="hero-desc">当数据量达到 5 万条或交易额达到 10 万元，才开始收取 <strong>390 元/年</strong>，在此之前完全免费。</p>
+        <div class="hero-actions">
+          <%= render 'links' %>
+          <a href="https://github.com/one-work" target="_blank" rel="nofollow" class="hero-github">
+            <%= svg_tag 'github', kind: 'brands' %>
+            <span>GitHub 开源</span>
+          </a>
+        </div>
       </div>
-    </h1>
-    <h2 class="title">一人可开发的全栈系统</h2>
-    <p class="text-grey-lighter">当数据量达到 5 万条或交易额达到 10 万元，才开始收取 390 元/年</p>
-  </div>
-  <div class="buttons are-large is-centered mb-4">
-    <%= render 'links' %>
+      <div class="column is-6">
+        <%= render 'hero_visual' %>
+      </div>
+    </div>
   </div>
 </section>
 
