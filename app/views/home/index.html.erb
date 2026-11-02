@@ -27,8 +27,5 @@
   </div>
 </section>
 
-<% @posts.each do |post| %>
-  <div class="work_layout">
-    <%= render partial: "md_layout/#{post.layout}", collection: post.raw_block_texts, as: :item %>
-  </div>
-<% end %>
+<%= render 'feature' %>
+
