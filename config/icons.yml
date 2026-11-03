@@ -4,3 +4,5 @@ light:
   - chart-line
   - circle-check
   - cubes
+solid:
+  - code-commit
