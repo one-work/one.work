@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_30_082611) do
+ActiveRecord::Schema[8.2].define(version: 2026_11_09_143124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -3749,6 +3749,14 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_30_082611) do
     t.index ["printer_id"], name: "index_print_printer_aims_on_printer_id"
   end
 
+  create_table "print_printer_logs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.uuid "printer_id"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["printer_id"], name: "index_print_printer_logs_on_printer_id"
+  end
+
   create_table "print_printers", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.boolean "online"
     t.string "bluetooth_addr"
@@ -3818,6 +3826,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_30_082611) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "prefix"
+    t.string "suffix"
+    t.string "input"
     t.index ["template_table_id"], name: "index_print_template_table_items_on_template_table_id"
   end
 
@@ -4871,6 +4882,9 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_30_082611) do
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.jsonb "wallet_amount"
+    t.decimal "number"
+    t.date "produce_on"
+    t.string "status"
     t.index ["item_id"], name: "index_trade_holds_on_item_id"
     t.index ["member_id"], name: "index_trade_holds_on_member_id"
     t.index ["member_organ_id"], name: "index_trade_holds_on_member_organ_id"
@@ -5674,6 +5688,17 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_30_082611) do
     t.index ["ancestor_id", "descendant_id", "generations"], name: "wechat/category_anc_desc_idx", unique: true
     t.index ["ancestor_id"], name: "index_wechat_category_hierarchies_on_ancestor_id"
     t.index ["descendant_id"], name: "index_wechat_category_hierarchies_on_descendant_id"
+  end
+
+  create_table "wechat_channels", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "feed_id"
+    t.string "finder_user_name"
+    t.string "feed_token"
+    t.boolean "autoplay"
+    t.boolean "looped"
+    t.string "appid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "wechat_contacts", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
