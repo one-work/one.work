@@ -55,13 +55,12 @@ Rails.application.configure do
 
   config.action_cable.disable_request_forgery_protection = true
   config.action_cable.allowed_request_origins = [
-    'http://localhost:3000',
-    'http://lvh.me:3000'
+    'https://work.test'
   ]
   config.hosts += [
-    '.linli.test',
-    '.admin.linli.test',
-    '.org.linli.test'
+    '.work.test',
+    '.admin.work.test',
+    '.org.work.test'
   ]
 
   config.x.role_debug = false
@@ -70,5 +69,5 @@ ActiveRecord.verbose_query_logs = true
 
 #ActionCable.server.config.logger = Logger.new(nil)
 Rails.application.routes.default_url_options = {
-  host: 'linli.test'
+  host: 'work.test'
 }
