@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_11_10_125051) do
+ActiveRecord::Schema[8.2].define(version: 2026_11_10_125638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -3629,6 +3629,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_11_10_125051) do
     t.string "provider_token"
     t.jsonb "dispatches"
     t.integer "desks_count"
+    t.time "start_at", precision: 6
+    t.time "finish_at", precision: 6
     t.index ["area_id"], name: "index_org_organs_on_area_id"
     t.index ["cache_id"], name: "index_org_organs_on_cache_id"
     t.index ["corp_user_id"], name: "index_org_organs_on_corp_user_id"
