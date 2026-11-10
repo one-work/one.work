@@ -6,6 +6,7 @@ module Org
     include Roled::Ext::Organ
     include Factory::Ext::Organ
     include Wechat::Ext::Organ
+    include Space::Ext::Organ
 
     #after_create_commit :init_provider_later
 
