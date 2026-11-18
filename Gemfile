@@ -25,7 +25,7 @@ gem 'kaminari', github: 'qinmingyuan/kaminari'
 # Third party
 gem 'octokit'
 gem 'omniauth-rails_csrf_protection'
-git 'https://gitee.com/tencentcloud/tencentcloud-sdk-ruby.git' do
+git 'https://github.com/qinmingyuan/tencentcloud-sdk-ruby.git' do
   gem 'tencentcloud-sdk-dnspod'
 end
 
@@ -85,5 +85,4 @@ group :development do
   gem 'web-console'
   gem 'listen'
   gem 'brakeman'
-  #gem 'tidewave'
 end
