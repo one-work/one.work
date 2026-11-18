@@ -16,7 +16,17 @@
     <div class="content text-centered mt-4">
       <div class="">©<%= Date.today.year %> <%= (defined?(current_organ) && current_organ&.name) || t('site_name') %></div>
       <div class="m-2">
-        <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow"><%= (defined?(current_organ_domain) && current_organ_domain&.beian) %></a>
+        <a
+          href="https://beian.miit.gov.cn"
+          target="_blank"
+          rel="nofollow"
+        >
+        <%= if defined?(current_organ_domain) && current_organ_domain %>
+          <span class="text-grey"><%= current_organ_domain.beian %></span>
+        <% else %>
+          <span class="text-grey">鄂ICP备20004085号-6</span>
+        <% end %>
+        </a>
       </div>
     </div>
   </div>

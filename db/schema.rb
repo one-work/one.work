@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_11_10_125638) do
+ActiveRecord::Schema[8.2].define(version: 2026_11_18_030710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -4986,9 +4986,11 @@ ActiveRecord::Schema[8.2].define(version: 2026_11_10_125638) do
     t.integer "weight", comment: "重量"
     t.string "scope"
     t.jsonb "purchase_res"
+    t.uuid "collect_id"
     t.index ["address_id"], name: "index_trade_items_on_address_id"
     t.index ["agent_id"], name: "index_trade_items_on_agent_id"
     t.index ["client_id"], name: "index_trade_items_on_client_id"
+    t.index ["collect_id"], name: "index_trade_items_on_collect_id"
     t.index ["contact_id"], name: "index_trade_items_on_contact_id"
     t.index ["current_cart_id"], name: "index_trade_items_on_current_cart_id"
     t.index ["desk_id"], name: "index_trade_items_on_desk_id"
